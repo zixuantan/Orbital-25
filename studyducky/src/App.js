@@ -1,0 +1,57 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/LoginPage";
+import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
+import GroupFinder from "./pages/GroupFinder";
+import GroupChat from "./pages/GroupChat";
+import VirtualStudyRoom from "./pages/VirtualStudyRoom";
+import Stats from "./pages/Stats";
+import Settings from "./pages/Settings";
+
+function App() {
+	return (
+		<Router>
+			<div className="container mt-4">
+				<h1>StudyDucky - Main Page</h1>
+				<div className="d-grid gap-2 d-md-flex justify-content-md-start">
+					<Link to="/dashboard" className="btn btn-primary">
+						Dashboard
+					</Link>
+					<Link to="/profile" className="btn btn-secondary">
+						Profile
+					</Link>
+					<Link to="/groups" className="btn btn-info">
+						Group Finder
+					</Link>
+					<Link to="/chat" className="btn btn-success">
+						Group Chat
+					</Link>
+					<Link to="/study-room" className="btn btn-warning">
+						Virtual Study Room
+					</Link>
+					<Link to="/stats" className="btn btn-dark">
+						Stats
+					</Link>
+					<Link to="/settings" className="btn btn-light">
+						Settings
+					</Link>
+				</div>
+				<Routes>
+					<Route path="/" element={<LandingPage />} />
+					<Route path="/login" element={<LoginPage />} />
+					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/profile" element={<Profile />} />
+					<Route path="/groups" element={<GroupFinder />} />
+					<Route path="/chat" element={<GroupChat />} />
+					<Route path="/study-room" element={<VirtualStudyRoom />} />
+					<Route path="/stats" element={<Stats />} />
+					<Route path="/settings" element={<Settings />} />
+				</Routes>
+			</div>
+		</Router>
+	);
+}
+
+export default App;
