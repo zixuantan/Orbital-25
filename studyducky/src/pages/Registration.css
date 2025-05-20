@@ -1,0 +1,22 @@
+.background {
+    background-color: #fff1c2;
+    background: url('lilypad_extracted.png') no-repeat center fixed;
+    background-size: cover;
+}
+
+.form-container {
+    background-color: #FFF;
+    padding: 16px;
+    border-radius: 10px;
+    width: 90%;
+}
+
+label {
+    font-size: 22px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+}
