@@ -2,6 +2,14 @@
     background-color: #fff1c2;
     background: url('lilypad_extracted.png') no-repeat center fixed;
     background-size: cover;
+    background-position: center;
+    display: flex;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 45px;
+    color: black;
 }
 
 .form-container {
@@ -9,14 +17,26 @@
     padding: 16px;
     border-radius: 10px;
     width: 90%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
 }
 
 label {
     font-size: 22px;
+    margin: 15px 0px 5px;
 }
 
 input, select {
   width: 100%;
   padding: 10px;
   font-size: 18px;
+}
+
+.mod-search {
+    display: flex;
+    gap: 4px;
+}
+
+.mod-search input {
+    flex: 1;
 }

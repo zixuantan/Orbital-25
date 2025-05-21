@@ -1,48 +1,51 @@
-<html>
-    <head>
-        <title>Register</title>
-    </head>
+import React from "react";
+import './Registration.css';
 
-    <body>
+function Registration() {
+    return (
+    <div class="background">
+        <form class="form-container">
+            <h1>Register</h1>
+            
+            <label>Name</label>
+            <input type="text"/>
 
-        <div class="background">
-            <form class="form-container">
-                <h1>Register</h1>
+            <label>Email</label>
+            <input type="email"/>
 
-                <label>Name</label>
+            <label>Year</label>
+            <select required>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+        
+            <label>Major</label>
+            <select required>
+                <option>Architecture</option>
+                <option>Business Administration</option>
+                <option>Business Analytics</option>
+                <option>Business Artifical Intelligence Systems</option>
+                <option>Computer Science</option>
+            </select>
+
+            <label>Modules taken this semester</label>
+            <div class="mod-search">
                 <input type="text"/>
+                <button type="button">🔍</button>
+            </div>
 
-                <label>Email</label>
-                <input type="email"/>
+            <label>Password</label>
+            <input type="password"/>
 
-                <label>Year</label>
-                <select required>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                </select>
-        
-                <label>Major</label>
-                <select required>
-                    <option>Business</option>
-                    <option>Business Analytics</option>
-                </select>
+            <label>Confirm password</label>
+            <input type="password"/>
 
-                <label>Modules taken this semester</label>
-                <div class="mod-search">
-                    <input type="text"/>
-                    <button type="button">🔍</button>
-                </div>
+        </form>
+    </div>
+    );
+}
 
-                <label>Password</label>
-                <input type="password"/>
-
-                <label>Confirm password</label>
-                <input type="password"/>
-
-            </form>
-        </div>
-        
-    </body>
-</html>
+export default Registration;
+    
