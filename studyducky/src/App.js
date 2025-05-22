@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
+import Registration from "./pages/Registration.js";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
@@ -40,6 +41,7 @@ function App() {
 				</div>
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
+					<Route path="/register" element={<Registration />} />
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/profile" element={<Profile />} />
@@ -51,6 +53,7 @@ function App() {
 				</Routes>
 			</div>
 		</Router>
+		
 	);
 }
 
