@@ -1,18 +1,7 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 .background {
-    background-color: #fff1c2;
-    /*background: url('lilypad_extracted.png') no-repeat center fixed;*/
-    background-size: cover;
+    background: #fff1c2 url('Reg_bg.png') no-repeat center fixed;
     background-position: center;
-    width: 100vw;               /* full horizontal width */
-    padding: 40px 20px;
-    box-sizing: border-box;     /* prevent padding from exceeding width */
-    display: flex;
+    background-size: cover;              
 }
 
 h1 {
