@@ -1,0 +1,22 @@
+.background {
+    background-color: #fff;
+}
+
+.profile-side {
+    width: 40%;
+    height: 100%;
+    padding: 15px;
+}
+
+.account-side {
+    background-color: #fff1C2;
+    margin-left: 40%;
+    width: 60%;
+    height: 100%;
+    padding: 15px;
+}
+
+h1, h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
