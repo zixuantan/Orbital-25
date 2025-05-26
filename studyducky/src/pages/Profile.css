@@ -11,7 +11,7 @@
     padding: 15px;
     display: flex;
     flex-direction: column;
-
+    align-items: flex-start;
 }
 
 .account-side {
@@ -23,7 +23,7 @@
 
 h1 {
     font-size: 35px;
-    margin-bottom: 20px;
+    margin-left: 20px;
     text-align: left;
 
 }
@@ -70,19 +70,34 @@ p {
     margin-top: 15px;
 }
 
-#desc {
+#desc, #first-title, #second-title {
     font-size: 15px;
-    margin-top: 5px;
 }
 
 .badge-section {
     width: 100%;
     height: 50%;
+    display: flex;
+    flex-direction: row;
 }
 
 #badge {
     font-size: 25px;
 }
+
+.first, .second {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;   
+    text-align: center;
+}
+
+#first-desc, #second-desc {
+    font-size: 13px;
+}
+
 
 
 
