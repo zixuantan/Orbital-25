@@ -2,7 +2,7 @@
     background-color: #fff;
     display: flex;
     flex-direction: row;
-    height: 100%
+    height: 130vh;
 }
 
 .profile-side {
@@ -24,8 +24,7 @@
 h1 {
     font-size: 35px;
     margin-left: 20px;
-    text-align: left;
-
+    align-items: left;
 }
 
 .details {
@@ -43,6 +42,7 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-top: 100px;
 }
 
 label {
@@ -67,10 +67,11 @@ p {
 
 #about {
     font-size: 20px;
-    margin-top: 15px;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
-#desc, #first-title, #second-title {
+#desc {
     font-size: 15px;
 }
 
@@ -86,7 +87,7 @@ p {
 }
 
 .first, .second {
-    width: 50%;
+    width: 33.3%;
     height: 50%;
     display: flex;
     flex-direction: column; 
@@ -94,8 +95,29 @@ p {
     text-align: center;
 }
 
+#first-title, #second-title {
+    font-size: 15px;
+    margin: 0 0 4px 0;
+}
+
 #first-desc, #second-desc {
     font-size: 13px;
+    text-align: center;
+    margin: 0;
+}
+
+.edit-btn {
+    background-color: #2c2c2c;
+    color: #f5f5f5;
+    padding: 10px;
+    width: 120px;
+    height: 40px;
+    border: #2C2C2C;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-top: 140px;
+    margin-left: auto;
+    cursor: pointer;
 }
 
 
