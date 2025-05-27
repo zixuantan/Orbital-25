@@ -25,6 +25,7 @@ function Registration() {
 
             <label>Year</label>
             <select required>
+                <option></option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -33,6 +34,7 @@ function Registration() {
         
             <label>Major</label>
             <select required>
+                <option></option>
                 <option>Architecture</option>
                 <option>Business Administration</option>
                 <option>Business Analytics</option>
