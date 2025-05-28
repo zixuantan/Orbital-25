@@ -55,7 +55,7 @@ function Profile() {
 				</div>
 			</div>
 			<div className="account-side">				
-				<div className="form-container">
+				<form className="form-container">
 					
 					<label>Name</label>
 					<input type="text" value="Annie" readonly/>
@@ -87,7 +87,7 @@ function Profile() {
 
 					<button type="submit" className="edit-btn">Edit</button>
 
-				</div>
+				</form>
 			</div>
 		</div>
 	);
