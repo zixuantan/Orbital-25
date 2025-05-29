@@ -6,20 +6,26 @@ const Chats = ({ title, groups }) => {
 
   return (
     <div className="groups">
-      <div className="group-name" onClick={() => setIsOpen(!isOpen)}>
-        <h3>{title}</h3>
-        <span>{isOpen ? '▲' : '▼'}</span>
+      <div className="group-type" onClick={() => setIsOpen(!isOpen)}>
+
+        <p id="title">{title}</p>
+        <span className="extend">{isOpen ? '▴' : '▾'}</span>
+
       </div>
+
       {isOpen && (
         <ul className="group-list">
+
           {groups.map((name, index) => (
             <li key={index} className="chat">
               {name}
               <span className="arrow">›</span>
             </li>
           ))}
+
         </ul>
       )}
+
     </div>
   );
 };

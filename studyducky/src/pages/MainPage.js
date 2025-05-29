@@ -26,13 +26,13 @@ function MainPage() {
                 <h1>Study Statistics</h1>
 
                 <div className="daily">
-                <p>Today's Progress</p>
+                <p id="today">Today's Progress</p>
                 <Doughnut data={dailyData} />
                     
                 </div>
                 <div className="weekly">
 
-                <p>Weekly Study Hours</p>
+                <p id="week">Weekly Study Hours</p>
                 <Bar data={weeklyData} />
                 
                 </div>
@@ -45,21 +45,20 @@ function MainPage() {
 
                     <div className="finder">
 
-                        <p id="group-finder">Want to find more flocks to join?</p>
+                        <span>Want to find more flocks to join?</span>
                         <Link to="/GroupFinder">
                         <button className="finder-btn">GroupFinder</button>
                         </Link>
 
                     </div>
                 </div> 
-                <div className="study-groups">
 
-                    <p>Study Groups</p>
-                    <Chats title="Study Groups" groups={['BZA squad', 'Study & chill']} />
+                <Chats title="Study Groups" groups={['BZA squad', 'Study & chill']} />
 
-                </div>  
                 <div className="project-groups">
+
                     <Chats title="Project Groups" groups={['Must get A for BT2102']} />
+
                 </div>          
             </div>
         </div>
