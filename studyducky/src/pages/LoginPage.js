@@ -1,25 +1,38 @@
-import React from "react";
-import { Button, Form, Container } from "react-bootstrap";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './LoginPage.css';
 
-const LoginPage = () => {
+function LoginPage() {
 	return (
-		<Container className="mt-4">
-			<h2>Login to StudyDucky</h2>
-			<Form>
-				<Form.Group className="mb-3" controlId="formBasicEmail">
-					<Form.Label>Email address</Form.Label>
-					<Form.Control type="email" placeholder="Enter email" />
-				</Form.Group>
-				<Form.Group className="mb-3" controlId="formBasicPassword">
-					<Form.Label>Password</Form.Label>
-					<Form.Control type="password" placeholder="Password" />
-				</Form.Group>
-				<Button variant="primary" type="submit">
-					Login
-				</Button>
-			</Form>
-		</Container>
+		<div className="overall-page">
+			<form className="login-section">
+				<div className="details">
+					<h1>Log In</h1>
+
+					<label>Email</label>
+					<input type="email"/>
+
+					<label>Password</label>
+					<input type="password"/>
+
+					<button type="submit" className="login-btn">Log In</button>
+				</div>
+			</form>
+
+			<div className="signup-section">
+				<div className="group">
+
+					<h2>New to StudyDucky?</h2>
+					<p>Sign up now to kickstart your study journey!</p>
+					<Link to="/Registration.js">
+					<button className="signup-btn">Sign Up</button>
+					</Link>
+
+				</div>
+
+			</div>
+		</div>
 	);
-};
+}
 
 export default LoginPage;
