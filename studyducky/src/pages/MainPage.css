@@ -3,14 +3,84 @@
 }
 
 h1 {
-    font-size: 30px;
+    font-size: 35px;
     text-align: left;
 }
 
 .stats {
     background-color: #fff1C2;
     width: 100%;
-    height: 33.33%;
+    height: 400px;
+    padding: 15px;
+    display: flex;
+}
+
+#today, #week {
+    font-size: 20px;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+.daily {
+    width: 220px;
+    height: 220px;
+    margin-top: 40px;
+    margin-right: 60px;
+}
+
+.weekly {
+    width: 460px;
+    height: 400px;
+    margin-top: 40px;
+}
+
+.chats {
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: #fff;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 60px;
     padding: 15px;
 }
 
+h2 {
+    font-size: 30px;
+}
+
+.finder {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+span {
+    font-size: 20px;
+}
+
+.finder-btn {
+    background-color: #2c2c2c;
+    color: #f5f5f5;
+    padding: 10px;
+    width: 160px;
+    height: 40px;
+    border: #2C2C2C;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.finder a {
+    text-decoration: none;
+}

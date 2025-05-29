@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Registration from "./pages/Registration.js";
 import LoginPage from "./pages/LoginPage";
+import MainPage from "./pages/MainPage.js";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import GroupFinder from "./pages/GroupFinder";
@@ -43,6 +44,7 @@ function App() {
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/register" element={<Registration />} />
 					<Route path="/login" element={<LoginPage />} />
+					<Route path="/main" element={<MainPage />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/groups" element={<GroupFinder />} />
