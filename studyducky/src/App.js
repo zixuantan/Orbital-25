@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar"; // ✅ new
 import LandingPage from "./pages/LandingPage";
-import Registration from "./pages/Registration.js";
+import Registration from "./pages/Registration";
 import LoginPage from "./pages/LoginPage";
-import MainPage from "./pages/MainPage.js";
+import MainPage from "./pages/MainPage";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import GroupFinder from "./pages/GroupFinder";
@@ -16,30 +17,7 @@ function App() {
 	return (
 		<Router>
 			<div className="container mt-4">
-				<h1>StudyDucky - Main Page</h1>
-				<div className="d-grid gap-2 d-md-flex justify-content-md-start">
-					<Link to="/dashboard" className="btn btn-primary">
-						Dashboard
-					</Link>
-					<Link to="/profile" className="btn btn-secondary">
-						Profile
-					</Link>
-					<Link to="/groups" className="btn btn-info">
-						Group Finder
-					</Link>
-					<Link to="/chat" className="btn btn-success">
-						Group Chat
-					</Link>
-					<Link to="/study-room" className="btn btn-warning">
-						Virtual Study Room
-					</Link>
-					<Link to="/stats" className="btn btn-dark">
-						Stats
-					</Link>
-					<Link to="/settings" className="btn btn-light">
-						Settings
-					</Link>
-				</div>
+				<Navbar /> 
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/register" element={<Registration />} />
@@ -55,7 +33,6 @@ function App() {
 				</Routes>
 			</div>
 		</Router>
-		
 	);
 }
 

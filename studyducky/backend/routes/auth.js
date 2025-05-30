@@ -13,13 +13,19 @@ router.get(
 router.get(
 	"/google/callback",
 	(req, res, next) => {
-		console.log("➡️ Google hit the callback route");
+		console.log("Google hit the callback route");
 		next();
 	},
 	passport.authenticate("google", { failureRedirect: "/" }),
 	(req, res) => {
-		console.log("✅ Google auth success, redirecting to /dashboard");
-		res.redirect("/dashboard");
+		// Check if the user has filled out their profile
+		if (!req.user.year || !req.user.major) {
+			console.log("Redirecting new user to registration");
+			res.redirect("http://localhost:3000/register");
+		} else {
+			console.log("Redirecting existing user to homepage");
+			res.redirect("http://localhost:3000/dashboard");
+		}
 	}
 );
 

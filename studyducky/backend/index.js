@@ -5,6 +5,8 @@ import passport from "passport";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import "./config/passport.js";
+import registerRoutes from "./routes/register.js";
+import cors from "cors"; // backend and frontend run on different ports
 
 dotenv.config();
 connectDB();
@@ -12,7 +14,10 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5050;
 
-// Session middleware
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(express.json());
+
+// Session
 app.use(
 	session({
 		secret: process.env.SESSION_SECRET,
@@ -21,23 +26,25 @@ app.use(
 		cookie: {
 			httpOnly: true,
 			sameSite: "lax",
-			secure: false, 
+			secure: false,
 			maxAge: 24 * 60 * 60 * 1000,
 		},
 	})
 );
 
-app.get("/me", (req, res) => {
-	console.log("User in session:", req.user);
-	res.json(req.user || { message: "Not logged in" });
-});
-
-// Passport middleware
+// Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
 app.use("/auth", authRoutes);
+
+app.use("/api", registerRoutes);
+
+app.get("/me", (req, res) => {
+	console.log("User in session:", req.user);
+	res.json(req.user || { message: "Not logged in" });
+});
 
 app.get("/", (req, res) => {
 	res.send("Home Page");
@@ -51,9 +58,11 @@ app.get("/dashboard", (req, res) => {
 	}
 });
 
-app.get("/test", (req, res) => {
-	console.log("Route /test hit");
-	res.send("Test route working");
+app.get("/debug-session", (req, res) => {
+	res.json({
+		session: req.session,
+		user: req.user,
+	});
 });
 
 app.listen(PORT, () => {

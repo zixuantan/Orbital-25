@@ -22,7 +22,7 @@ passport.use(
 				let user = await User.findOne({ googleId: profile.id });
 
 				if (!user) {
-					console.log("🆕 No user found — creating new user in DB");
+					console.log("No user found — creating new user in DB");
 					user = await User.create({
 						googleId: profile.id,
 						name: profile.displayName,
@@ -33,8 +33,10 @@ passport.use(
 						modulesTaken: [],
 					});
 					console.log("New user created:", user);
+					user.isNew = true; // new user
 				} else {
 					console.log("User already exists:", user.email);
+					user.isNew = false; // existing user
 				}
 
 				return done(null, user);
@@ -46,17 +48,18 @@ passport.use(
 	)
 );
 
-console.log("✅ GoogleStrategy registered");
+console.log("GoogleStrategy registered");
 
 passport.serializeUser((user, done) => {
-	console.log("🔁 serializeUser called for:", user.email);
-	done(null, user.id);
+	console.log("serializeUser called for:", user.email);
+	done(null, { id: user.id, isNew: user.isNew });
 });
 
-passport.deserializeUser(async (id, done) => {
-	console.log("deserializeUser called for _id:", id);
+passport.deserializeUser(async (obj, done) => {
+	console.log("deserializeUser called for _id:", obj.id);
 	try {
-		const user = await User.findById(id);
+		const user = await User.findById(obj.id);
+		user.isNew = obj.isNew;
 		done(null, user);
 	} catch (err) {
 		done(err, null);
