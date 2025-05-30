@@ -1,40 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
 import "./LoginPage.css";
 
 function LoginPage() {
 	return (
 		<div className="overall-page">
-			<form className="login-section">
-				<div className="details">
-					<h1>Log In</h1>
+			<div className="header">
 
-					<label>Email</label>
-					<input type="email" />
+				<img src="logo.png" alt="logo" width="150" height="150"/>
+				<h1>StudyDucky</h1>
 
-					<label>Password</label>
-					<input type="password" />
-
-					<button type="submit" className="login-btn">
-						Log In
-					</button>
-				</div>
-			</form>
-
-			<div className="signup-section">
-				<div className="group">
-					<h2>New to StudyDucky?</h2>
-					<p>Sign up now to kickstart your study journey!</p>
-					<button
-						onClick={() =>
-							(window.location.href =
-								"http://localhost:5050/auth/google")
-						}
-					>
-						Login with Google
-					</button>
-				</div>
 			</div>
+
+			<p>Kickstart your study journey now!</p>
+			<button 
+				onClick={() =>
+					(window.location.href =
+						"http://localhost:5050/auth/google")
+					}
+			>
+				Login with Google
+			</button>
 		</div>
 	);
 }
