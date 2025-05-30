@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import "./config/passport.js";
 import registerRoutes from "./routes/register.js";
+import updateProfile from "./routes/updateProfile.js";
 import cors from "cors"; // backend and frontend run on different ports
 
 dotenv.config();
@@ -40,10 +41,11 @@ app.use(passport.session());
 app.use("/auth", authRoutes);
 
 app.use("/api", registerRoutes);
+app.use("/api", updateProfile);
 
 app.get("/me", (req, res) => {
-	console.log("User in session:", req.user);
-	res.json(req.user || { message: "Not logged in" });
+	console.log("User in session:", req.user); // req.user populated by Passport.js after successful auth
+	res.json(req.user || { message: "Not logged in" }); // if user is logged in and session is valid, sends user obj as JSON back to frontend, else sends not logged in
 });
 
 app.get("/", (req, res) => {
