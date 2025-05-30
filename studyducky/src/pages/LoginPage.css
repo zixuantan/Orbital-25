@@ -1,38 +1,41 @@
-.overall-page {
-    background-color: #fff1c2;
+.login-page {
+    background-color: #fff1c2 !important;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    height: 100vh;
+    gap: 20px;
     align-items: center;
-    background-color: red;
 }
 
-.header {
+.logo-header {
     width: 50%;
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-top: 50px;
-    gap: 10px;
+    gap: 0;
+    text-align: center;
 }
 
-h1 {
-    font-size: 20px; 
-    margin: 0;
-    line-height: 1;                      
+#website {
+    font-size: 40px; 
+    margin: 0;  
+    line-height: 1;
+    padding-bottom: 15px;                   
 }
 
-p {
+#motiv {
     font-size: 25px;
     text-align: center;
 }
 
-button { 
+.login-btn { 
     width: 250px;
-    height: 80px;
+    height: 60px;
     padding: 10px;
     border: #2C2C2C;
     border-radius: 8px;
-    font-size: 5px;
+    font-size: 20px;
     display: flex;
     justify-content: center; 
     align-items: center;
