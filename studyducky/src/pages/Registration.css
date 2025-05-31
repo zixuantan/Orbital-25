@@ -2,10 +2,14 @@
     background: #fff1c2 url('Reg2.png') no-repeat center fixed;
     background-position: center;
     background-size: cover; 
-    background-attachment: scroll;             
+    background-attachment: scroll; 
+    min-height: 100vh;
+    height: 100%;
+    padding-top: 0;          /* reset any accidental spacing */
+    margin-top: 0;            
 }
 
-h1 {
+#reg {
     text-align: center;
     margin-bottom: 20px;
     font-size: 45px;
