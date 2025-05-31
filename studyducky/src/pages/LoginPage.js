@@ -18,7 +18,8 @@ function LoginPage() {
 						"http://localhost:5050/auth/google")
 					}
 			>
-				Login with Google
+			<img src="google-logo.png" alt="google" width="35" height="35"/>
+			<span>Login with Google</span>
 			</button>
 		</div>
 	);
