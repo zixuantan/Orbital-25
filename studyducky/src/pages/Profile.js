@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import axios from "axios";
 import "./Profile.css";
+import Navbar from "../components/Navbar";
 
 const modsOption = [
 	{ value: "BT2102", label: "BT2102" },
@@ -69,117 +70,105 @@ function Profile() {
 	};
 
 	return (
-		<div className="overall-container">
-			<div className="profile-side">
-				<h1>Profile</h1>
-				<div className="details">
-					<div className="prof">
-						<img
-							src="profilepic.png"
-							alt="profile"
-							width="185"
-							height="185"
-						/>
-						<p>{name}</p>
-					</div>
-					<p id="about">About</p>
+		<div className="profile-page">
+			<Navbar />
+			<div className="overall-container">
+				<div className="profile-side">
+					<h1>Profile</h1>
+					<div className="details">
+						<div className="prof">
+							<img src="profilepic.png" alt="profile" width="185" height="185"/>
+							<p>{name}</p>
+						</div>
+						<p id="about">About</p>
 
-					<p id="desc">
-						Just a motivated duck trying to stay afloat in the sea
-						of deadlines. 🐣 Lover of matcha, late-night cramming,
-						and productive silence.
-					</p>
-				</div>
-				<p id="badge">Badges</p>
-				<div className="badge-section">
-					<div className="first">
-						<img
-							src="firstbadge.png"
-							alt="Just Getting Started"
-							width="100"
-							height="100"
-						/>
-						<p id="first-title">Just Getting Started</p>
-						<p id="first-desc">Join the Flock</p>
-					</div>
-					<div className="second">
-						<img
-							src="lockbadge.png"
-							alt="Lock It In"
-							width="100"
-							height="100"
-						/>
-						<p id="second-title">Lock It In</p>
-						<p id="second-desc">
-							Study more than an hour consecutively
+						<p id="desc">
+							Just a motivated duck trying to stay afloat in the sea
+							of deadlines. 🐣 Lover of matcha, late-night cramming,
+							and productive silence.
 						</p>
 					</div>
+					<p id="badge">Badges</p>
+					<div className="badge-section">
+						<div className="first">
+							<img src="firstbadge.png" alt="Just Getting Started" width="100" height="100"/>
+							<p id="first-title">Just Getting Started</p>
+							<p id="first-desc">Join the Flock</p>
+						</div>
+						<div className="second">
+							<img src="lockbadge.png" alt="Lock In" width="100" height="100"/>
+							<p id="second-title">Lock It In</p>
+							<p id="second-desc">
+								Study more than an hour consecutively
+							</p>
+						</div>
+					</div>
 				</div>
-			</div>
 
-			<div className="account-side">
-				<form className="form-container" onSubmit={handleSave}>
-					<label>Name</label>
-					<input type="text" value={name} readOnly />
+				<div className="account-side">
+					<form className="form-container" onSubmit={handleSave}>
+						<label>Name</label>
+						<input type="text" value={name} readOnly />
 
-					<label>Year</label>
-					<select
-						required
-						value={year}
-						onChange={(e) => setYear(e.target.value)}
-						disabled={!isEditing}
-					>
-						<option value="">Select</option>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-					</select>
-
-					<label>Major</label>
-					<select
-						required
-						value={major}
-						onChange={(e) => setMajor(e.target.value)}
-						disabled={!isEditing}
-					>
-						<option value="">Select</option>
-						<option>Architecture</option>
-						<option>Business Administration</option>
-						<option>Business Analytics</option>
-						<option>
-							Business Artificial Intelligence Systems
-						</option>
-						<option>Computer Science</option>
-					</select>
-
-					<label>Modules taken this semester</label>
-					<Select
-						isMulti
-						options={modsOption}
-						value={selectedMods}
-						onChange={setSelectedMods}
-						isDisabled={!isEditing}
-						className="module-select"
-					/>
-
-					{isEditing ? (
-						<button type="submit" className="edit-btn">
-							Save
-						</button>
-					) : (
-						<button
-							type="button"
-							className="edit-btn"
-							onClick={(e) => {
-								e.preventDefault();
-								setIsEditing(true);
-							}}
+						<label>Year</label>
+						<select
+							required
+							value={year}
+							onChange={(e) => setYear(e.target.value)}
+							disabled={!isEditing}
 						>
-							Edit
-						</button>
-					)}
-				</form>
+							<option value="">Select</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+
+						<label>Major</label>
+						<select
+							required
+							value={major}
+							onChange={(e) => setMajor(e.target.value)}
+							disabled={!isEditing}
+						>
+							<option value="">Select</option>
+							<option>Architecture</option>
+							<option>Business Administration</option>
+							<option>Business Analytics</option>
+							<option>
+								Business Artificial Intelligence Systems
+							</option>
+							<option>Computer Science</option>
+						</select>
+
+						<label>Modules taken this semester</label>
+						<Select
+							isMulti
+							options={modsOption}
+							value={selectedMods}
+							onChange={setSelectedMods}
+							isDisabled={!isEditing}
+							className="module-select"
+						/>
+
+						{isEditing ? (
+							<button type="submit" className="edit-btn">
+								Save
+							</button>
+						) : (
+							<button
+								type="button"
+								className="edit-btn"
+								onClick={(e) => {
+									e.preventDefault();
+									setIsEditing(true);
+								}}
+							>
+								Edit
+							</button>
+						)}
+					</form>
+				</div>
 			</div>
 		</div>
 	);
