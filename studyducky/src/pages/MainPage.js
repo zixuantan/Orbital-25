@@ -6,6 +6,7 @@ import { ArcElement } from 'chart.js';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
 import { Link } from 'react-router-dom';
 import Chats from '../components/Chats';
+import Navbar from "../components/Navbar";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, ArcElement);
 
@@ -22,6 +23,7 @@ function MainPage() {
             backgroundColor: ['#4abdac', '#fff'], borderWidth: 0 }]};
     return (
         <div className="overall-page">
+            <Navbar />
             <div className="stats">
                 <h1>Study Statistics</h1>
 

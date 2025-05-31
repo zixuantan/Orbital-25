@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar"; // ✅ new
 import LandingPage from "./pages/LandingPage";
 import Registration from "./pages/Registration";
 import LoginPage from "./pages/LoginPage.js";
@@ -16,8 +15,7 @@ import Settings from "./pages/Settings";
 function App() {
 	return (
 		<Router>
-			<div className="container mt-4">
-				<Navbar /> 
+			<div className="app-page">  
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/register" element={<Registration />} />
@@ -29,7 +27,7 @@ function App() {
 					<Route path="/chat" element={<GroupChat />} />
 					<Route path="/study-room" element={<VirtualStudyRoom />} />
 					<Route path="/stats" element={<Stats />} />
-					<Route path="/settings" element={<Settings />} />
+					<Route path="/settings" element={<Settings />} /> 
 				</Routes>
 			</div>
 		</Router>

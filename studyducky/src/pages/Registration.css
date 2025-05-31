@@ -1,7 +1,8 @@
 .background {
     background: #fff1c2 url('Reg2.png') no-repeat center fixed;
     background-position: center;
-    background-size: cover;              
+    background-size: cover; 
+    background-attachment: scroll;             
 }
 
 h1 {

@@ -1,7 +1,8 @@
 .login-page {
     background: url("login-bg.jpg") no-repeat center fixed;
     background-position: center;
-    background-size: cover;              
+    background-size: cover; 
+    background-attachment: scroll;             
     display: flex;
     flex-direction: column;
     width: 100%;
