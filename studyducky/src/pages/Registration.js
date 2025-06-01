@@ -54,8 +54,8 @@ function Registration() {
 
 	return (
 		<div className="background">
-			<form className="form-container" onSubmit={handleSubmit}>
-				<h1 id="reg">Register</h1>
+			<h1 id="reg">Register</h1>
+			<form className="reg-form" onSubmit={handleSubmit}>
 
 				<label>Name</label>
 				<input type="text" value={name} readOnly />

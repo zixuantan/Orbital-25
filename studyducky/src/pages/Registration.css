@@ -3,22 +3,20 @@
     background-position: center;
     background-size: cover; 
     background-attachment: scroll; 
-    min-height: 100vh;
-    height: 100%;
-    padding-top: 0;          /* reset any accidental spacing */
-    margin-top: 0;            
+    padding-top: 40px;   
+    height: 130vh;        
 }
 
 #reg {
     text-align: center;
-    margin-bottom: 20px;
     font-size: 45px;
-    color: black;    
+    color: black;  
+    margin-bottom: 20px;  
 }
 
-.form-container {
-    padding: 16px;
+.reg-form {
     width: 80%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     margin:auto;

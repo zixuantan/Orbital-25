@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 const Dashboard = () => {
 	const [user, setUser] = useState(null);
@@ -16,6 +17,7 @@ const Dashboard = () => {
 
 	return (
 		<Container className="mt-4">
+			<Navbar />
 			<h2>Dashboard</h2>
 			<p>Welcome to your StudyDucky dashboard, {user.name}!</p>
 		</Container>
