@@ -22,9 +22,6 @@ const Navbar = () => {
 				<Link to="/study-room" className="nav-btn">
 					StudyRoom
 				</Link>
-				<Link to="/stats" className="nav-btn">
-					Stats
-				</Link>
 				<Link to="/" className="landing-btn">
 					Go to Landing
 				</Link>
