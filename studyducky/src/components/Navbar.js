@@ -26,6 +26,13 @@ const Navbar = () => {
 					Go to Landing
 				</Link>
 			</div>
+			<Link
+				to="/main"
+				className="btn btn-outline-secondary"
+				style={{ marginLeft: "8px" }}
+			>
+				Go to Main Page
+			</Link>
 		</div>
 	);
 };
