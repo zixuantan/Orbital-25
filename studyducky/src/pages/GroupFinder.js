@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 function GroupFinder() {
 	const [user, setUser] = useState(null);
@@ -42,7 +43,8 @@ function GroupFinder() {
 	if (!user) return <p>Loading user info...</p>;
 
 	return (
-		<div className="container mt-4">
+		<div className="App-header">
+			<Navbar />
 			<h2>Group Finder</h2>
 			{groups.map((group) => (
 				<div key={group._id} className="card mb-3">

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar"; 
+import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 import Registration from "./pages/Registration";
 import LoginPage from "./pages/LoginPage.js";
@@ -16,8 +16,7 @@ import Settings from "./pages/Settings";
 function App() {
 	return (
 		<Router>
-			<div className="container mt-4">
-				<Navbar /> 
+			<div className="App-header">
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/register" element={<Registration />} />

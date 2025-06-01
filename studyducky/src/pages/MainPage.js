@@ -13,6 +13,7 @@ import {
 } from "chart.js";
 import { Link } from "react-router-dom";
 import Chats from "../components/Chats";
+import Navbar from "../components/Navbar";
 
 ChartJS.register(
 	CategoryScale,
@@ -49,6 +50,8 @@ function MainPage() {
 	};
 	return (
 		<div className="overall-page">
+			<Navbar />
+
 			<div className="stats">
 				<h1>Study Statistics</h1>
 

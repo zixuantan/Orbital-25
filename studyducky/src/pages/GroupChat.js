@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button, ListGroup } from "react-bootstrap";
+import Navbar from "../components/Navbar";
 
 const GroupChat = () => {
 	const [messages, setMessages] = useState([]);
@@ -12,7 +13,8 @@ const GroupChat = () => {
 	};
 
 	return (
-		<Container className="mt-4">
+		<Container fluid className="App-header">
+			<Navbar />
 			<h2>Group Chat</h2>
 			<ListGroup className="mb-3">
 				{messages.map((msg, index) => (
