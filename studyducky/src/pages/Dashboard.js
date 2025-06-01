@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
 import axios from "axios";
+import './Dashboard.css';
 import Navbar from "../components/Navbar";
 
 const Dashboard = () => {
@@ -13,14 +13,14 @@ const Dashboard = () => {
 			.catch((err) => console.error("Failed to fetch user:", err));
 	}, []);
 
-	if (!user) return <p>Loading...</p>;
+	if (!user) return <p className="welc">Loading...</p>
 
 	return (
-		<Container className="mt-4">
+		<div className="dash-page">
 			<Navbar />
-			<h2>Dashboard</h2>
-			<p>Welcome to your StudyDucky dashboard, {user.name}!</p>
-		</Container>
+			<h2 id="dashboard">Dashboard</h2>
+			<p className="welc">Welcome to your StudyDucky dashboard, {user.name}!</p>
+		</div>
 	);
 };
 
