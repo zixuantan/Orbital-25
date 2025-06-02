@@ -46,7 +46,7 @@ function Registration() {
 				{ withCredentials: true }
 			);
 
-			window.location.href = "/dashboard"; // go to dashboard after successful registration
+			window.location.href = "/dashboard"; // go dashboard after successful registration
 		} catch (err) {
 			console.error("Registration error:", err);
 		}
