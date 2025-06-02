@@ -9,15 +9,15 @@ function GroupFinder() {
 	const [joining, setJoining] = useState(null);
 
 	useEffect(() => {
-		// Fetch current logged-in user
 		axios
-			.get("http://localhost:5050/me", { withCredentials: true })
+			.get("https://orbital-25.onrender.com/me", {
+				withCredentials: true,
+			})
 			.then((res) => setUser(res.data))
 			.catch((err) => console.error("Error fetching user:", err));
 
-		// Fetch all groups
 		axios
-			.get("http://localhost:5050/api/groups/all")
+			.get("https://orbital-25.onrender.com/api/groups/all")
 			.then((res) => setGroups(res.data))
 			.catch((err) => console.error("Error fetching groups:", err));
 	}, []);
@@ -25,7 +25,7 @@ function GroupFinder() {
 	const handleJoin = async (groupId) => {
 		try {
 			await axios.post(
-				`http://localhost:5050/api/groups/${groupId}/join`,
+				`https://orbital-25.onrender.com/api/groups/${groupId}/join`,
 				{
 					userId: user._id,
 					availability: availability[groupId] || "Not specified",

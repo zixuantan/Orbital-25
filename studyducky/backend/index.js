@@ -16,7 +16,15 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5050;
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+	cors({
+		origin: [
+			"http://localhost:3000",
+			"https://orbital-25-3lexprzb8-zi-xuans-projects-a4d16121.vercel.app",
+		],
+		credentials: true,
+	})
+);
 app.use(express.json());
 
 // Session
@@ -71,5 +79,5 @@ app.get("/debug-session", (req, res) => {
 });
 
 app.listen(PORT, () => {
-	console.log(`Server running at http://localhost:${PORT}`);
+	console.log(`Server running on port ${PORT}`);
 });

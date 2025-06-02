@@ -22,7 +22,9 @@ function Profile() {
 	// Fetch user data
 	useEffect(() => {
 		axios
-			.get("http://localhost:5050/me", { withCredentials: true })
+			.get("https://orbital-25.onrender.com/me", {
+				withCredentials: true,
+			})
 			.then((res) => {
 				const user = res.data;
 				setName(user.name);
@@ -51,7 +53,7 @@ function Profile() {
 
 		try {
 			await axios.put(
-				"http://localhost:5050/api/update-profile",
+				"https://orbital-25.onrender.com/api/update-profile",
 				{
 					year,
 					major,
@@ -77,26 +79,41 @@ function Profile() {
 					<h1>Profile</h1>
 					<div className="details">
 						<div className="prof">
-							<img src="profilepic.png" alt="profile" width="185" height="185"/>
+							<img
+								src="profilepic.png"
+								alt="profile"
+								width="185"
+								height="185"
+							/>
 							<p>{name}</p>
 						</div>
 						<p id="about">About</p>
 
 						<p id="desc">
-							Just a motivated duck trying to stay afloat in the sea
-							of deadlines. 🐣 Lover of matcha, late-night cramming,
-							and productive silence.
+							Just a motivated duck trying to stay afloat in the
+							sea of deadlines. 🐣 Lover of matcha, late-night
+							cramming, and productive silence.
 						</p>
 					</div>
 					<p id="badge">Badges</p>
 					<div className="badge-section">
 						<div className="first">
-							<img src="firstbadge.png" alt="Just Getting Started" width="100" height="100"/>
+							<img
+								src="firstbadge.png"
+								alt="Just Getting Started"
+								width="100"
+								height="100"
+							/>
 							<p id="first-title">Just Getting Started</p>
 							<p id="first-desc">Join the Flock</p>
 						</div>
 						<div className="second">
-							<img src="lockbadge.png" alt="Lock In" width="100" height="100"/>
+							<img
+								src="lockbadge.png"
+								alt="Lock In"
+								width="100"
+								height="100"
+							/>
 							<p id="second-title">Lock It In</p>
 							<p id="second-desc">
 								Study more than an hour consecutively
