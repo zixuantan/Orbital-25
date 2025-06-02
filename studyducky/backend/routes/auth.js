@@ -1,15 +1,18 @@
 import express from "express";
 import passport from "passport";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const router = express.Router();
 
-// Start Google login
+const FRONTEND_URL = process.env.FRONTEND_URL;
+
 router.get(
 	"/google",
 	passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-// Callback route from Google
 router.get(
 	"/google/callback",
 	(req, res, next) => {
@@ -18,18 +21,16 @@ router.get(
 	},
 	passport.authenticate("google", { failureRedirect: "/" }),
 	(req, res) => {
-		// Check if the user has filled out their profile
 		if (!req.user.year || !req.user.major) {
 			console.log("Redirecting new user to registration");
-			res.redirect("http://localhost:3000/register");
+			res.redirect(`${FRONTEND_URL}/register`);
 		} else {
 			console.log("Redirecting existing user to homepage");
-			res.redirect("http://localhost:3000/dashboard");
+			res.redirect(`${FRONTEND_URL}/dashboard`);
 		}
 	}
 );
 
-// Logout route
 router.get("/logout", (req, res) => {
 	req.logout(() => {
 		res.redirect("/");
