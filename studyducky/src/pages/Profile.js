@@ -42,7 +42,7 @@ function Profile() {
 
 	const handleSave = async (e) => {
 		e.preventDefault();
-		console.log("🔧 Save button clicked");
+		console.log("Save button clicked");
 		console.log("Payload:", {
 			year,
 			major,
@@ -59,7 +59,7 @@ function Profile() {
 				},
 				{ withCredentials: true }
 			);
-			alert("✅ Profile updated!");
+			alert("Profile updated!");
 			setIsEditing(false);
 		} catch (err) {
 			console.error(
