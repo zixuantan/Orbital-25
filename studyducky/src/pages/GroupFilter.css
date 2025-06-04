@@ -1,0 +1,48 @@
+.overall-filter {
+    background-color: #fff1c2;
+    height: 100vh;
+}
+
+.filter-page {
+    padding: 15px;
+    margin-top: 15px;
+}
+
+#filter-header {
+    font-size: 35px;
+}
+
+#quote {
+    font-size: 25px;
+}
+
+.filter-form {
+    display: flex;
+    flex-direction: column; 
+    padding-left: 20px;
+    margin-top: 50px;
+}
+
+.indiv {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    gap: 30px;
+}
+
+.questions {
+    width: 500px;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.filter-select {
+    background-color: #FFF;
+    width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #D9D9D9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+}
+
