@@ -4,6 +4,7 @@ import './GroupFilter.css';
 
 function GroupFilter() {
     const [groupSelected, setGroup] = useState("");
+    const [modSelected, setMod] = useState("");
     return (
         <div className="overall-filter">
             <Navbar/>
@@ -12,6 +13,7 @@ function GroupFilter() {
                 <p id="quote">Find your most compatible flock now!</p>
                 
                 <form className="filter-form">
+
                     <div className="indiv">
                         <span className="questions">First, what kind of group are you looking for?</span>
                         <select className="filter-select" required 
@@ -22,14 +24,17 @@ function GroupFilter() {
                             <option value="project">Project Group</option>
                         </select>
                     </div>
+
                     {groupSelected === "study" ? (
                         <div>
+
                             <div className="indiv">
                                 <span className="questions">Which module is it for?</span>
                                 <select className="filter-select" required>
                                     <option hidden></option>
                                 </select>
                             </div>
+
                             <div className="indiv">
                                 <span className="questions">When do you prefer to study?</span>
                                 <select className="filter-select" required>
@@ -39,9 +44,21 @@ function GroupFilter() {
                                     <option>Evening (5PM - 10PM)</option>
                                 </select>
                             </div>
+
+                            <div className="indiv">
+                                <span className="questions">How often do you expect to be active in the group chat?</span>
+                                <select className="filter-select" required>
+                                    <option hidden></option>
+                                    <option>Daily</option>
+                                    <option>A few times a week</option>
+                                    <option>Mostly near exams</option>
+                                </select>
+                            </div>
+
                         </div> )
                     : groupSelected === "project" ? (
                         <div>
+
                             <div className="indiv">
                                 <span className="questions">Which module is it for?</span> 
                                 <select className="filter-select" required>
