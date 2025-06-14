@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 import Registration from "./pages/Registration";
 import LoginPage from "./pages/LoginPage.js";
@@ -12,6 +11,7 @@ import GroupChat from "./pages/GroupChat";
 import VirtualStudyRoom from "./pages/VirtualStudyRoom";
 import Stats from "./pages/Stats";
 import Settings from "./pages/Settings";
+import GroupFilter from "./pages/GroupFilter";
 
 function App() {
 	return (
@@ -24,6 +24,7 @@ function App() {
 					<Route path="/main" element={<MainPage />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/profile" element={<Profile />} />
+					<Route path="/filter" element={<GroupFilter />} />
 					<Route path="/groups" element={<GroupFinder />} />
 					<Route path="/chat" element={<GroupChat />} />
 					<Route path="/study-room" element={<VirtualStudyRoom />} />
