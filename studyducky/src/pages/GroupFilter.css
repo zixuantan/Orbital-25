@@ -25,13 +25,12 @@
 
 .indiv {
     display: flex;
-    align-items: center;
-    margin-bottom: 45px;
-    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 50px;
 }
 
 .questions {
-    width: 500px;
+    width: 520px;
     font-size: 20px;
     flex-shrink: 0;
 }
@@ -46,29 +45,20 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
 }
 
-.checkbox-space {
-    display: flex;
-    justify-content: space-between; /* Or try: space-around, or even center + gap */
+.checkbox-portion {
+    display: flex; 
+    gap: 20px;
 }
 
 .checkbox-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1; /* Ensures equal space per item */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px; 
 }
 
 .checkbox {
-    font-size: 16px;
-    gap: 20px;
     box-shadow: none;
-}
-
-.check-labels {
-  font-size: 16px;
-  margin-top: 5px;            /* Adds space between checkbox and label */
-  display: block;             /* Forces label to break to new line */
-  text-align: center;
 }
 
 .search-btn {

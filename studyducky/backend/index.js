@@ -48,12 +48,6 @@ app.use("/api", updateProfile);
 app.use("/api", retrieveMods);
 app.use('/api', groupFilter);
 
-app.use((req, res) => {
-  console.log("⚠️ Fallback hit:", req.method, req.url);
-  res.status(404).send("Route not found");
-});
-
-
 app.get("/me", (req, res) => {
 	console.log("User in session:", req.user); // req.user populated by Passport.js after successful auth
 	res.json(req.user || { message: "Not logged in" }); // if user is logged in and session is valid, sends user obj as JSON back to frontend, else sends not logged in

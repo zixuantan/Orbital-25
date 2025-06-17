@@ -95,7 +95,7 @@ function GroupFilter() {
 
                     {groupSelected === "study" ? (
                         <div>
-                            <ModulesTaken googleId={googleId} onSelectModule={setModule}/>
+                            <ModulesTaken googleId={googleId} selectMod={setModule}/>
                         
                             <div className="indiv"> 
                                 <span className="questions">What do you want from these calls?</span>
@@ -173,7 +173,7 @@ function GroupFilter() {
                     : groupSelected === "project" ? (
                         <div>
 
-                            <ModulesTaken googleId={googleId} onSelectModule={setModule}/>
+                            <ModulesTaken googleId={googleId} selectMod={setModule}/>
 
                             <div className="indiv"> 
                                 <span className="questions">Which tutorial slot do you have?</span>
@@ -227,7 +227,7 @@ function GroupFilter() {
 
                             <div className="indiv">
                                 <span className="questions">What are your preferred work slots?</span>
-                                <div className="checkbox-space">
+                                <div className="checkbox-portion">
                                     {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map((day) => (
                                         <div className="checkbox-row" key={day}>
                                             <input type="checkbox" id={day} name={day}
@@ -240,7 +240,7 @@ function GroupFilter() {
                                                 setDays((prev) => prev.filter((slot) => slot !== day));
                                                 }
                                             }}/>
-                                            <label className="check-labels" for={day}>{day}</label><br/>
+                                            <label for={day}>{day}</label>
                                         </div>
                                     ))} 
                                 </div>                               
