@@ -7,7 +7,9 @@ import authRoutes from "./routes/auth.js";
 import "./config/passport.js";
 import registerRoutes from "./routes/register.js";
 import updateProfile from "./routes/updateProfile.js";
-import groupRoutes from "./routes/groups.js"; // adjust path if needed
+import retrieveMods from "./routes/retrieveMods.js";
+import groupFilter from "./routes/groupFilter.js";
+//import groupRoutes from "./routes/groups.js"; // adjust path if needed
 import cors from "cors"; // backend and frontend run on different ports
 
 dotenv.config();
@@ -43,8 +45,8 @@ app.use("/auth", authRoutes);
 
 app.use("/api", registerRoutes);
 app.use("/api", updateProfile);
-
-app.use("/api/groups", groupRoutes);
+app.use("/api", retrieveMods);
+app.use('/api', groupFilter);
 
 app.get("/me", (req, res) => {
 	console.log("User in session:", req.user); // req.user populated by Passport.js after successful auth
