@@ -1,6 +1,6 @@
 .overall-filter {
     background-color: #fff1c2;
-    height: 150vh;
+    height: 160vh;
 }
 
 .filter-page {
@@ -46,7 +46,41 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
 }
 
+.checkbox-space {
+    display: flex;
+    justify-content: space-between; /* Or try: space-around, or even center + gap */
+}
+
+.checkbox-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1; /* Ensures equal space per item */
+}
+
 .checkbox {
     font-size: 16px;
+    gap: 20px;
+    box-shadow: none;
+}
+
+.check-labels {
+  font-size: 16px;
+  margin-top: 5px;            /* Adds space between checkbox and label */
+  display: block;             /* Forces label to break to new line */
+  text-align: center;
+}
+
+.search-btn {
+    background-color: #2c2c2c;
+    color: #f5f5f5;
+    padding: 10px;
+    width: 120px;
+    height: 40px;
+    border: #2C2C2C;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-left: auto;
+    cursor: pointer;
 }
 
