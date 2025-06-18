@@ -13,7 +13,7 @@ const Navbar = () => {
 				<Link to="/profile" className="nav-btn">
 					Profile
 				</Link>
-				<Link to="/groups" className="nav-btn">
+				<Link to="/filter" className="nav-btn">
 					GroupFinder
 				</Link>
 				<Link to="/chat" className="nav-btn">

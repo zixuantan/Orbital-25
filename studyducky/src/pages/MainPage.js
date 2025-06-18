@@ -71,7 +71,7 @@ function MainPage() {
 
 					<div className="finder">
 						<span>Want to find more flocks to join?</span>
-						<Link to="/groups">
+						<Link to="/filter">
 							<button className="finder-btn">GroupFinder</button>
 						</Link>
 					</div>

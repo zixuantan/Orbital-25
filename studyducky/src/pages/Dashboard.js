@@ -8,7 +8,7 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		axios
-			.get("https://orbital-25.onrender.com/me", {
+			.get("http://localhost:5050/me", {
 				withCredentials: true,
 			})
 			.then((res) => setUser(res.data))

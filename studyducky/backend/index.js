@@ -8,8 +8,8 @@ import "./config/passport.js";
 import registerRoutes from "./routes/register.js";
 import updateProfile from "./routes/updateProfile.js";
 import retrieveMods from "./routes/retrieveMods.js";
-import groupFilter from "./routes/groupFilter.js";
-//import groupRoutes from "./routes/groups.js"; // adjust path if needed
+import groupFilter from "./routes/groupFilter.js"; //filter
+import groupRoutes from "./routes/groups.js"; //show groups in db
 import cors from "cors"; // backend and frontend run on different ports
 
 dotenv.config();
@@ -20,10 +20,7 @@ const PORT = process.env.PORT || 5050;
 
 app.use(
 	cors({
-		origin: [
-			"http://localhost:3000",
-			"https://orbital-25-3lexprzb8-zi-xuans-projects-a4d16121.vercel.app",
-		],
+		origin: ["http://localhost:3000"],
 		credentials: true,
 	})
 );
@@ -54,7 +51,8 @@ app.use("/auth", authRoutes);
 app.use("/api", registerRoutes);
 app.use("/api", updateProfile);
 app.use("/api", retrieveMods);
-app.use('/api', groupFilter);
+app.use("/api", groupFilter);
+app.use("/api/groups", groupRoutes);
 
 app.get("/me", (req, res) => {
 	console.log("User in session:", req.user); // req.user populated by Passport.js after successful auth

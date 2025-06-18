@@ -22,7 +22,7 @@ function Profile() {
 	// Fetch user data
 	useEffect(() => {
 		axios
-			.get("https://orbital-25.onrender.com/me", {
+			.get("http://localhost:5050/me", {
 				withCredentials: true,
 			})
 			.then((res) => {
@@ -53,7 +53,7 @@ function Profile() {
 
 		try {
 			await axios.put(
-				"https://orbital-25.onrender.com/api/update-profile",
+				"http://localhost:5050/api/update-profile",
 				{
 					year,
 					major,

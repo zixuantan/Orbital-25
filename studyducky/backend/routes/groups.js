@@ -1,6 +1,7 @@
 import express from "express";
-import Group from "../models/Group.js";
 import User from "../models/User.js";
+import StudyGroup from "../models/StudyGroup.js";
+import ProjectGroup from "../models/ProjectGroup.js";
 
 const router = express.Router();
 
@@ -8,17 +9,31 @@ const router = express.Router();
 router.post("/", async (req, res) => {
 	try {
 		const { name, type, module, creatorId } = req.body;
-		const newGroup = new Group({
+
+		// Determine which model to use
+		const GroupModel =
+			type === "study"
+				? StudyGroup
+				: type === "project"
+				? ProjectGroup
+				: null;
+
+		if (!GroupModel) {
+			return res.status(400).json({ message: "Invalid group type" });
+		}
+
+		const newGroup = new GroupModel({
 			name,
 			type,
 			module,
 			members: [
 				{
 					user: creatorId,
-					availability: "Not specified", 
+					availability: "Not specified",
 				},
 			],
 		});
+
 		await newGroup.save();
 		res.status(201).json(newGroup);
 	} catch (err) {
@@ -54,21 +69,25 @@ router.post("/:id/join", async (req, res) => {
 	}
 });
 
-// Get all groups
-router.get("/all", async (req, res) => {
+// fetch groups by type
+router.get("/by-type", async (req, res) => {
+	const { type } = req.query;
+
 	try {
-		const groups = await Group.find().populate(
-			"members.user",
-			"name email"
-		);
+		let groups;
+		if (type === "study") {
+			groups = await StudyGroup.find();
+		} else if (type === "project") {
+			groups = await ProjectGroup.find();
+		} else {
+			return res.status(400).json({ message: "Invalid group type" });
+		}
+
 		res.json(groups);
 	} catch (err) {
-		console.error("Error fetching groups:", err);
-		res.status(500).json({ message: "Failed to retrieve groups" });
+		console.error("Error fetching typed groups:", err);
+		res.status(500).json({ message: "Server error" });
 	}
 });
 
 export default router;
-
-
-

@@ -14,7 +14,7 @@ function LoginPage() {
 				className="login-btn"
 				onClick={() =>
 					(window.location.href =
-						"https://orbital-25.onrender.com/auth/google")
+						"http://localhost:5050/auth/google")
 				}
 			>
 				<img
