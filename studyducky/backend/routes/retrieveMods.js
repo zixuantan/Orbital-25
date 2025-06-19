@@ -8,7 +8,7 @@ router.get("/mods/:googleId", async (req, res) => {
 		const user = await User.findOne({ googleId: req.params.googleId });
 		if (!user) return res.status(404).json({ error: "User not found" });
 
-		res.json(user.modulesTaken); 
+		res.json(user.modulesTaken);
 	} catch (err) {
 		console.error(err);
 		res.status(500).json({ error: "Server error" });
@@ -16,3 +16,5 @@ router.get("/mods/:googleId", async (req, res) => {
 });
 
 export default router;
+
+// for selection of module in group filter

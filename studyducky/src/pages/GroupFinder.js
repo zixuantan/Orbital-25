@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 
-
 function GroupFinder() {
 	const location = useLocation();
+
+	const [module, setModule] = useState(location.state?.module || "");
+	const [preferences, setPreferences] = useState(
+		location.state?.preferences || {}
+	);
 	const groupType = location.state?.type || "study";
 
+	const navigate = useNavigate();
 	const [user, setUser] = useState(null);
 	const [groups, setGroups] = useState([]);
 	const [availability, setAvailability] = useState({});
@@ -22,21 +27,28 @@ function GroupFinder() {
 			.then((res) => setUser(res.data))
 			.catch((err) => console.error("Error fetching user:", err));
 
-		// fetch groups (groupfilter-style or fallback)
+		// fetch matched groups with score
+		if (!module || !groupType) return;
+
 		axios
-			.get(`http://localhost:5050/api/groups/by-type?type=${groupType}`, {
-				withCredentials: true,
-			})
+			.post(
+				"http://localhost:5050/api/groupfilter",
+				{
+					type: groupType,
+					module: module,
+					...preferences, 
+				},
+				{ withCredentials: true }
+			)
 			.then((res) => {
-				console.log("Groups fetched from backend:", res.data);
-				const responseGroups = res.data.group || res.data;
-				const mappedGroups = Array.isArray(responseGroups[0])
-					? responseGroups
-					: responseGroups.map((g) => ({ group: g, score: null }));
-				setGroups(mappedGroups);
+				console.log("Matched groups with score:", res.data);
+				const responseGroups = res.data.group || [];
+				setGroups(responseGroups); 
 			})
-			.catch((err) => console.error("Error fetching groups:", err));
-	}, [groupType]);
+			.catch((err) =>
+				console.error("Error fetching matched groups:", err)
+			);
+	}, [groupType, module, preferences]);
 
 	const handleJoin = async (groupId) => {
 		try {
@@ -64,6 +76,28 @@ function GroupFinder() {
 			<h2>Group Finder</h2>
 			<p>Total groups found: {groups.length}</p>
 
+			<div className="mb-4">
+				<h4>
+					Create a New{" "}
+					{groupType.charAt(0).toUpperCase() + groupType.slice(1)}{" "}
+					Group
+				</h4>
+				<button
+					className="btn btn-outline-primary"
+					onClick={() =>
+						navigate("/create-group", {
+							state: {
+								type: groupType,
+								module: module,
+								preferences: preferences,
+							},
+						})
+					}
+				>
+					Create Group
+				</button>
+			</div>
+
 			{groups.map(({ group, score }) => (
 				<div key={group._id} className="card mb-3">
 					<div className="card-body">
@@ -72,6 +106,27 @@ function GroupFinder() {
 							Type: {group.type} <br />
 							Module: {group.module} <br />
 							Members: {group.members.length} <br />
+							{group.type === "study" ? (
+								<>
+									Calls: {group.calls} <br />
+									When: {group.when} <br />
+									Group Size: {group.groupSize} <br />
+									Notes: {group.notes} <br />
+									VSR Commitment: {group.VSR} <br />
+									Preferred Duration: {group.duration} <br />
+								</>
+							) : group.type === "project" ? (
+								<>
+									Tutorial: {group.tutorial} <br />
+									Commitment Level: {group.commitment} <br />
+									Meeting Time: {group.meeting} <br />
+									Work Pace: {group.pace} <br />
+									Work Slots: {group.workSlots?.join(
+										", "
+									)}{" "}
+									<br />
+								</>
+							) : null}
 							{score !== null && <span>Score: {score}%</span>}
 						</p>
 						{joining === group._id ? (

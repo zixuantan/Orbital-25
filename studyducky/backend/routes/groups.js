@@ -8,31 +8,66 @@ const router = express.Router();
 // Create group
 router.post("/", async (req, res) => {
 	try {
-		const { name, type, module, creatorId } = req.body;
-
-		// Determine which model to use
-		const GroupModel =
-			type === "study"
-				? StudyGroup
-				: type === "project"
-				? ProjectGroup
-				: null;
-
-		if (!GroupModel) {
-			return res.status(400).json({ message: "Invalid group type" });
-		}
-
-		const newGroup = new GroupModel({
+		const {
 			name,
 			type,
 			module,
-			members: [
-				{
-					user: creatorId,
-					availability: "Not specified",
-				},
-			],
-		});
+			creatorId,
+			// study group
+			calls,
+			when,
+			groupSize,
+			notes,
+			VSR,
+			duration,
+			// project group
+			tutorial,
+			commitment,
+			meeting,
+			pace,
+			workSlots,
+		} = req.body;
+
+		let newGroup;
+
+		if (type === "study") {
+			newGroup = new StudyGroup({
+				name,
+				type,
+				module,
+				calls,
+				when,
+				groupSize,
+				notes,
+				VSR,
+				duration,
+				members: [
+					{
+						user: creatorId,
+						availability: "Not specified",
+					},
+				],
+			});
+		} else if (type === "project") {
+			newGroup = new ProjectGroup({
+				name,
+				type,
+				module,
+				tutorial,
+				commitment,
+				meeting,
+				pace,
+				workSlots,
+				members: [
+					{
+						user: creatorId,
+						availability: "Not specified",
+					},
+				],
+			});
+		} else {
+			return res.status(400).json({ message: "Invalid group type" });
+		}
 
 		await newGroup.save();
 		res.status(201).json(newGroup);
@@ -71,14 +106,14 @@ router.post("/:id/join", async (req, res) => {
 
 // fetch groups by type
 router.get("/by-type", async (req, res) => {
-	const { type } = req.query;
+	const { type, module } = req.query;
 
 	try {
 		let groups;
 		if (type === "study") {
-			groups = await StudyGroup.find();
+			groups = await StudyGroup.find(module ? { module } : {});
 		} else if (type === "project") {
-			groups = await ProjectGroup.find();
+			groups = await ProjectGroup.find(module ? { module } : {});
 		} else {
 			return res.status(400).json({ message: "Invalid group type" });
 		}

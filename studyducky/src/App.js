@@ -12,6 +12,7 @@ import VirtualStudyRoom from "./pages/VirtualStudyRoom";
 import Stats from "./pages/Stats";
 import Settings from "./pages/Settings";
 import GroupFilter from "./pages/GroupFilter";
+import CreateGroup from "./pages/CreateGroup";
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 					<Route path="/study-room" element={<VirtualStudyRoom />} />
 					<Route path="/stats" element={<Stats />} />
 					<Route path="/settings" element={<Settings />} />
+					<Route path="/create-group" element={<CreateGroup />} />
 				</Routes>
 			</div>
 		</Router>

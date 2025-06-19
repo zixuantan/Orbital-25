@@ -72,6 +72,20 @@ function GroupFilter() {
 					state: {
 						type: groupSelected,
 						filterData: data,
+						module: moduleSelected,
+						preferences: {
+							calls: callsSelected,
+							when: whenSelected,
+							groupSize: sizeSelected,
+							notes: notesSelected,
+							VSR: VSRSelected,
+							duration: durationSelected,
+							tutorial: tutorialSelected,
+							commitment: commitSelected,
+							meeting: meetSelected,
+							pace: paceSelected,
+							workSlots: daysSelected,
+						},
 					},
 				});
 			})
