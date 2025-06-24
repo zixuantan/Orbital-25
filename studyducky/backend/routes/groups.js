@@ -43,8 +43,7 @@ router.post("/", async (req, res) => {
 				duration,
 				members: [
 					{
-						user: creatorId,
-						availability: "Not specified",
+						user: creatorId
 					},
 				],
 			});
@@ -61,7 +60,6 @@ router.post("/", async (req, res) => {
 				members: [
 					{
 						user: creatorId,
-						availability: "Not specified",
 					},
 				],
 			});
@@ -78,10 +76,10 @@ router.post("/", async (req, res) => {
 });
 
 // Join group
-router.post("/:id/join", async (req, res) => {
+/* router.post("/:id/join", async (req, res) => {
 	try {
 		const groupId = req.params.id;
-		const { userId, availability } = req.body;
+		const { userId } = req.body;
 
 		const group = await Group.findById(groupId);
 		if (!group) return res.status(404).json({ message: "Group not found" });
@@ -91,8 +89,7 @@ router.post("/:id/join", async (req, res) => {
 		);
 		if (!alreadyMember) {
 			group.members.push({
-				user: userId,
-				availability: availability || [],
+				user: userId
 			});
 			await group.save();
 		}
@@ -124,5 +121,5 @@ router.get("/by-type", async (req, res) => {
 		res.status(500).json({ message: "Server error" });
 	}
 });
-
+*/
 export default router;

@@ -10,6 +10,9 @@ import updateProfile from "./routes/updateProfile.js";
 import retrieveMods from "./routes/retrieveMods.js";
 import groupFilter from "./routes/groupFilter.js"; //filter
 import groupRoutes from "./routes/groups.js"; //show groups in db
+import joinGroup from "./routes/joinGroup.js";
+import retrieveChat from "./routes/retrieveChat.js";
+import retrieveGroups from "./routes/retrieveGroups.js";
 import cors from "cors"; // backend and frontend run on different ports
 
 dotenv.config();
@@ -53,6 +56,9 @@ app.use("/api", updateProfile);
 app.use("/api", retrieveMods);
 app.use("/api", groupFilter);
 app.use("/api/groups", groupRoutes);
+app.use("/api", joinGroup);
+app.use("/api", retrieveChat);
+app.use("/api", retrieveGroups);
 
 app.get("/me", (req, res) => {
 	console.log("User in session:", req.user); // req.user populated by Passport.js after successful auth

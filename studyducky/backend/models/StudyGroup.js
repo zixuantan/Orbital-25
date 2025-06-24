@@ -14,8 +14,7 @@ const studyGroupSchema = new Schema({
  
 	members: [
 		{
-			user: { type: Types.ObjectId, ref: "User" },
-			availability: { type: String, default: "Not specified" },
+			user: { type: Types.ObjectId, ref: "User" }
 		},
 	],
 

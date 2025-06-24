@@ -27,7 +27,7 @@ function App() {
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/filter" element={<GroupFilter />} />
 					<Route path="/groups" element={<GroupFinder />} />
-					<Route path="/chat" element={<GroupChat />} />
+					<Route path="/chat/:groupId" element={<GroupChat />} />
 					<Route path="/study-room" element={<VirtualStudyRoom />} />
 					<Route path="/stats" element={<Stats />} />
 					<Route path="/settings" element={<Settings />} />

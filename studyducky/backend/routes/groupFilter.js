@@ -1,20 +1,25 @@
 import express from "express";
+import User from "../models/User.js";
 import StudyGroup from "../models/StudyGroup.js";
 import ProjectGroup from "../models/ProjectGroup.js";
 
 const router = express.Router();
 
 router.post("/groupfilter", async (req, res) => {
-    console.log("POST /api/groupfilter hit");
-    console.log("Request body:", req.body);
 
-    const { type, module, tutorial } = req.body;
+    const { googleId, type, module, tutorial } = req.body;
 
     try {
+        const user = await User.findOne({ googleId });
+        if (!user) return res.status(404).json({ error: "User not found" });
+
         let matched = [];
 
         if (type === "study") {
+            console.log("Incoming module:", module);
             matched = await StudyGroup.find({module});
+            console.log("Matched groups from DB:", matched);
+            matched = matched.filter(group => !group.members.some(member => member.user.equals(user._id)));
             matched = matched.map((group) => {
                 let score = 0;
                 if (group.calls === req.body.calls) score += 50 / 3;
@@ -28,6 +33,7 @@ router.post("/groupfilter", async (req, res) => {
             });
         } else if (type === "project") {
             matched = await ProjectGroup.find({module, tutorial});
+            matched = matched.filter(group => !group.members.some(member => member.user.equals(user._id)));
             matched = matched.map((group) => {
                 let score = 0;
                 score += (4 - Math.abs(Number(group.commitment) - Number(req.body.commitment))) 
