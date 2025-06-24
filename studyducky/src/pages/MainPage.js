@@ -51,32 +51,33 @@ function MainPage() {
 			},
 		],
 	};
-	
+
 	useEffect(() => {
-			fetch("http://localhost:5050/me", {
-				credentials: "include",
+		fetch("http://localhost:5050/me", {
+			credentials: "include",
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.googleId) {
+					setGoogleId(data.googleId);
+				}
 			})
-				.then((res) => res.json())
-				.then((data) => {
-					if (data.googleId) {
-						setGoogleId(data.googleId);
-					}
-				})
-				.catch((err) => {
-					console.error("Failed to get user info:", err);
-				});
-		}, []);
-	
+			.catch((err) => {
+				console.error("Failed to get user info:", err);
+			});
+	}, []);
+
 	useEffect(() => {
-  		fetch(`http://localhost:5050/api/user/${googleId}/groups`, {
-    		credentials: "include",
-  		})
-  		.then(res => res.json())
-  		.then(data => {
-			console.log("Fetched user groups:", data);
-    		setStudyGroups(data.studyGroups);
-    		setProjectGroups(data.projectGroups);
-  		});
+		if (!googleId) return;
+		fetch(`http://localhost:5050/api/user/${googleId}/groups`, {
+			credentials: "include",
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log("Fetched user groups:", data);
+				setStudyGroups(data.studyGroups);
+				setProjectGroups(data.projectGroups);
+			});
 	}, [googleId]);
 	return (
 		<div className="overall-page">
@@ -107,16 +108,10 @@ function MainPage() {
 					</div>
 				</div>
 
-				<Chats
-					title="Study Groups"
-					groups={study}
-				/>
+				<Chats title="Study Groups" groups={study} />
 
 				<div className="project-groups">
-					<Chats
-						title="Project Groups"
-						groups={project}
-					/>
+					<Chats title="Project Groups" groups={project} />
 				</div>
 			</div>
 		</div>

@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
 				duration,
 				members: [
 					{
-						user: creatorId
+						user: creatorId,
 					},
 				],
 			});
@@ -67,7 +67,17 @@ router.post("/", async (req, res) => {
 			return res.status(400).json({ message: "Invalid group type" });
 		}
 
+		// save group to generate new group id
 		await newGroup.save();
+
+		// update user's group list with new group id
+		await User.findByIdAndUpdate(creatorId, {
+			$addToSet: {
+				[type === "study" ? "studyGroups" : "projectGroups"]:
+					newGroup._id,
+			},
+		});
+
 		res.status(201).json(newGroup);
 	} catch (err) {
 		console.error("Group creation error:", err);

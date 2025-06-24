@@ -12,15 +12,15 @@ function GroupFinder() {
 	const [joining, setJoining] = useState(null);
 
 	useEffect(() => {
-    	if (!filterData) {
-      		console.warn("Data not passed from groupFilter");
-    	} else {
-      		console.log("Received filtered groups:", filterData);
-    	}
-  	}, [filterData]);
+		if (!filterData) {
+			console.warn("Data not passed from groupFilter");
+		} else {
+			console.log("Received filtered groups:", filterData);
+		}
+	}, [filterData]);
 
 	useEffect(() => {
-    	setGroups(filterData);
+		setGroups(filterData);
 	}, [filterData]);
 
 	useEffect(() => {
@@ -31,23 +31,27 @@ function GroupFinder() {
 			})
 			.then((res) => setUser(res.data))
 			.catch((err) => console.error("Error fetching user:", err));
-		})
+	});
 
 	const handleJoin = async (groupId, type) => {
-  		try {
-    		const res = await fetch(`http://localhost:5050/api/joingroup/${groupId}`, {
-      		method: 'POST',
-      		headers: {
-        	'Content-Type': 'application/json', }, 
-			body: JSON.stringify({ groupId, type }),  
-    	});
-		const data = await res.json();
-    	console.log("Join result:", data);
-		navigate(`/chat/${groupId}`);
-
-  		} catch (err) {
-    	console.error("Join failed:", err);
-  		}
+		try {
+			const res = await fetch(
+				`http://localhost:5050/api/joingroup/${groupId}`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					credentials: "include",
+					body: JSON.stringify({ groupId, type }),
+				}
+			);
+			const data = await res.json();
+			console.log("Join result:", data);
+			navigate(`/chat/${groupId}`);
+		} catch (err) {
+			console.error("Join failed:", err);
+		}
 	};
 
 	if (!user) return <p>Loading user info...</p>;
@@ -59,9 +63,10 @@ function GroupFinder() {
 			<p className="group-info">Total groups found: {groups.length}</p>
 
 			<div className="create-group">
-				<h2 className="create-header">Create a New{" "}
-					{type.charAt(0).toUpperCase() + type.slice(1)}{" "}
-					Group</h2>
+				<h2 className="create-header">
+					Create a New {type.charAt(0).toUpperCase() + type.slice(1)}{" "}
+					Group
+				</h2>
 				<button
 					className="create-btn"
 					onClick={() =>
@@ -72,7 +77,10 @@ function GroupFinder() {
 								preferences: preferences,
 							},
 						})
-					}>Create Group</button>
+					}
+				>
+					Create Group
+				</button>
 			</div>
 
 			{groups.map(({ group, score }) => (
@@ -108,15 +116,19 @@ function GroupFinder() {
 						</p>
 						{joining === group._id ? (
 							<div>
-								<button className="join-btn"
-									onClick={() => handleJoin(group._id, type)}>
+								<button
+									className="join-btn"
+									onClick={() => handleJoin(group._id, type)}
+								>
 									Confirm Join
 								</button>
 							</div>
 						) : (
 							<div>
-								<button className="join-btn"
-									onClick={() => setJoining(group._id)}>
+								<button
+									className="join-btn"
+									onClick={() => setJoining(group._id)}
+								>
 									Join Group
 								</button>
 							</div>
