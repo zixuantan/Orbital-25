@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Chats.css';
 
-const Chats = ({ title, groups }) => {
+const Chats = ({ title, groups = [] }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -16,9 +16,9 @@ const Chats = ({ title, groups }) => {
       {isOpen && (
         <ul className="group-list">
 
-          {groups.map((name, index) => (
+          {groups.map((group, index) => (
             <li key={index} className="chat">
-              {name}
+              {group.name}
               <span className="arrow">›</span>
             </li>
           ))}
