@@ -37,8 +37,8 @@ const userSchema = new Schema(
 			default: {},
 		},
 
-		studyGroups: [{ type: Types.ObjectId, ref: "Group" }],
-		projectGroups: [{ type: Types.ObjectId, ref: "Group" }],
+		studyGroups: [{ type: Types.ObjectId, ref: "StudyGroup" }],
+		projectGroups: [{ type: Types.ObjectId, ref: "ProjectGroup" }],
 	},
 	{ timestamps: true }
 ); 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./MainPage.css";
 import { Bar } from "react-chartjs-2";
 import { Doughnut } from "react-chartjs-2";
@@ -28,6 +28,9 @@ const week = [2.0, 3.0, 1.5, 4.0, 2.5, 4.5, 3.0];
 const day = 3;
 
 function MainPage() {
+	const [study, setStudyGroups] = useState([]);
+	const [project, setProjectGroups] = useState([]);
+	const [googleId, setGoogleId] = useState(null);
 	const weeklyData = {
 		labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
 		datasets: [
@@ -48,6 +51,33 @@ function MainPage() {
 			},
 		],
 	};
+	
+	useEffect(() => {
+			fetch("http://localhost:5050/me", {
+				credentials: "include",
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					if (data.googleId) {
+						setGoogleId(data.googleId);
+					}
+				})
+				.catch((err) => {
+					console.error("Failed to get user info:", err);
+				});
+		}, []);
+	
+	useEffect(() => {
+  		fetch(`http://localhost:5050/api/user/${googleId}/groups`, {
+    		credentials: "include",
+  		})
+  		.then(res => res.json())
+  		.then(data => {
+			console.log("Fetched user groups:", data);
+    		setStudyGroups(data.studyGroups);
+    		setProjectGroups(data.projectGroups);
+  		});
+	}, [googleId]);
 	return (
 		<div className="overall-page">
 			<Navbar />
@@ -79,13 +109,13 @@ function MainPage() {
 
 				<Chats
 					title="Study Groups"
-					groups={["BZA squad", "Study & chill"]}
+					groups={study}
 				/>
 
 				<div className="project-groups">
 					<Chats
 						title="Project Groups"
-						groups={["Must get A for BT2102"]}
+						groups={project}
 					/>
 				</div>
 			</div>

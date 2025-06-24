@@ -5,18 +5,23 @@ import Navbar from "../components/Navbar";
 
 function GroupFinder() {
 	const location = useLocation();
-
-	const [module, setModule] = useState(location.state?.module || "");
-	const [preferences, setPreferences] = useState(
-		location.state?.preferences || {}
-	);
-	const groupType = location.state?.type || "study";
-
+	const { type, filterData, module, preferences } = location.state || {};
 	const navigate = useNavigate();
 	const [user, setUser] = useState(null);
 	const [groups, setGroups] = useState([]);
-	const [availability, setAvailability] = useState({});
 	const [joining, setJoining] = useState(null);
+
+	useEffect(() => {
+    	if (!filterData) {
+      		console.warn("Data not passed from groupFilter");
+    	} else {
+      		console.log("Received filtered groups:", filterData);
+    	}
+  	}, [filterData]);
+
+	useEffect(() => {
+    	setGroups(filterData);
+	}, [filterData]);
 
 	useEffect(() => {
 		// fetch current user
@@ -26,97 +31,69 @@ function GroupFinder() {
 			})
 			.then((res) => setUser(res.data))
 			.catch((err) => console.error("Error fetching user:", err));
+		})
 
-		// fetch matched groups with score
-		if (!module || !groupType) return;
+	const handleJoin = async (groupId, type) => {
+  		try {
+    		const res = await fetch(`http://localhost:5050/api/joingroup/${groupId}`, {
+      		method: 'POST',
+      		headers: {
+        	'Content-Type': 'application/json', }, 
+			body: JSON.stringify({ groupId, type }),  
+    	});
+		const data = await res.json();
+    	console.log("Join result:", data);
+		navigate(`/chat/${groupId}`);
 
-		axios
-			.post(
-				"http://localhost:5050/api/groupfilter",
-				{
-					type: groupType,
-					module: module,
-					...preferences, 
-				},
-				{ withCredentials: true }
-			)
-			.then((res) => {
-				console.log("Matched groups with score:", res.data);
-				const responseGroups = res.data.group || [];
-				setGroups(responseGroups); 
-			})
-			.catch((err) =>
-				console.error("Error fetching matched groups:", err)
-			);
-	}, [groupType, module, preferences]);
-
-	const handleJoin = async (groupId) => {
-		try {
-			await axios.post(
-				`http://localhost:5050/api/groups/${groupId}/join`,
-				{
-					userId: user._id,
-					availability: availability[groupId] || "Not specified",
-				},
-				{ withCredentials: true }
-			);
-			alert("Joined group successfully!");
-			setJoining(null);
-		} catch (err) {
-			console.error("Failed to join group:", err);
-			alert("Failed to join group.");
-		}
+  		} catch (err) {
+    	console.error("Join failed:", err);
+  		}
 	};
 
 	if (!user) return <p>Loading user info...</p>;
 
 	return (
-		<div className="App-header">
+		<div className="overall-finder">
 			<Navbar />
-			<h2>Group Finder</h2>
-			<p>Total groups found: {groups.length}</p>
+			<h1 id="finder-header">GroupFinder</h1>
+			<p className="group-info">Total groups found: {groups.length}</p>
 
-			<div className="mb-4">
-				<h4>
-					Create a New{" "}
-					{groupType.charAt(0).toUpperCase() + groupType.slice(1)}{" "}
-					Group
-				</h4>
+			<div className="create-group">
+				<h2 className="create-header">Create a New{" "}
+					{type.charAt(0).toUpperCase() + type.slice(1)}{" "}
+					Group</h2>
 				<button
-					className="btn btn-outline-primary"
+					className="create-btn"
 					onClick={() =>
 						navigate("/create-group", {
 							state: {
-								type: groupType,
+								type: type,
 								module: module,
 								preferences: preferences,
 							},
 						})
-					}
-				>
-					Create Group
-				</button>
+					}>Create Group</button>
 			</div>
 
 			{groups.map(({ group, score }) => (
-				<div key={group._id} className="card mb-3">
-					<div className="card-body">
-						<h5 className="card-title">{group.name}</h5>
-						<p className="card-text">
+				<div key={group._id} className="group-options">
+					<div className="each-group">
+						<h3 className="group-name">{group.name}</h3>
+						<p className="group-details">
 							Type: {group.type} <br />
 							Module: {group.module} <br />
 							Members: {group.members.length} <br />
 							{group.type === "study" ? (
-								<>
+								<div>
 									Calls: {group.calls} <br />
 									When: {group.when} <br />
 									Group Size: {group.groupSize} <br />
 									Notes: {group.notes} <br />
 									VSR Commitment: {group.VSR} <br />
 									Preferred Duration: {group.duration} <br />
-								</>
+								</div>
 							) : group.type === "project" ? (
-								<>
+								<div>
 									Tutorial: {group.tutorial} <br />
 									Commitment Level: {group.commitment} <br />
 									Meeting Time: {group.meeting} <br />
@@ -125,38 +102,24 @@ function GroupFinder() {
 										", "
 									)}{" "}
 									<br />
-								</>
+								</div>
 							) : null}
 							{score !== null && <span>Score: {score}%</span>}
 						</p>
 						{joining === group._id ? (
-							<>
-								<input
-									type="text"
-									className="form-control mb-2"
-									placeholder="Enter your availability"
-									value={availability[group._id] || ""}
-									onChange={(e) =>
-										setAvailability((prev) => ({
-											...prev,
-											[group._id]: e.target.value,
-										}))
-									}
-								/>
-								<button
-									className="btn btn-success"
-									onClick={() => handleJoin(group._id)}
-								>
+							<div>
+								<button className="join-btn"
+									onClick={() => handleJoin(group._id, type)}>
 									Confirm Join
 								</button>
-							</>
+							</div>
 						) : (
-							<button
-								className="btn btn-primary"
-								onClick={() => setJoining(group._id)}
-							>
-								Join Group
-							</button>
+							<div>
+								<button className="join-btn"
+									onClick={() => setJoining(group._id)}>
+									Join Group
+								</button>
+							</div>
 						)}
 					</div>
 				</div>

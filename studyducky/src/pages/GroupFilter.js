@@ -39,6 +39,7 @@ function GroupFilter() {
 	const handleData = (e) => {
 		e.preventDefault();
 		const prefData = {
+			googleId,
 			type: groupSelected,
 			...(groupSelected === "study" && {
 				module: moduleSelected,
@@ -71,7 +72,7 @@ function GroupFilter() {
 				navigate("/groups", {
 					state: {
 						type: groupSelected,
-						filterData: data,
+						filterData: data.group,
 						module: moduleSelected,
 						preferences: {
 							calls: callsSelected,
