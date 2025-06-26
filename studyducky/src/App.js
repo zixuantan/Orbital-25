@@ -7,7 +7,7 @@ import MainPage from "./pages/MainPage";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import GroupFinder from "./pages/GroupFinder";
-import GroupChat from "./pages/GroupChat";
+import GroupChatPage from "./pages/GroupChatPage";
 import VirtualStudyRoom from "./pages/VirtualStudyRoom";
 import Stats from "./pages/Stats";
 import Settings from "./pages/Settings";
@@ -27,7 +27,7 @@ function App() {
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/filter" element={<GroupFilter />} />
 					<Route path="/groups" element={<GroupFinder />} />
-					<Route path="/chat/:groupId" element={<GroupChat />} />
+					<Route path="/chat/:groupId" element={<GroupChatPage />} />
 					<Route path="/study-room" element={<VirtualStudyRoom />} />
 					<Route path="/stats" element={<Stats />} />
 					<Route path="/settings" element={<Settings />} />
