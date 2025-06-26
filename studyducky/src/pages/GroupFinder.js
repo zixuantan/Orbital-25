@@ -60,7 +60,7 @@ function GroupFinder() {
 	return (
 		<div className="overall-finder">
 			<Navbar />
-			<h1 id="finder-header">GroupFinder</h1>
+			<h1 className="finder-header">GroupFinder</h1>
 			<p className="group-info">Total groups found: {groups.length}</p>
 
 			<div className="create-group">
@@ -118,7 +118,7 @@ function GroupFinder() {
 						<div className="details-right">
 
 							<div className="comp-score" style={{ '--score': score }}>
-								{score !== null && <span id="score">Score: {score}%</span>}
+								{score !== null && <span id="score">Score: <br />{score}%</span>}
 							</div>
 
 							{joining === group._id ? (

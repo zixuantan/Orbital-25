@@ -1,0 +1,30 @@
+.create-page {
+    background-color: #fff1c2;
+    height: 100vh;
+}
+
+#createpg-header {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    font-size: 35px;
+}
+
+#fill-in {
+    font-size: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.creation-details {
+    width: 400px;
+    background-color: #FFF;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #D9D9D9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

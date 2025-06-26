@@ -48,6 +48,7 @@
 
 .group-pref {
     margin-top: 20px;
+    width: 450px;
 }
 
 .pref {
@@ -57,33 +58,37 @@
 .details-right {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     margin-left: 400px;
     align-items: center;
-    gap: 80px;
+    gap: 40px;
 }
 
 .comp-score { 
     margin-top: 20px;
-    background-color: #E6FFFB;
+    width: 160px;
+    height: 160px;
+    background-color: #4abdac;
     font-weight: 500;
     font-size: 14px;
-    padding: 10px 40px;
     border-radius: 999px;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;     
+    align-items: center;       
+    text-align: center; 
 }
 
 #score {
     font-size: 30px;
-    color: #333333;
+    color: white;
 }
 
 .join-btn {
-    background-color: #4abdac;
-    color: white;
-    width: 200px;
+    background-color: #2c2c2c;
+    color: #f5f5f5;
+    width: 170px;
     margin-bottom: 18px;
-    font-weight: 600;
+    font-weight: 500;
     border: none;
     border-radius: 8px;
     padding: 8px 16px;
