@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import "./CreateGroup.css";
 
 function CreateGroup() {
 	const location = useLocation();
@@ -55,26 +56,28 @@ function CreateGroup() {
 	if (!user) return <p>Loading user info...</p>;
 
 	return (
-		<div className="App-header">
+		<div className="create-page">
 			<Navbar />
-			<h2>
-				Create a {groupType === "study" ? "Study" : "Project"} Group
-			</h2>
-			<form onSubmit={handleCreate}>
+			<h1 id="createpg-header">Create a {groupType === "study" ? "Study" : "Project"} Group</h1>
+			<p id="fill-in">Fill in the following details.</p>
+			<form className="form-group" onSubmit={handleCreate}>
+
+				<label>What would you like to name this group?</label>
 				<input
 					type="text"
-					placeholder="Group Name"
-					className="form-control my-2"
+					className="creation-details"
 					value={groupName}
 					onChange={(e) => setGroupName(e.target.value)}
 				/>
+
+				<label>Which module is it for?</label>
 				<input
 					type="text"
-					className="form-control my-2"
+					className="creation-details"
 					value={module}
 					readOnly
 				/>
-				<button type="submit" className="btn btn-success">
+				<button type="submit" className="create-btn">
 					Create Group
 				</button>
 			</form>

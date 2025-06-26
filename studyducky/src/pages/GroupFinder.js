@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import "./GroupFinder.css";
 
 function GroupFinder() {
 	const location = useLocation();
@@ -59,13 +60,12 @@ function GroupFinder() {
 	return (
 		<div className="overall-finder">
 			<Navbar />
-			<h1 id="finder-header">GroupFinder</h1>
+			<h1 className="finder-header">GroupFinder</h1>
 			<p className="group-info">Total groups found: {groups.length}</p>
 
 			<div className="create-group">
 				<h2 className="create-header">
-					Create a New {type.charAt(0).toUpperCase() + type.slice(1)}{" "}
-					Group
+					No Groups to join? Create a new {type.charAt(0).toUpperCase() + type.slice(1)}{" "} Group now!
 				</h2>
 				<button
 					className="create-btn"
@@ -85,54 +85,62 @@ function GroupFinder() {
 
 			{groups.map(({ group, score }) => (
 				<div key={group._id} className="group-options">
-					<div className="each-group">
-						<h3 className="group-name">{group.name}</h3>
-						<p className="group-details">
-							Type: {group.type} <br />
-							Module: {group.module} <br />
-							Members: {group.members.length} <br />
+					<h3 id="group-name">{group.name}</h3>
+
+					<div className="group-details">
+
+						<div className="group-pref">
+							<p className="pref">Module: {group.module} </p>
+							<p className="pref">Members: {group.members.length} </p>
 							{group.type === "study" ? (
 								<div>
-									Calls: {group.calls} <br />
-									When: {group.when} <br />
-									Group Size: {group.groupSize} <br />
-									Notes: {group.notes} <br />
-									VSR Commitment: {group.VSR} <br />
-									Preferred Duration: {group.duration} <br />
+									<p className="pref">Call Purpose: {group.calls}</p>
+									<p className="pref">Time Preference: {group.when}</p>
+									<p className="pref">Group Size: {group.groupSize}</p>
+									<p className="pref">Note Sharing: {group.notes}</p>
+									<p className="pref">Virtual Study Room Commitment: {group.VSR}</p>
+									<p className="pref">Preferred Duration: {group.duration}</p>
 								</div>
 							) : group.type === "project" ? (
 								<div>
-									Tutorial: {group.tutorial} <br />
-									Commitment Level: {group.commitment} <br />
-									Meeting Time: {group.meeting} <br />
-									Work Pace: {group.pace} <br />
-									Work Slots: {group.workSlots?.join(
+									<p className="pref">Tutorial Slot: {group.tutorial}</p>
+									<p className="pref">Commitment Level: {group.commitment}</p>
+									<p className="pref">Meeting Time: {group.meeting}</p>
+									<p className="pref">Work Pace: {group.pace}</p>
+									<p className="pref">Work Slots: {group.workSlots?.join(
 										", "
 									)}{" "}
-									<br />
+									</p>
 								</div>
 							) : null}
-							{score !== null && <span>Score: {score}%</span>}
-						</p>
-						{joining === group._id ? (
-							<div>
-								<button
-									className="join-btn"
-									onClick={() => handleJoin(group._id, type)}
-								>
-									Confirm Join
-								</button>
+						</div>
+
+						<div className="details-right">
+
+							<div className="comp-score" style={{ '--score': score }}>
+								{score !== null && <span id="score">Score: <br />{score}%</span>}
 							</div>
-						) : (
-							<div>
-								<button
-									className="join-btn"
-									onClick={() => setJoining(group._id)}
-								>
-									Join Group
-								</button>
-							</div>
-						)}
+
+							{joining === group._id ? (
+								<div>
+									<button
+										className="join-btn"
+										onClick={() => handleJoin(group._id, type)}
+									>
+										Confirm Join
+									</button>
+								</div>
+							) : (
+								<div>
+									<button
+										className="join-btn"
+										onClick={() => setJoining(group._id)}
+									>
+										Join Group
+									</button>
+								</div>
+							)}
+						</div>
 					</div>
 				</div>
 			))}

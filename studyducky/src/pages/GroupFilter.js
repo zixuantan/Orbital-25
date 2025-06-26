@@ -135,13 +135,13 @@ function GroupFilter() {
 									onChange={(e) => setCalls(e.target.value)}
 								>
 									<option value="" hidden></option>
-									<option value="presence">
+									<option value="Just having presence/accountability">
 										Just having presence/accountability
 									</option>
-									<option value="occasional">
-										Occasional discussion
+									<option value="Occasional discussions">
+										Occasional discussions
 									</option>
-									<option value="checkins">
+									<option value="Daily check ins">
 										Daily check ins
 									</option>
 								</select>
@@ -158,13 +158,13 @@ function GroupFilter() {
 									onChange={(e) => setWhen(e.target.value)}
 								>
 									<option value="" hidden></option>
-									<option value="morn">
+									<option value="Morning (7AM - 12PM)">
 										Morning (7AM - 12PM)
 									</option>
-									<option value="aftn">
+									<option value="Afternoon (12PM - 5PM)">
 										Afternoon (12PM - 5PM)
 									</option>
-									<option value="eve">
+									<option value="Evening (5PM - 10PM)">
 										Evening (5PM - 10PM)
 									</option>
 								</select>
@@ -199,8 +199,8 @@ function GroupFilter() {
 									onChange={(e) => setNotes(e.target.value)}
 								>
 									<option value="" hidden></option>
-									<option value="yes">Yes</option>
-									<option value="no">No</option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
 								</select>
 							</div>
 
@@ -216,11 +216,11 @@ function GroupFilter() {
 									onChange={(e) => setVSR(e.target.value)}
 								>
 									<option value="" hidden></option>
-									<option value="daily">Daily</option>
-									<option value="few times">
+									<option value="Daily">Daily</option>
+									<option value="A few times a week">
 										A few times a week
 									</option>
-									<option value="exams">
+									<option value="Mostly near exams">
 										Mostly near exams
 									</option>
 								</select>
@@ -239,11 +239,11 @@ function GroupFilter() {
 									}
 								>
 									<option value="" hidden></option>
-									<option value="less than 1">
+									<option value="Less than 1 hour">
 										Less than 1 hour
 									</option>
-									<option value="1-2">1-2 hours</option>
-									<option value="2">2 hours</option>
+									<option value="1-2 hours">1-2 hours</option>
+									<option value="2 hours">2 hours</option>
 								</select>
 							</div>
 						</div>
@@ -303,13 +303,13 @@ function GroupFilter() {
 									onChange={(e) => setMeet(e.target.value)}
 								>
 									<option value="" hidden></option>
-									<option value="morn">
+									<option value="Morning (7AM - 12PM)">
 										Morning (7AM - 12PM)
 									</option>
-									<option value="aftn">
+									<option value="Afternoon (12PM - 5PM)">
 										Afternoon (12PM - 5PM)
 									</option>
-									<option value="eve">
+									<option value="Evening (5PM - 10PM)">
 										Evening (5PM - 10PM)
 									</option>
 								</select>
@@ -326,11 +326,11 @@ function GroupFilter() {
 									onChange={(e) => setPace(e.target.value)}
 								>
 									<option value="" hidden></option>
-									<option value="early">Start early</option>
-									<option value="balanced">
+									<option value="Start early">Start early</option>
+									<option value="Balanced pace">
 										Balanced pace
 									</option>
-									<option value="cram">
+									<option value="Cram last minute">
 										Cram last minute
 									</option>
 								</select>
