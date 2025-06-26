@@ -40,7 +40,7 @@ router.post("/joingroup/:groupId", async (req, res) => {
 		}
 		res.json({ message: "Joined group:", groupId });
 	} catch (err) {
-		console.error(err);
+		console.error("Join group error:", err);
 		res.status(500).json({ error: "Server error" });
 	}
 });

@@ -13,7 +13,11 @@ import groupRoutes from "./routes/groups.js"; //show groups in db
 import joinGroup from "./routes/joinGroup.js";
 import retrieveChat from "./routes/retrieveChat.js";
 import retrieveGroups from "./routes/retrieveGroups.js";
+import messageRoutes from "./routes/messageRoutes.js";
 import cors from "cors"; // backend and frontend run on different ports
+
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 dotenv.config();
 connectDB();
@@ -50,7 +54,6 @@ app.use(passport.session());
 
 // Routes
 app.use("/auth", authRoutes);
-
 app.use("/api", registerRoutes);
 app.use("/api", updateProfile);
 app.use("/api", retrieveMods);
@@ -59,6 +62,7 @@ app.use("/api/groups", groupRoutes);
 app.use("/api", joinGroup);
 app.use("/api", retrieveChat);
 app.use("/api", retrieveGroups);
+app.use("/api", messageRoutes);
 
 app.get("/me", (req, res) => {
 	console.log("User in session:", req.user); // req.user populated by Passport.js after successful auth
@@ -84,6 +88,32 @@ app.get("/debug-session", (req, res) => {
 	});
 });
 
-app.listen(PORT, () => {
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+	cors: {
+		origin: ["http://localhost:3000"],
+		credentials: true,
+	},
+});
+
+io.on("connection", (socket) => {
+	console.log("User connected:", socket.id);
+
+	socket.on("joinRoom", ({ groupId }) => {
+		socket.join(groupId);
+		console.log(`User ${socket.id} joined room ${groupId}`);
+	});
+
+	socket.on("sendMessage", (messageData) => {
+		io.to(messageData.groupId).emit("receiveMessage", messageData);
+	});
+
+	socket.on("disconnect", () => {
+		console.log("User disconnected:", socket.id);
+	});
+});
+
+httpServer.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
 });

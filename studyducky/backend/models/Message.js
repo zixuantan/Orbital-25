@@ -1,10 +1,15 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const { Schema, model, Types } = mongoose;
 
 const messageSchema = new Schema({
 	group: {
 		type: Types.ObjectId,
-		ref: "Group",
+		refPath: "groupType",
+		required: true,
+	},
+	groupType: {
+		type: String,
+		enum: ["study", "project"],
 		required: true,
 	},
 	sender: {
@@ -22,4 +27,4 @@ const messageSchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model("Message", messageSchema);
+export default model("Message", messageSchema);
