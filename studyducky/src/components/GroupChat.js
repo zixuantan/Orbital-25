@@ -6,6 +6,7 @@ const GroupChat = ({ groupId, groupType }) => {
 	const [messages, setMessages] = useState([]);
 	const [input, setInput] = useState("");
 	const [currentUserId, setCurrentUserId] = useState(null);
+	const [group, setGroup] = useState(null);
 
 	// fetch current user for displayname
 	useEffect(() => {
@@ -42,6 +43,19 @@ const GroupChat = ({ groupId, groupType }) => {
 		};
 	}, [groupId, groupType]);
 
+	useEffect(() => {
+			console.log("Fetching group with ID:", groupId);
+			fetch(`http://localhost:5050/api/group/${groupId}`)
+				.then((res) => res.json())
+				.then((data) => {
+					console.log("Fetched group data:", data);
+					setGroup(data.group);
+				})
+				.catch((err) => {
+					console.error("Error fetching group:", err);
+				});
+		}, [groupId]);
+
 	// send message
 	const sendMessage = async () => {
 		const userRes = await axios.get("http://localhost:5050/me", {
@@ -70,6 +84,32 @@ const GroupChat = ({ groupId, groupType }) => {
 		setInput("");
 	};
 
+	const handleUpload = async (event) => {
+
+		if (!group || !group.folderId) {
+			alert("No Google Drive folder found.");
+			return;
+		}
+		const file = event.target.files[0];
+		if (!file) return;
+		const fileData = new FormData();
+		fileData.append("file", file);
+	
+		try {
+			const res = await fetch(`http://localhost:5050/api/drive/upload/${group.folderId}`, {
+				method: "POST",
+				body: fileData,
+				credentials: "include",
+			});
+			const data = await res.json();
+			console.log("File uploaded:", data.fileLink);
+			alert("File uploaded successfully!");
+		} catch (err) {
+			console.error("Upload error:", err);
+			alert("Failed to upload file.");
+		}
+	};
+
 	return (
 		<div>
 			<h2>Group Chat</h2>
@@ -86,12 +126,16 @@ const GroupChat = ({ groupId, groupType }) => {
 					</p>
 				))}
 			</div>
-			<input
-				value={input}
-				onChange={(e) => setInput(e.target.value)}
-				placeholder="Type your message"
-			/>
-			<button onClick={sendMessage}>Send</button>
+			<div className="msg-part">
+				<input
+					value={input}
+					onChange={(e) => setInput(e.target.value)}
+					placeholder="Type your message"
+				/>
+				<button onClick={sendMessage}>➣</button>
+				<label htmlFor="files" className="upload-btn">Upload Files</label>
+				<input type="file" id="files" onChange={handleUpload}/>
+			</div>
 		</div>
 	);
 };

@@ -23,6 +23,7 @@ function CreateGroup() {
 	}, []);
 
 	const handleCreate = async (e) => {
+		console.log("🚀 handleCreate triggered");
 		e.preventDefault();
 		if (!groupName || !module) {
 			alert("Please fill all fields");
@@ -34,6 +35,17 @@ function CreateGroup() {
 		);
 
 		try {
+		
+			const folderRes = await axios.post("http://localhost:5050/api/drive/create-folder",
+			{ groupName },
+			{ withCredentials: true }
+			);
+			console.log("Folder creation response:", folderRes.data);
+
+			const folderId = folderRes.data.folderId;
+			console.log("Folder ID:", folderId);
+			console.log("📁 folderId being sent to /api/groups:", folderId);
+
 			await axios.post(
 				"http://localhost:5050/api/groups",
 				{
@@ -41,6 +53,7 @@ function CreateGroup() {
 					type: groupType,
 					module: module,
 					creatorId: user._id,
+					folderId,
 					...cleanedPreferences,
 				},
 				{ withCredentials: true }

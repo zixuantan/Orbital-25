@@ -10,6 +10,7 @@ const groupSchema = new Schema({
 	meeting: { type: String, enum: ["Morning (7AM - 12PM)", "Afternoon (12PM - 5PM)", "Evening (5PM - 10PM)"], required: true },
 	pace: { type: String, enum: ["Start early", "Balanced pace", "Cram last minute"], required: true },
 	workSlots: { type: [String], required: true },
+	folderId: { type: String, required: true },
 
 	members: [
 		{

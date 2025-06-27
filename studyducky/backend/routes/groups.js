@@ -13,6 +13,7 @@ router.post("/", async (req, res) => {
 			type,
 			module,
 			creatorId,
+			folderId,
 			// study group
 			calls,
 			when,
@@ -41,6 +42,7 @@ router.post("/", async (req, res) => {
 				notes,
 				VSR,
 				duration,
+				folderId,
 				members: [
 					{
 						user: creatorId,
@@ -57,6 +59,7 @@ router.post("/", async (req, res) => {
 				meeting,
 				pace,
 				workSlots,
+				folderId,
 				members: [
 					{
 						user: creatorId,

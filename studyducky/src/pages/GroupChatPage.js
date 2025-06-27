@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Form, ListGroup } from "react-bootstrap";
-import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import GroupChat from "../components/GroupChat.js";
+import "./GroupChatPage.css";
 
 function GroupChatPage() {
 	const { groupId } = useParams();
@@ -24,7 +23,7 @@ function GroupChatPage() {
 				console.log("Fetched group data:", data);
 				setGroup(data.group);
 				setMessages(data.messages);
-			}) //;
+			})
 			.catch((err) => {
 				console.error("Error fetching group:", err);
 			});
@@ -32,15 +31,24 @@ function GroupChatPage() {
 
 	return (
 		<div className="chat-page">
-			<Navbar />
-			{group ? (
-				<>
-					<h1 className="group-name">Group Chat: {group.name}</h1>
-					<GroupChat groupId={groupId} groupType={group.type} />
-				</>
-			) : (
-				<p>Loading chat...</p>
+			<div className="chat-top">
+
+				<Link to="/main" className="backmain-btn">⮜</Link>
+				{group ? (
+					<div className="group-stuff">
+						<h1 className="group-name">{group.name}</h1>
+						<Link to={`/files/${group.folderId}`} className="files-btn">Files</Link>
+					</div>
+				) : (
+					<p>Loading chat...</p>
+				)}
+				
+
+			</div>
+			{group && (
+			<GroupChat groupId={groupId} groupType={group.type} />
 			)}
+	
 		</div>
 	);
 }

@@ -13,6 +13,7 @@ import Stats from "./pages/Stats";
 import Settings from "./pages/Settings";
 import GroupFilter from "./pages/GroupFilter";
 import CreateGroup from "./pages/CreateGroup";
+import FilesPage from "./pages/FilesPage";
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 					<Route path="/filter" element={<GroupFilter />} />
 					<Route path="/groups" element={<GroupFinder />} />
 					<Route path="/chat/:groupId" element={<GroupChatPage />} />
+					<Route path="/files/:folderId" element={<FilesPage />} />
 					<Route path="/study-room" element={<VirtualStudyRoom />} />
 					<Route path="/stats" element={<Stats />} />
 					<Route path="/settings" element={<Settings />} />

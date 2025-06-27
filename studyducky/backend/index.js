@@ -14,6 +14,8 @@ import joinGroup from "./routes/joinGroup.js";
 import retrieveChat from "./routes/retrieveChat.js";
 import retrieveGroups from "./routes/retrieveGroups.js";
 import messageRoutes from "./routes/messageRoutes.js";
+import googleDrive from "./routes/googleDrive.js";
+import files from "./routes/files.js";
 import cors from "cors"; // backend and frontend run on different ports
 
 import { createServer } from "http";
@@ -63,6 +65,8 @@ app.use("/api", joinGroup);
 app.use("/api", retrieveChat);
 app.use("/api", retrieveGroups);
 app.use("/api", messageRoutes);
+app.use("/api/drive", googleDrive);
+app.use("/api/drive", files);
 
 app.get("/me", (req, res) => {
 	console.log("User in session:", req.user); // req.user populated by Passport.js after successful auth

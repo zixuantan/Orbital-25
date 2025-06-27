@@ -11,6 +11,7 @@ const studyGroupSchema = new Schema({
 	notes: { type: String, enum: ["Yes", "No"], required: true },
 	VSR: { type: String, enum: ["Daily", "A few times a week", "Mostly near exams"], required: true },
 	duration: { type: String, enum: ["Less than 1 hour", "1-2 hours", "2 hours"], required: true },
+	folderId: { type: String, required: true },
  
 	members: [
 		{

@@ -1,0 +1,27 @@
+.chat-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-top {
+    display: flex;
+    background-color: #fff1c2;
+    height: 70px;
+}
+
+.backmain-btn {
+    font-size: 25px;
+    width: 60px;
+    color: #2c2c2c;
+    text-decoration: none;
+    margin-top: 16px;
+    margin-left: 20px;
+}
+
+.group-stuff {
+    display: flex;
+}
+
+.group-name {
+    font-size: 35px;
+}
