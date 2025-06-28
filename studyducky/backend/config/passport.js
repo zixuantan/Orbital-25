@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import User from "../models/User.js";
 
 dotenv.config();
-console.log("CURRENT ENVIRONMENT passport.js:", process.env.NODE_ENV);
 
 console.log("passport.js is being loaded");
 
@@ -24,7 +23,10 @@ passport.use(
 		async (accessToken, refreshToken, profile, done) => {
 			console.log("Inside GoogleStrategy verify function");
 			console.log("Looking for user with googleId:", profile.id);
-
+			console.log(
+				"CURRENT ENVIRONMENT passport.js:",
+				process.env.NODE_ENV
+			);
 			try {
 				let user = await User.findOne({ googleId: profile.id });
 
