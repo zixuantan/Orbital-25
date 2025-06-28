@@ -1,0 +1,1486 @@
+
+"""Sums the first n odd integers from 1 (inclusive) to n using recursion"""
+
+
+#def sum_odd_n(n):
+#   if n == 1:
+#        return 1
+#    else:
+#        return 2*(n-1) + 1 + sum_odd_n(n-1)
+
+
+#base case
+#recursive case - call the function itself --> function(n-1) or whatever it takes to go down one level
+# within the recursive case, can call another function / write other code besides calling the function
+        
+##in that sense it acts like a for loop, except for each "for", it the function repeats itself 
+
+#sum_odd_n(4)
+#2(4-1) + 1 + sum_odd_n(3)
+#2(4-1) + 1 + 2(3-1) + 1 + sum_odd_n(2)
+#2(4-1) + 1 + 2(3-1) + 1 + 2(2-1) + 1 + sum_odd(1)
+#2(4-1) + 1 + 2(3-1) + 1 + 2(2-1) + 1 + 1
+
+##def occurrence(s1, s2):
+##    """Counts the number of occurrences of s2 in s1"""
+##
+##    counter = 0
+##
+##    first = 0
+##
+##    stop = [-len(s2)]
+##
+##    while s1[first] != stop:
+##
+##        if s1[first:first+len(s2)] == s2:
+##            counter += 1
+##            first += len(s2)
+##        else:
+##            first += 1
+##
+##    return counter
+        
+##def fold2(op, term, a, next, b, base): 
+##    if a > b:
+##        return base
+##    else:
+##        return op (term(a), fold2(op, term, next(a), next, b, base))
+##    
+##def geometric_series(a, r, n):
+##    
+##    total = lambda x,y: x+y
+##    add1 = lambda x: x+1
+##    power = lambda x: a * (r**x)
+##
+##    return fold2(total, power, 0, add1, n-1, 0)
+##
+##print(geometric_series(1, 2, 4))
+
+##def num_combination(n, m):
+##    """Calculates number of ways to choose m items from a set of n distinct items"""
+##    
+##    if m == 0 or m == n:
+##        return 1
+##
+##    elif n == 0:
+##        return 0
+##        
+##        
+##    else:
+##        return num_combination(n-1, m) + num_combination(n, m-1)
+##
+##
+##
+##print(num_combination(20, 4))
+
+##def calc_integral(f, a, b, n):
+##    
+##    total = 0
+##    
+##    h = (b-a)/n
+##    
+##    for k in range(n+1):
+##        if k == 0 or k == n:
+##            total += f(a+k*h)
+##        else:
+##            if k % 2 == 1:
+##                total += 4 * f(a+k*h)
+##            else:
+##                total += 2 * f(a+k*h)
+##        
+##    print (h/3 * total)
+##
+##calc_integral(lambda x: x*x*x, 0, 1, 100)
+
+
+##def accumulate(combiner, base, term, a, next, b):
+##    
+##    if a > b:
+##        return base
+##    
+##    return combiner(term(a), accumulate(combiner, base, term, next(a), next, b))
+##
+##
+##def accumulate_iter(combiner, null_value, term, a, next, b):
+##
+##    result = null_value
+##
+##    while a <= b:
+##
+##        result = combiner(result, term(a))
+##
+##        a = next(a)
+##
+##    return result
+##
+##
+#### keep looping combiner, take the prev and loop back in again 
+##        
+##
+##print(accumulate_iter(lambda x,y: x*y, 1, lambda x: x*x, 1, lambda x: x+1, 5))
+###14400
+##print(accumulate_iter(lambda x,y: x+y, 1, lambda x: x*x, 1, lambda x: x+1, 5))
+###56
+##print(accumulate_iter(lambda x,y: x+y, 0, lambda x: x*x, 1, lambda x: x+1, 5))
+###55
+
+
+##def change_value_at_index(tpl, index, value):
+##
+##    if index >= len(tpl) or index < -len(tpl):
+##        return tpl
+##
+##    else:
+##
+##        if index < 0:
+##            index = index + len(tpl)
+##
+##        new_tpl = tuple(value if i == index else tpl[i]for i in range(len(tpl)))        
+##        
+##    return (new_tpl)
+##
+##print(change_value_at_index((1, 2, 3), 1, -1))
+##print(change_value_at_index((1, 2, 3), -3, 'huh'))
+
+
+
+##
+##def make_module(course_code,units):
+##    return (course_code, units)
+##
+##
+##def total_scheduled_units(schedule):
+##
+##    total_units = 0
+##    
+##    for course in schedule:
+##        total_units += get_module_total_units(get_module_units(course))
+##
+##    return total_units
+##
+
+##def drop_class(schedule, course):
+##
+##    new = ()
+##
+##    for c in schedule:   #Loop for n times
+##        if c in course:  # Time: O(1) Space: O(1)
+##            new = (c,) + new  # Time: O(n) Space: O(n)
+##
+##    return new
+##
+#### Time: O(n**2)
+#### Space: O(n)
+
+
+
+
+##def credit_limit(schedule, max_credits):
+##
+##    total_units = total_scheduled_units(schedule) # Time: O(n)  Space: O(1)
+##
+##    while (total_units > max_credits): # Loop n times
+##
+##        schedule = schedule[1:] # Time: O(n) Space: O(n)
+##        total_units = total_scheduled_unit(schedule) # Time: O(n)  Space: O(1)
+##
+##    return schedule 
+
+# Time: n + n*(n+n) = O(n**2)
+# Space: O(n)
+
+
+##
+##def make_empty_schedule():
+##    return ()
+##
+##
+
+##def add_class(course, schedule):
+##
+##    if course in schedule:
+##        return schedule
+##
+##    else:
+##        return schedule + (course,)
+
+
+##
+##schedule = make_empty_schedule()
+##
+##schedule = (add_class((1,2), schedule))
+##schedule = (add_class((5,6), schedule))
+##
+##
+##print(schedule)
+
+##def accumulate(combiner, base, term, a, next, b):
+##    
+##    if a > b:
+##        return base
+##    
+##    return combiner(term(a), accumulate(combiner, base, term, next(a), next, b))
+
+# term is what operates on a
+# combine combines the terms
+# next is what moves the value of a closer to b 
+
+##def accumulate_iter(combiner, null_value, term, a, next, b):
+##
+##    result = null_value
+##
+##    while a <= b:
+##
+##        result = combiner(result, term(a))
+##
+##        a = next(a)
+##
+##    return result
+
+##def accumulate_iter(combiner, null_value, term, a, next, b):
+##
+##    store = ()
+##
+##    while a <= b:
+##
+##        store = (term(a),) + store
+##
+##        a = next(a)
+##
+##    result = null_value
+##
+##    for i in store:
+##        result = combiner(i, result)
+##
+##    return result
+##
+##print(accumulate_iter(lambda x,y: x*y, 1, lambda x: x*x, 1, lambda x: x+1, 5))
+
+
+
+##def copy_tree(tree):
+##    
+##    ## If tree is empty, return it as it is
+##    
+##    if tree == ():
+##        return 
+##    
+##    ## If tree is a leaf, return it as it is 
+##    
+##    elif type(tree) != tuple:
+##        return tree
+##
+##    ## If tree is a tuple, 
+##    
+##    else:
+##        
+##        return tuple(copy_tree(subtree) for subtree in tree)
+##
+####original = (1, 2, 3, 4, (5,6))
+##original = ()
+##
+##
+##print((original is copy_tree(original))) ## False
+##
+##print(copy_tree(original)) ## (1,2,3,4)
+
+
+
+##def accumulate(fn, initial, seq):
+##    if seq == ():
+##        return initial
+##    else:
+##        return fn(seq[0],  accumulate(fn, initial, seq[1:]))
+##
+##def map(fn, seq):
+##    if seq == ():
+##        return ()
+##    else:
+##        return (fn(seq[0]), ) + map(fn, seq[1:])
+##
+##def filter(pred, seq):
+##    if seq == ():
+##        return ()
+##    elif pred(seq[0]):
+##        return (seq[0],) + filter(pred, seq[1:])
+##    else:
+##        return filter(pred, seq[1:])
+##
+#### take a tuple, return a string
+##
+##def to_str(tup):
+##    # your code here
+##    x = map(lambda x: str(x), tup)
+##
+##    return accumulate(lambda x,y: x+y, "", map(lambda x: str(x), tup))
+##
+## 
+##
+##
+##print(to_str(('c', 's', 1, 0, 1, 0, 's')))
+##print(to_str((12, 345, 6)))
+
+
+
+##terms = ()
+##
+##a  = 1
+##
+##b =5
+##
+##
+##while a <= b:
+##    terms = (a*2,) + terms
+##    a +=1
+##
+##print(terms)
+
+##def hanoi(n, src, dst, aux):
+##    
+##    # Base Case
+##    
+##    if n == 0:
+##        return ()
+##    
+##    elif n == 1:
+##        return((src,dst),)
+##        
+##    else:
+##        
+##        return(hanoi(n-1, src, aux, dst) + ((src,dst),) + hanoi(n-1, aux, dst, src))
+##
+##print(hanoi(3, 1, 2, 3))
+
+##def occurrence(s1, s2):
+##    
+##    # start from first char of s1, compare with first char of s2
+##    # if same, compare second char of s1 with second char of s2
+##    
+##    # if all chars are the same, slice s1 from that index, return 1 + occurrence(s1,s2)
+##    # if one is not the same, slice s1 from s1[1:], return occurrence(s1,s2)
+##    
+##    # Base Case
+##    
+##    if len(s2) > len(s1):
+# 
+##        return 0
+##        
+##    else:
+##    
+##        for index in range(0, len(s2)):
+##            if s1[index] != s2[index]:
+##                return occurrence(s1[1:],s2)
+##                
+##        
+##        return 1 + occurrence(s1[len(s2):],s2)
+
+##def star_wars_recursive(num_enemy_ships):
+##    
+##    if num_enemy_ships == 0:
+##        return ''
+##        
+##    else:
+##        if num_enemy_ships % 2 == 0:
+##            return star_wars_recursive(num_enemy_ships-1) + '*--'
+##        else:
+##            return star_wars_recursive(num_enemy_ships-1) + '*-'
+
+##def star_wars_iteration(num_enemy_ships):
+##    
+##    result = ''
+##    
+##    for ships in range(num_enemy_ships):
+##        
+##        if ships % 2 == 0:
+##            result = result + "*-"   
+##        else:
+##            result = result + "*--" 
+##            
+##    return result
+
+def shift_one_left(num):
+    
+    # takes index 0 of num, removes it and appends it to the end
+    
+    return int(str(num)[1:] + str(num)[0])
+
+def shift_left(num, n):
+    
+    # Base Case: n == 0
+    
+    if n == 0:
+        return num
+    
+    # Recursive Step: perform shift_one_left, reduce n by 1 
+    
+    else:
+        
+        return shift_left(shift_one_left(num),n-1)
+
+def shift_left_alt(num, n):
+    
+    num_temp = num
+    
+    for i in range(n):
+        
+        num_temp = shift_one_left(num_temp)
+        
+    return num_temp
+
+
+def shift_right(num, n):
+    
+    # Base Case: n == 0
+    
+    if n == 0:
+        return num
+    
+    # Recursive Case: call shift_right on the shifted number, n-1
+    
+    else:
+
+        shifted_num = int(str(num)[-1] + str(num)[0:-1]
+)
+        
+        return shift_right(shifted_num, n-1)
+
+def shift_right_alt(num, n):
+    
+    shifted_num = num
+    
+    for i in range(n):
+        shifted_num = int(str(shifted_num)[-1] + str(shifted_num)[0:-1])
+        
+    return shifted_num
+
+##def nth_digit(n, num):
+##    
+##    # Base Case: n > len(num), return None
+##    
+##    if n > len(str(num)):
+##        return None
+##    
+##    # Base Case: n == 1, return last digit of num
+##    
+##    elif n == 1:
+##        return int(str(num)[-1])
+##    
+##    # Recursive Pattern:  slice away the last digit,n-1
+##    
+##    else:
+##        
+##        return nth_digit(n-1, int(str(num)[:-1]))
+##
+##def mth_digit(m, num):
+##    
+##    # Base Case: m > len(num), return None
+##    
+##    if m > len(str(num)):
+##        return None
+##    
+##    # Base Case: m ==1, return first digit of num
+##    
+##    elif m == 1:
+##        return int(str(num)[0])
+##    
+##    # Recursive Pattern: slice away the first digit, m-1
+##    
+##    else:
+##        
+##        return mth_digit(m-1, int(str(num)[1:]))
+
+##def concat(n, m):
+##    
+##    # Base case: len(m) = 1
+##    
+##    if len(str(m)) == 1:
+##        return int(str(n) + str(m)[-1])
+##    
+##    # Recursive case: add first digit of m to end of n, slice m[1:]
+##    
+##    else:
+##    
+##        n_new = int(str(n) + str(m)[0])
+##        
+##        return concat(n_new, int(str(m)[1:]))
+
+def replace_digit(n, d, r):
+    
+    n_temp = n
+    
+    for i in range(len(str(n))):
+        
+        if int(str(n_temp)[0]) == d:
+            n_temp = int(str(n_temp)[1:] + str(r))
+        else:
+            n_temp = int(str(n_temp)[1:] + str(n_temp)[0])
+            
+    return n_temp
+
+
+def concat(n, m):
+
+    if n == 0:
+        return m
+    
+    elif len(str(m)) == 1:
+        return int(str(n) + str(m)[-1])
+    
+    # Recursive case: add first digit of m to end of n, slice m[1:]
+    
+    else:
+    
+        n_new = int(str(n) + str(m)[0])
+        
+        return concat(n_new, int(str(m)[1:]))
+
+def count_change(amount, kinds_of_coins):
+    
+    coins = (1, 5, 10, 20, 50, 100)
+    
+    # Base Case
+    
+    if amount == 0:
+        return 1
+        
+    elif kinds_of_coins == 0 or amount < 0:
+        return 0
+    
+    # Recursive Case 
+    
+    else:
+        return count_change(amount - coins[kinds_of_coins-1], kinds_of_coins) + count_change(amount, kinds_of_coins-1)
+
+
+
+def foo(x):
+    print(x) # See note in instructions
+    return lambda y: x(x(y))
+
+print(foo(foo)(lambda x: x + 1)(2))
+
+def make_generator(op):
+    
+    return lambda x: lambda y: op(x,y)
+
+#################
+# DO NOT REMOVE #
+#################
+
+def mul(x,y):
+    return x*y
+
+def pow(x,y):
+    return x**y
+
+make_multiplier = make_generator(mul)
+make_exponentiator = make_generator(pow)
+
+
+def foo3(n):
+    
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
+            return True
+    else:
+        return False
+
+
+def divisible_by_11(num):
+    
+    # Base Case - one digit left
+    
+    if len(str(num)) == 1:
+        
+        return num
+        
+    
+    # Recursive Case
+    
+    else:
+        
+        if len(str(num)) % 2 == 0:
+        
+            return (divisible_by_11(int(str(num)[1:])) - int(str(num)[0])) 
+            
+        else:
+            
+            return (divisible_by_11(int(str(num)[1:])) + int(str(num)[0]))
+
+def replace_digit(n, d, r):
+    
+    # Base Case
+    
+    if n < 10:
+        
+        if d == 0:
+            return r
+        else:
+            return n
+    
+    # Recursive Case
+    
+    else:
+        
+        if n % 10 == d:
+        
+            return replace_digit(n//10, d, r) + r * 10 ** (len(str(n))-1)
+            
+        else:
+            
+            return replace_digit(n//10, d, r) + (n%10) * 10 ** (len(str(n))-1)
+
+def create_a (a,b,c):
+    return (a,b,c)
+
+
+
+
+def pop_at_index(seq, index):
+    
+    if (index > len(seq)-1) or (index < -len(seq)):
+        return seq
+    else:
+        if index == -1:
+            return seq[0:index]
+        else:
+            return seq[0:index] + seq[index+1:]
+
+ 
+def remove_extras(lst):
+    
+    lst.sort()
+
+    i = 0
+
+    while i < len(lst)-1:
+
+        if lst[i] == lst[i+1]:
+            lst.remove(lst[i])
+        else:
+            i += 1
+
+    return lst
+
+def sort_age(lst):
+    
+    sorted_lst = []
+
+    while lst:
+        
+        oldest = lst[0]
+
+        for x in lst:
+            
+            if x[1] > oldest[1]:
+                
+                oldest = x
+                
+        lst.remove(oldest)
+        
+        sorted_lst.append(oldest)
+        
+    return sorted_lst
+
+def sort_by_gender_then_age(lst):
+    
+    def sort_age(lst):
+    
+        sorted_lst = []
+        while lst:
+            
+            oldest = lst[0]
+            for x in lst:
+                
+                if x[1] > oldest[1]:
+                    
+                    oldest = x
+                    
+            lst.remove(oldest)
+            
+            sorted_lst.append(oldest)
+            
+        return sorted_lst
+                    
+    
+    male = []
+    female = []
+    
+    for x in lst:
+        
+        if x[0] == "M":
+            male.append(x)
+        else:
+            female.append(x)
+            
+    return sort_age(male) + sort_age(female)
+
+def top_k(lst, k):
+    
+    def merge_sort(lst):
+        
+        if len(lst) < 2:
+            return lst
+            
+        middle = len(lst)//2
+        
+        left = merge_sort(lst[:middle])
+        right = merge_sort(lst[middle:])
+        
+        return merge(left,right)
+        
+    def merge(left, right):
+        
+        to_return = []
+        
+        while left and right:
+            
+            if left[0] > right[0]:
+                to_return.append(left[0])
+                left.pop(0)
+            else:
+                to_return.append(right[0])
+                right.pop(0)
+                
+        to_return.extend(left)
+        to_return.extend(right)
+
+        return to_return
+        
+    return merge_sort(lst)[:k]
+
+
+
+
+
+def bubble_sort(lst):
+
+    swap = False
+
+    while True:
+
+        for i in range(0, len(lst)-1):
+
+            swap = False
+
+            if lst[i] > lst[i+1]:
+                lst[i], lst[i+1] = lst[i+1], lst[i]
+                swap = True
+
+        if swap == False:
+            break
+
+    print(lst)
+
+
+#print(bubble_sort([1,4,8,6,9,10]))
+
+
+def selection_sort(lst):
+
+    for i in range(0, len(lst)):
+
+        smallest_index = i
+
+        for n in range(i+1, len(lst)):
+
+            if lst[n] < lst[smallest_index]:
+
+                smallest_index = n
+
+        lst[i], lst[smallest_index] = lst[smallest_index], lst[i]
+
+    print(lst)
+
+#print(selection_sort([1,4,8,6,9,10]))
+
+students = [
+('tiffany ', 'A', 15),
+('jane ', 'B', 10),
+('ben ', 'C', 8),
+('simon ', 'A', 21),
+('john ', 'A', 15),
+('jimmy ', 'F', 1),
+('charles ', 'C', 9),
+('freddy ', 'D', 4),
+('dave ', 'B', 12 )]
+
+def fewerthan6(lst):
+
+    return tuple(student[0] for student in students if len(student[0]) < 6)
+
+def create_pairs(lst):
+
+    return tuple(student[1:] for student in students)
+
+print(fewerthan6(students))
+
+def students_reverse(lst):
+
+    for i in range(0, len(lst)):
+
+        largest_alphabet = i
+
+        for n in range(i+1, len(lst)):
+
+            if lst[n][0][0] > lst[largest_alphabet][0][0]:
+
+                largest_alphabet = n
+
+        lst[i], lst[largest_alphabet] = lst[largest_alphabet], lst[i]
+
+    return lst
+
+
+def students_layered(lst):
+
+    ## Sort by letter grade 
+
+    for i in range(0, len(lst)):
+
+        highest_grade = i
+
+        for n in range(i+1, len(lst)):
+
+            if lst[n][1] < lst[highest_grade][1]:
+
+                highest_grade = n
+
+        lst[i], lst[highest_grade] = lst[highest_grade], lst[i]
+
+    ## Sort by names within each grade boundary
+
+    i = 0
+
+    while i < len(lst):
+
+        end_boundary = i
+
+        while end_boundary + 1 < len(lst) and lst[i][1] == lst[end_boundary + 1][1]:
+            end_boundary += 1
+
+        for x in range(i, end_boundary+1):
+            
+            smallest_name = x
+
+            for k in range(x+1, end_boundary+1):
+
+                if lst[k][0] < lst[smallest_name][0]:
+
+                    smallest_name = k
+
+            lst[x], lst[smallest_name] = lst[smallest_name], lst[x]
+
+        i = end_boundary + 1
+
+    return lst
+
+#print(students_layered(students))
+
+def count_occurences(lst):
+
+    narrowed = tuple(student[1:] for student in students)
+
+    result = ()
+
+    # take first as reference, count and pop the rest
+
+    while lst:
+
+        ref = lst[0]
+
+        counter = 1
+
+        for ele in lst[1:]:
+
+            if ele[1] == ref[1]:
+
+                lst.remove(ele)
+                counter +=1
+
+        result += ((ref[1], counter),)
+
+        lst.remove(ref)
+
+    return result
+
+
+
+print(count_occurences(students))
+
+
+def bubble_sort(lst):
+
+    count = 1 # needs to be > 0 so it will go into the loop
+
+    while count > 0:
+
+        count = 0
+
+        for i in range(len(lst)-1):
+
+            if lst[i] > lst[i+1]:
+                
+                lst[i], lst[i+1] = lst[i+1], lst[i]
+
+                ## if swap, add 1 to count
+
+                count +=1
+
+
+##def transpose(matrix):
+##
+##    # figure out number of sublists required for new_matrix (one for each element in the row of the matrix)
+##    # add all the first elements into the first sublist, second into the second sublist etc.
+##    
+##    new_matrix = []
+##
+##    for i in range(len(matrix[0])):
+##
+##        sublist = []
+##        
+##        for j in range(len(matrix)):
+##
+##            sublist.append(matrix[j][i])
+##
+##        new_matrix.append(sublist)
+##        
+##    return new_matrix
+
+def transpose(matrix):
+
+    matrix_copy = matrix[:]
+
+    for i in range(len(matrix[0])):
+
+        for j in range(len(matrix)):
+
+            if i != j:
+
+                matrix[i][j] = matrix_copy[j][i]
+
+    return matrix
+
+            
+
+
+
+matrix1 = [[ 1, 2, 3], [4, 5, 6], [7, 8, 9]]
+matrix2 = [[ 1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+matrix3 = [[1, 2, 3]]
+
+print(transpose(matrix1))
+
+def col_sum(matrix):
+    
+    result = []
+    
+    for i in range(len(matrix[0])):
+ # number of columns 
+        
+        total = 0
+        
+        for j in range(len(matrix)):
+ # number of rows 
+            
+            total += matrix[j][i]
+            
+        result.append(total)
+        
+    return result
+
+print(col_sum([[1,2],[3,4],[5,6]]))
+
+def mode_score(students):
+    
+    # Sort in descending order
+    
+    while True:
+        
+        swap = False
+    
+        # Single pass 
+        
+        for i in range(len(students)-1):
+            
+            if students[i+1][2] > students[i][2]:
+                
+                students[i+1], students[i] = students[i], students[i+1]
+                
+                swap = True
+                
+        if swap == False:
+            
+            break
+        
+    # Count occurences
+    
+    occurences = []
+
+    current_max = 0
+
+    while students:
+
+        ref_score = students[0][2]
+        count = 0
+
+        for i in range(len(students)):
+            if students[i][2] == ref_score:
+                count += 1
+
+        students = students[count:]
+
+        if count > current_max:
+            occurences.clear()
+            occurences.append([ref_score, count])
+            current_max = count
+
+        elif count == current_max:
+            occurences.append([ref_score, count])
+
+    return [i[0] for i in occurences]
+
+    
+    
+
+    
+
+students = [('tiffany', 'A', 15), 
+            ('jane', 'B', 10),
+            ('ben', 'C', 8), 
+            ('simon', 'A', 21), 
+            ('eugene', 'A', 21), 
+            ('john', 'A', 15), 
+            ('jimmy', 'F', 1), 
+            ('charles', 'C', 9), 
+            ('freddy', 'D', 4), 
+            ('dave', 'B', 12)]
+print(mode_score( [('Dave', 'A', 16), ('jane', 'B', 10), ('Eugene', 'A', 16), ('jimmy', 'F', 1) ]))
+print(mode_score(students))   
+
+def top_k(students, k):
+    
+    students_copy = students.copy()
+    
+    students_copy.sort(key = lambda x: (-x[2], x[0]))
+    
+    # sort by score in descending order
+
+##    while True:
+##
+##        swap = False
+##
+##        for i in range(len(students)-1):
+##
+##            if students_copy[i][2] < students_copy[i+1][2]:
+##
+##                students_copy[i][2], students_copy[i+1][2] = students_copy[i+1][2], students_copy[i][2]
+##                
+##                swap = True
+##
+##        if swap == False:
+##
+##            break
+
+    # sort by names within each score boundary
+
+    # create boundary_marker
+
+    # start from index 0
+
+    # if the scores are the same, extend the marker by 1
+
+    # create a forloop from the start to that boundary marker and bubble sort within
+
+    # start from index boundarymarker and repeat
+
+
+    
+
+    to_return = students_copy[:k]
+
+    for i in range(k, len(students)):
+
+        if students_copy[i][2] == students_copy[k-1][2]:
+            to_return.append(students_copy[i])
+
+    return to_return
+        
+
+        
+
+    
+print(top_k(students, 5))
+print(top_k(students, 3))
+
+
+matrix1 = [[ 1, 2, 3], [4, 5, 6], [7, 8, 9]]
+matrix2 = [[ 1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+matrix3 = [[1, 2, 3]]
+
+
+
+
+# Base Case
+
+# n = 1 --> return 3
+
+
+# n = 5 --> 819
+
+# n1 + n3 = 3 + 51 + 5*3**4
+
+# outer is always 3*(4**(n-1))
+
+def snowflake(n):
+
+    if n == 1:
+
+        return 3
+
+    else:
+
+        if n % 2 == 0:
+
+            return snowflake(n-1) * 4
+
+        else:
+
+            return snowflake(n-1) * 4 + 3
+
+print(snowflake(5))
+
+            
+
+def calculate(inputs):
+    
+    stack = []
+    
+    for i in inputs:
+
+        if type(i) == int:
+        
+            stack.append(i)
+        
+        else:
+            
+            second = stack.pop()
+            first = stack.pop()
+            
+            expr = f"{first} {i} {second}"
+            
+            result = eval(expr) 
+            
+            stack.append(result)
+            
+    return stack[0]
+
+print(calculate((1, 2, '+', 3, '*')))
+print(calculate((28, )))
+
+
+d = {'a': 1, 'b': 2}
+d["a"]+=1
+del d["b"]
+d["c"] = 3
+d["b"] = 2
+
+print(d)
+
+# {'a': 2, 'c': 3, 'b': 2}
+
+def increase_by_one(d):
+    
+    for key in d:
+        
+        if type(d[key]) == dict:
+
+            increase_by_one(d[key])
+            
+        else:
+
+            d[key] += 1
+            
+    return d
+
+print(increase_by_one({'first':27, 'second':16, 'third':8}))
+
+
+print(increase_by_one({'1':2.7, '11':16, '111':{'a':5, 't':8}}))
+
+print(increase_by_one({2:{ }, 3:{ }, 4:{ }}))
+
+print(increase_by_one({'a':{'b':{'c':10}}}))
+
+def accumulate(op, init, seq):
+    if not seq:
+        return init
+    else:
+        return op(seq[0], accumulate(op, init, seq[1:]))
+
+def accumulate_n(op, init, sequences):
+    if (not sequences) or (not sequences[0]):
+        return type(sequences)()
+    else:
+        return type(sequences)([accumulate(op, init, type(sequences)(map(lambda x: x[0], sequences)))]) \
+            + accumulate_n(op, init, type(sequences)(map(lambda x: x[1:], sequences)))
+
+print(accumulate_n(lambda x,y: x+y, 0, ((1,2),(3,4),(5,6))))
+
+# accumulate accumulates elements in a sequences in running order 
+
+#t1: create a list containing the index 0 of every sublist
+#t2: modify each sublist to remove the first element of each sublist
+
+#list(map(lambda x: x[0], sequences))
+
+#list(map(lambda x: x[1:], sequences))
+
+def count_sentence(sentence):
+
+    words, letters = 0, 0
+
+    for i in range(len(sentence)):
+
+        words += 1
+
+        letters += len(accumulate(lambda x,y: x+y, "", sentence[i]))
+
+        if 0 < i < len(sentence):
+            letters += 1
+
+    return [words, letters]
+
+        
+
+print(count_sentence([['C', 'S', '1', '0', '1', '0', 'A'], ['R', 'o', 'c', 'k', 's']]))
+
+
+
+
+
+# return a series list [no. of words in sentence, no. of letters in sentence]
+
+def letter_count(sentence):
+    
+    new_dict = {}
+    
+    for word in sentence:
+        
+        for letter in word:
+            
+            if letter not in new_dict:
+                
+                new_dict[letter] = 1
+                
+            else:
+                
+                new_dict[letter] += 1
+                
+    return new_dict
+
+
+#print(letter_count([['C', 'S', '1', '0', '1', '0', 'A'], ['R', 'o', 'c', 'k', 's']]))
+
+        
+def most_frequent_letters(sentence):
+
+    highest_frequency = 0
+
+    to_return = dict()
+
+    counts = letter_count(sentence)
+
+    for letter in counts:
+
+        if counts[letter] > highest_frequency:
+
+            highest_frequency = counts[letter]
+
+            to_return.clear()
+
+            to_return[letter] = counts[letter]
+
+        elif counts[letter] == highest_frequency:
+
+            to_return[letter] = counts[letter]
+
+    return to_return
+
+
+        
+
+        
+
+print(set(most_frequent_letters([['C', 'S', '1', '0', '1', '0', 'A'], ['R', 'o', 'c', 'k', 's']])))
+        
+    
+def translate(source, destination, string):
+    
+    translation_dict = dict()
+    
+    for i in range(len(source)):
+        
+        translation_dict[source[i]] = destination[i]
+
+    return_string = ""
+
+    for char in string:
+
+        if char in translation_dict:
+            return_string += translation_dict[char]
+        else:
+            return_string += char
+
+    return return_string
+
+
+print(translate("(hrd", ")esy", "CODING is hard :(")
+
+)
+
+def caesar_cipher(shift, string):
+
+    lowercase = "abcdefghijklmnopqrstuvwxyz"
+    uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    shift_lowercase = lowercase[shift%26:] + lowercase[:shift%26]
+    shift_uppercase = uppercase[shift%26:] + uppercase[:shift%26]
+
+    source = lowercase + uppercase
+    destination = shift_lowercase + shift_uppercase
+
+    return translate(source, destination, string)
+
+    
+
+        
+
+
+##def caesar_cipher(shift, string):
+##    
+##    new_string = ""
+##    
+##    for char in string:
+##        
+##        if char.isalpha():
+##
+##            # Uppercase and overrun
+##    
+##            if ord(char) <= 90 and (ord(char) + shift) > 90:
+##    
+##                new_string += chr(64 + ord(char) + shift - 90)
+##    
+##            # Lowercase and overrun
+##    
+##            elif ord(char) <= 122 and (ord(char) + shift) > 122:
+##    
+##                new_string += chr(96 + ord(char) + shift - 122)
+##    
+##            else:
+##    
+##                new_string += chr(ord(char) + shift)
+##                
+##        else:
+##            
+##            new_string += char
+##
+##    return new_string
+
+#print(caesar_cipher(10, "abcd,"))
+#print(caesar_cipher(25, "aAbB"))
+
+def running_total(tup):
+    
+    result = ()
+    
+    for i in range(len(tup)):
+        result += (tup[i] + sum(tup[0:i]),)
+    
+    return result
+
+#print(running_total((1, 1, 2, 2, 4, 4, 4, 5)))
+
+def bins_count(marks, max_marks):
+    
+    marks_count = {}
+    
+    for i in range(max_marks+1):
+        marks_count[i] = 0
+    
+    for mark in sorted(marks):
+        marks_count[mark] += 1
+            
+    return tuple(marks_count[i] for i in marks_count)
+
+#print(bins_count((2, 0, 0, 1, 0, 2, 1, 0, 2), 5))
+
+def running_total(tup):
+    
+    result = ()
+    
+    for i in range(len(tup)):
+        result += (tup[i] + sum(tup[0:i]),)
+    
+    return result
+
+# running_total((1, 1, 2, 2, 4, 4, 4, 5)) will return (1, 2, 4, 6, 10, 14, 18, 23)
+
+# cdf((2, 0, 0, 1, 0, 2, 1, 0, 2), 5) will return (4, 6, 9, 9, 9, 9). This means
+# there are four people who scored at most 0, six people who scored at most 1, nine
+# people who scored at most 2, and so on until 5 marks.
+
+def cdf(marks, max_marks):
+
+    return running_total(bins_count(marks, max_marks))
+
+#print(cdf((2, 0, 0, 1, 0, 2, 1, 0, 2), 5))
+
+passenger_data = [[2017, "CC1", 21000],
+                  [2017, "CC2", 20300],
+                  [2018, "CC1", 18500],
+                  [2018, "CC2", 27000],
+                  [2019, "CC1", 24500],
+                  [2019, "CC2", 19000]]
+
+
+# pivoted_data[2019]["CC2"] = 19000
+# pivoted_data[2017]["CC1"] = 21000
+
+def pivot(data):
+
+    result = {}
+
+    for row in data:
+
+        if row[0] in result:
+
+            if row[1] in result[row[0]]:
+                result[row[0]][row[1]] += row[2]
+
+            else:
+                result[row[0]][row[1]] = row[2]
+
+        else:
+
+            result[row[0]] = dict([(row[1],row[2])])
+
+    return result
+
+#print(pivot(passenger_data))
+
+a = [1,2,3]
+b = [4,5]
+a.append(b)
+print(a[3][1])
+b.append(a)
+print(b[2][1])
+
+a[3][1] = 6
+
+print(a[3][2])
+        
+        
+        
+
+

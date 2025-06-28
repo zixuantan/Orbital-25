@@ -8,7 +8,7 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:5050/me", {
+			.get(`${process.env.REACT_APP_BACKEND_URL}/me`, {
 				withCredentials: true,
 			})
 			.then((res) => setUser(res.data))

@@ -53,7 +53,7 @@ function MainPage() {
 	};
 
 	useEffect(() => {
-		fetch("http://localhost:5050/me", {
+		fetch(`${process.env.REACT_APP_BACKEND_URL}/me`, {
 			credentials: "include",
 		})
 			.then((res) => res.json())
@@ -69,7 +69,7 @@ function MainPage() {
 
 	useEffect(() => {
 		if (!googleId) return;
-		fetch(`http://localhost:5050/api/user/${googleId}/groups`, {
+		fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/${googleId}/groups`, {
 			credentials: "include",
 		})
 			.then((res) => res.json())

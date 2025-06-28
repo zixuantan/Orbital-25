@@ -7,12 +7,18 @@ dotenv.config();
 
 console.log("passport.js is being loaded");
 
+const isProd = process.env.NODE_ENV === "production";
+
+const CALLBACK_URL = isProd
+	? process.env.CALLBACK_URL_PROD
+	: process.env.CALLBACK_URL;
+
 passport.use(
 	new GoogleStrategy(
 		{
 			clientID: process.env.GOOGLE_CLIENT_ID,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-			callbackURL: process.env.CALLBACK_URL,
+			callbackURL: CALLBACK_URL,
 		},
 		async (accessToken, refreshToken, profile, done) => {
 			console.log("Inside GoogleStrategy verify function");

@@ -22,6 +22,17 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 
 dotenv.config();
+
+const isProd = process.env.NODE_ENV === "production";
+
+const FRONTEND_URL = isProd
+	? process.env.FRONTEND_URL_PROD
+	: process.env.FRONTEND_URL;
+
+const CALLBACK_URL = isProd
+	? process.env.CALLBACK_URL_PROD
+	: process.env.CALLBACK_URL;
+
 connectDB();
 
 const app = express();
@@ -29,7 +40,7 @@ const PORT = process.env.PORT || 5050;
 
 app.use(
 	cors({
-		origin: ["http://localhost:3000"],
+		origin: FRONTEND_URL,
 		credentials: true,
 	})
 );
@@ -44,7 +55,7 @@ app.use(
 		cookie: {
 			httpOnly: true,
 			sameSite: "lax",
-			secure: false,
+			secure: isProd,
 			maxAge: 24 * 60 * 60 * 1000,
 		},
 	})
@@ -96,7 +107,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
 	cors: {
-		origin: ["http://localhost:3000"],
+		origin: FRONTEND_URL,
 		credentials: true,
 	},
 });

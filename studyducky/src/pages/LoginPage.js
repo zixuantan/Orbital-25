@@ -14,7 +14,7 @@ function LoginPage() {
 				className="login-btn"
 				onClick={() =>
 					(window.location.href =
-						"http://localhost:5050/auth/google")
+						`${process.env.REACT_APP_BACKEND_URL}/auth/google`)
 				}
 			>
 				<img

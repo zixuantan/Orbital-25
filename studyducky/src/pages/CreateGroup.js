@@ -17,7 +17,7 @@ function CreateGroup() {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:5050/me", { withCredentials: true })
+			.get(`${process.env.REACT_APP_BACKEND_URL}/me`, { withCredentials: true })
 			.then((res) => setUser(res.data))
 			.catch((err) => console.error("Error fetching user:", err));
 	}, []);
@@ -36,7 +36,7 @@ function CreateGroup() {
 
 		try {
 		
-			const folderRes = await axios.post("http://localhost:5050/api/drive/create-folder",
+			const folderRes = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/drive/create-folder`,
 			{ groupName },
 			{ withCredentials: true }
 			);
@@ -47,7 +47,7 @@ function CreateGroup() {
 			console.log("📁 folderId being sent to /api/groups:", folderId);
 
 			await axios.post(
-				"http://localhost:5050/api/groups",
+				`${process.env.REACT_APP_BACKEND_URL}/api/groups`,
 				{
 					name: groupName,
 					type: groupType,

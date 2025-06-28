@@ -17,7 +17,7 @@ function GroupChatPage() {
 
 	useEffect(() => {
 		console.log("Fetching group with ID:", groupId);
-		fetch(`http://localhost:5050/api/group/${groupId}`)
+		fetch(`${process.env.REACT_APP_BACKEND_URL}/api/group/${groupId}`)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log("Fetched group data:", data);

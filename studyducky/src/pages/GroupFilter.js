@@ -22,7 +22,7 @@ function GroupFilter() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		fetch("http://localhost:5050/me", {
+		fetch(`${process.env.REACT_APP_BACKEND_URL}/me`, {
 			credentials: "include",
 		})
 			.then((res) => res.json())
@@ -59,7 +59,7 @@ function GroupFilter() {
 				workSlots: daysSelected,
 			}),
 		};
-		fetch("http://localhost:5050/api/groupfilter", {
+		fetch(`${process.env.REACT_APP_BACKEND_URL}/api/groupfilter`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

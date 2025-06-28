@@ -22,7 +22,7 @@ function Registration() {
 	// auto-population of name and email
 	useEffect(() => {
 		axios
-			.get("http://localhost:5050/me", { withCredentials: true })
+			.get(`${process.env.REACT_APP_BACKEND_URL}/me`, { withCredentials: true })
 			.then((res) => {
 				setName(res.data.name);
 				setEmail(res.data.email);
@@ -37,7 +37,7 @@ function Registration() {
 		e.preventDefault(); // prevent default form reload
 		try {
 			await axios.post(
-				"http://localhost:5050/api/complete-registration",
+				`${process.env.REACT_APP_BACKEND_URL}/api/complete-registration`,
 				{
 					year,
 					major,

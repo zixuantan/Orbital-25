@@ -22,7 +22,7 @@ function Profile() {
 	// Fetch user data
 	useEffect(() => {
 		axios
-			.get("http://localhost:5050/me", {
+			.get(`${process.env.REACT_APP_BACKEND_URL}/me`, {
 				withCredentials: true,
 			})
 			.then((res) => {
@@ -53,7 +53,7 @@ function Profile() {
 
 		try {
 			await axios.put(
-				"http://localhost:5050/api/update-profile",
+				`${process.env.REACT_APP_BACKEND_URL}/api/update-profile`,
 				{
 					year,
 					major,

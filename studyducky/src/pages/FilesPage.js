@@ -7,7 +7,7 @@ function FilesPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:5050/api/drive/list-files/${folderId}`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/drive/list-files/${folderId}`)
         .then((res) => res.json())
         .then((data) => {
             setFiles(data.files || []);

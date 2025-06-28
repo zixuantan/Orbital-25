@@ -8,7 +8,7 @@ function ModulesTaken({ googleId, selectMod }) {
     useEffect(() => {
         if (!googleId) return;
 
-    fetch(`http://localhost:5050/api/mods/${googleId}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/mods/${googleId}`)
     .then((res) => res.json())
     .then((data) => setModules(data))
     .catch((err) => console.error('Error fetching modules:', err));

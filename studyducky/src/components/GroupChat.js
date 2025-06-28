@@ -11,7 +11,7 @@ const GroupChat = ({ groupId, groupType }) => {
 	// fetch current user for displayname
 	useEffect(() => {
 		axios
-			.get("http://localhost:5050/me", { withCredentials: true })
+			.get(`${process.env.REACT_APP_BACKEND_URL}/me`, { withCredentials: true })
 			.then((res) => setCurrentUserId(res.data._id))
 			.catch((err) => console.error("Failed to get current user:", err));
 	}, []);
@@ -28,7 +28,7 @@ const GroupChat = ({ groupId, groupType }) => {
 
 		// fetch chat history from backend
 		axios
-			.get(`http://localhost:5050/api/message/${groupType}/${groupId}`, {
+			.get(`${process.env.REACT_APP_BACKEND_URL}/api/message/${groupType}/${groupId}`, {
 				withCredentials: true,
 			})
 			.then((res) => setMessages(res.data))
@@ -45,7 +45,7 @@ const GroupChat = ({ groupId, groupType }) => {
 
 	useEffect(() => {
 			console.log("Fetching group with ID:", groupId);
-			fetch(`http://localhost:5050/api/group/${groupId}`)
+			fetch(`${process.env.REACT_APP_BACKEND_URL}/api/group/${groupId}`)
 				.then((res) => res.json())
 				.then((data) => {
 					console.log("Fetched group data:", data);
@@ -58,7 +58,7 @@ const GroupChat = ({ groupId, groupType }) => {
 
 	// send message
 	const sendMessage = async () => {
-		const userRes = await axios.get("http://localhost:5050/me", {
+		const userRes = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/me`, {
 			withCredentials: true,
 		});
 		const senderId = userRes.data._id;
@@ -73,14 +73,14 @@ const GroupChat = ({ groupId, groupType }) => {
 		};
 
 		console.log(
-			"Sending POST to http://localhost:5050/api/message with payload:",
+			`Sending POST to ${process.env.REACT_APP_BACKEND_URL}/api/message with payload:`,
 			message
 		);
 
 		// send to socket
 		socket.emit("sendMessage", message);
 		// save to db
-		await axios.post("http://localhost:5050/api/message", message);
+		await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/message`, message);
 		setInput("");
 	};
 
@@ -96,7 +96,7 @@ const GroupChat = ({ groupId, groupType }) => {
 		fileData.append("file", file);
 	
 		try {
-			const res = await fetch(`http://localhost:5050/api/drive/upload/${group.folderId}`, {
+			const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/drive/upload/${group.folderId}`, {
 				method: "POST",
 				body: fileData,
 				credentials: "include",

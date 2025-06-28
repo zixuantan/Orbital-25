@@ -27,7 +27,7 @@ function GroupFinder() {
 	useEffect(() => {
 		// fetch current user
 		axios
-			.get("http://localhost:5050/me", {
+			.get(`${process.env.REACT_APP_BACKEND_URL}/me`, {
 				withCredentials: true,
 			})
 			.then((res) => setUser(res.data))
@@ -37,7 +37,7 @@ function GroupFinder() {
 	const handleJoin = async (groupId, type) => {
 		try {
 			const res = await fetch(
-				`http://localhost:5050/api/joingroup/${groupId}`,
+				`${process.env.REACT_APP_BACKEND_URL}/api/joingroup/${groupId}`,
 				{
 					method: "POST",
 					headers: {
@@ -65,7 +65,8 @@ function GroupFinder() {
 
 			<div className="create-group">
 				<h2 className="create-header">
-					No Groups to join? Create a new {type.charAt(0).toUpperCase() + type.slice(1)}{" "} Group now!
+					No Groups to join? Create a new{" "}
+					{type.charAt(0).toUpperCase() + type.slice(1)} Group now!
 				</h2>
 				<button
 					className="create-btn"
@@ -88,44 +89,75 @@ function GroupFinder() {
 					<h3 id="group-name">{group.name}</h3>
 
 					<div className="group-details">
-
 						<div className="group-pref">
 							<p className="pref">Module: {group.module} </p>
-							<p className="pref">Members: {group.members.length} </p>
+							<p className="pref">
+								Members: {group.members.length}{" "}
+							</p>
 							{group.type === "study" ? (
 								<div>
-									<p className="pref">Call Purpose: {group.calls}</p>
-									<p className="pref">Time Preference: {group.when}</p>
-									<p className="pref">Group Size: {group.groupSize}</p>
-									<p className="pref">Note Sharing: {group.notes}</p>
-									<p className="pref">Virtual Study Room Commitment: {group.VSR}</p>
-									<p className="pref">Preferred Duration: {group.duration}</p>
+									<p className="pref">
+										Call Purpose: {group.calls}
+									</p>
+									<p className="pref">
+										Time Preference: {group.when}
+									</p>
+									<p className="pref">
+										Group Size: {group.groupSize}
+									</p>
+									<p className="pref">
+										Note Sharing: {group.notes}
+									</p>
+									<p className="pref">
+										Virtual Study Room Commitment:{" "}
+										{group.VSR}
+									</p>
+									<p className="pref">
+										Preferred Duration: {group.duration}
+									</p>
 								</div>
 							) : group.type === "project" ? (
 								<div>
-									<p className="pref">Tutorial Slot: {group.tutorial}</p>
-									<p className="pref">Commitment Level: {group.commitment}</p>
-									<p className="pref">Meeting Time: {group.meeting}</p>
-									<p className="pref">Work Pace: {group.pace}</p>
-									<p className="pref">Work Slots: {group.workSlots?.join(
-										", "
-									)}{" "}
+									<p className="pref">
+										Tutorial Slot: {group.tutorial}
+									</p>
+									<p className="pref">
+										Commitment Level: {group.commitment}
+									</p>
+									<p className="pref">
+										Meeting Time: {group.meeting}
+									</p>
+									<p className="pref">
+										Work Pace: {group.pace}
+									</p>
+									<p className="pref">
+										Work Slots:{" "}
+										{group.workSlots?.join(", ")}{" "}
 									</p>
 								</div>
 							) : null}
 						</div>
 
 						<div className="details-right">
-
-							<div className="comp-score" style={{ '--score': score }}>
-								{score !== null && <span id="score">Score: <br />{score}%</span>}
+							<div
+								className="comp-score"
+								style={{ "--score": score }}
+							>
+								{score !== null && (
+									<span id="score">
+										Score: <br />
+										{score}%
+									</span>
+								)}
 							</div>
 
 							{joining === group._id ? (
 								<div>
 									<button
 										className="join-btn"
-										onClick={() => handleJoin(group._id, type)}
+										onClick={() =>
+											handleJoin(group._id, type)
+										}
 									>
 										Confirm Join
 									</button>
