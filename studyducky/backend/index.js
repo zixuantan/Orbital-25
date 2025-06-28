@@ -22,6 +22,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 
 dotenv.config();
+console.log("CURRENT ENVIRONMENT index.js:", process.env.NODE_ENV);
 
 const isProd = process.env.NODE_ENV === "production";
 

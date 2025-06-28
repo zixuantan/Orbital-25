@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import User from "../models/User.js";
 
 dotenv.config();
+console.log("CURRENT ENVIRONMENT passport.js:", process.env.NODE_ENV);
 
 console.log("passport.js is being loaded");
 
