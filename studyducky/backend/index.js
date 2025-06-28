@@ -30,22 +30,33 @@ const FRONTEND_URL = isProd
 	? process.env.FRONTEND_URL_PROD
 	: process.env.FRONTEND_URL;
 
-const CALLBACK_URL = isProd
-	? process.env.CALLBACK_URL_PROD
-	: process.env.CALLBACK_URL;
+const allowedOrigins = [FRONTEND_URL, FRONTEND_URL_PROD];
+
+const logOrigin = (req, res, next) => {
+	console.log("Request Origin:", req.headers.origin);
+	next();
+};
 
 connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5050;
 
+app.use(logOrigin);
+
 app.use(
 	cors({
-		origin: FRONTEND_URL,
+		origin: function (origin, callback) {
+			if (!origin || allowedOrigins.includes(origin)) {
+				callback(null, true);
+			} else {
+				console.warn("CORS rejected origin:", origin);
+				callback(new Error("Not allowed by CORS"));
+			}
+		},
 		credentials: true,
 	})
 );
-app.use(express.json());
 
 // Session
 app.use(
@@ -108,7 +119,14 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
 	cors: {
-		origin: FRONTEND_URL,
+		origin: function (origin, callback) {
+			if (!origin || allowedOrigins.includes(origin)) {
+				callback(null, true);
+			} else {
+				console.warn("SOCKET CORS rejected origin:", origin);
+				callback(new Error("Socket origin not allowed"));
+			}
+		},
 		credentials: true,
 	},
 });
