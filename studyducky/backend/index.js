@@ -107,7 +107,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
 	cors: {
-		origin: [FRONTEND_URL, "http://localhost:3000"],
+		origin: FRONTEND_URL,
 		credentials: true,
 	},
 });
