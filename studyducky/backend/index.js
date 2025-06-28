@@ -26,9 +26,13 @@ console.log("CURRENT ENVIRONMENT index.js:", process.env.NODE_ENV);
 
 const isProd = process.env.NODE_ENV === "production";
 
+const FRONTEND_URL_PROD = process.env.FRONTEND_URL_PROD;
 const FRONTEND_URL = isProd
 	? process.env.FRONTEND_URL_PROD
 	: process.env.FRONTEND_URL;
+
+console.log("FRONTEND_URL_PROD from env:", FRONTEND_URL_PROD);
+console.log("FRONTEND_URL selected:", FRONTEND_URL);
 
 const allowedOrigins = [FRONTEND_URL, FRONTEND_URL_PROD];
 
