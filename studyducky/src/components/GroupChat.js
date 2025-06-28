@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import socket from "../socket";
 import axios from "axios";
+import "./GroupChat.css";
 
 const GroupChat = ({ groupId, groupType }) => {
 	const [messages, setMessages] = useState([]);
@@ -112,11 +113,10 @@ const GroupChat = ({ groupId, groupType }) => {
 
 	return (
 		<div>
-			<h2>Group Chat</h2>
-			<div style={{ height: "300px", overflowY: "scroll" }}>
+			<div className="msg-box" style={{ height: "501.5px", overflowY: "scroll" }}>
 				{messages.map((m, i) => (
-					<p key={i}>
-						<b>
+					<p className="message" key={i}>
+						<b className="user">
 							{m.sender?._id === currentUserId
 								? "You"
 								: m.sender?.name || "Unknown"}
@@ -131,10 +131,11 @@ const GroupChat = ({ groupId, groupType }) => {
 					value={input}
 					onChange={(e) => setInput(e.target.value)}
 					placeholder="Type your message"
+					className="msg-input"
 				/>
-				<button onClick={sendMessage}>➣</button>
+				<button onClick={sendMessage} className="send-msg-btn">➣</button>
 				<label htmlFor="files" className="upload-btn">Upload Files</label>
-				<input type="file" id="files" onChange={handleUpload}/>
+				<input type="file" id="files" onChange={handleUpload} hidden/>
 			</div>
 		</div>
 	);

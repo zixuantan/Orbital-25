@@ -1,0 +1,38 @@
+.msg-box {
+    padding-left: 22px;
+    padding-top: 20px;
+}
+
+.user, .message {
+    font-size: 20px;
+}
+
+.msg-part {
+    display: flex;
+    background-color: #fff1c2;
+    height: 72.5px;
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 40px;
+    gap: 20px;
+}
+
+.msg-input {
+    width: 1400px;
+    height: 40px;
+}
+
+.send-msg-btn {
+    background-color: transparent;
+    color: #2c2c2c;
+    border: none;
+    font-size: 25px;
+}
+
+.upload-btn {
+    width: 200px;
+    font-weight: 200px;
+    text-align: center;
+    padding-bottom: 8px;
+    margin-left: 200px;
+}

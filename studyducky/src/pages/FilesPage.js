@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import "./FilesPages.css";
 
 function FilesPage() {
     const { folderId } = useParams();
@@ -26,24 +27,32 @@ function FilesPage() {
                 <h1 className="files-header">Files</h1>
             </div>
 
-            {loading ? (
-                <p>Loading files...</p>
-            ) : files.length === 0 ? (
-                <p>No files uploaded yet.</p>
-            ) : (
-                <ul className="file-list">
-                {files.map((file) => (
-                    <li key={file.id}>
-                        <span className="file-name">{file.name}</span>
-                        <p className="file-link">{file.webViewLink}</p>
-                        <p className="file-details">Uploaded by {file.uploaderName}</p>
-                        <p className="file-details">Uploaded at {file.date}</p>
-                    </li>
-                ))}
-                </ul>
-            )}       
+            <div className="files-part">
+                {loading ? (
+                    <p>Loading files...</p>
+                ) : files.length === 0 ? (
+                    <p>No files uploaded yet.</p>
+                ) : (
+                    <ul className="file-list">
+                    {files.map((file) => (
+                        <li className="each-file" key={file.id}>
+                            <span className="file-name">{file.name}</span>
+                            <p className="file-link">
+                                <a href={file.webViewLink} target="_blank" rel="noopener noreferrer">
+                                    {file.webViewLink}
+                                </a>
+                            </p>
+                            
+                        </li>
+                    ))}
+                    </ul>
+                )} 
+            </div>      
         </div>
     )
 }
+
+/* <p className="file-details">Uploaded by {file.uploaderName}</p>
+                            <p className="file-details">Uploaded at {file.date}</p> */
 
 export default FilesPage;

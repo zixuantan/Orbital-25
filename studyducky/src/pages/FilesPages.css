@@ -1,0 +1,50 @@
+.files-top {
+    display: flex;
+    background-color: #fff1c2;
+    height: 70px;
+    align-items: center; 
+    gap: 20px;
+}
+
+.back-btn {
+    text-decoration: none;
+    font-size: 25px;
+    color: #2c2c2c;
+    width: 60px;
+    padding-left: 40px;
+}
+
+.files-header {
+    font-size: 30px;
+    padding-top: 5px;
+}
+
+.files-part {
+    margin-top: 30px;
+    padding-left: 50px;
+    padding-right: 80px;
+}
+
+.file-list {
+    border: lightgray;
+    list-style: none;
+}
+
+.each-file {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 15px;
+    background-color: #fdfdfd;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+
+.file-link {
+    font-size: 17px;
+}
+
+.file-details {
+    font-size: 17px;
+}
