@@ -7,6 +7,8 @@ import File from "../models/File.js";
 
 dotenv.config();
 
+const isProd = process.env.NODE_ENV === "production";
+
 const router = express.Router();
 const upload = multer({ dest: "uploads/" });
 

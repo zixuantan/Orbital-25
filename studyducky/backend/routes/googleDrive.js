@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 
 dotenv.config();
 
+const isProd = process.env.NODE_ENV === "production";
+
 const router = express.Router();
 
 const auth = new google.auth.GoogleAuth({
