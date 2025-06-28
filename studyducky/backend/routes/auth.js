@@ -6,7 +6,11 @@ dotenv.config();
 
 const router = express.Router();
 
-const FRONTEND_URL = process.env.FRONTEND_URL;
+const isProd = process.env.NODE_ENV === "production";
+
+const FRONTEND_URL = isProd
+	? process.env.FRONTEND_URL_PROD
+	: process.env.FRONTEND_URL;
 
 router.get(
 	"/google",
