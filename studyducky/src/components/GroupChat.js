@@ -113,10 +113,10 @@ const GroupChat = ({ groupId, groupType }) => {
 
 	return (
 		<div>
-			<div style={{ height: "501.5px", overflowY: "scroll" }}>
+			<div className="msg-box" style={{ height: "501.5px", overflowY: "scroll" }}>
 				{messages.map((m, i) => (
-					<p key={i}>
-						<b>
+					<p className="message" key={i}>
+						<b className="user">
 							{m.sender?._id === currentUserId
 								? "You"
 								: m.sender?.name || "Unknown"}

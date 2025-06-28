@@ -1,3 +1,12 @@
+.msg-box {
+    padding-left: 22px;
+    padding-top: 20px;
+}
+
+.user, .message {
+    font-size: 20px;
+}
+
 .msg-part {
     display: flex;
     background-color: #fff1c2;

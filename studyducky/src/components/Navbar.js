@@ -16,14 +16,11 @@ const Navbar = () => {
 				<Link to="/filter" className="nav-btn">
 					GroupFinder
 				</Link>
-				<Link to="/chat" className="nav-btn">
-					Chats
-				</Link>
 				<Link to="/study-room" className="nav-btn">
 					StudyRoom
 				</Link>
 				<Link to="/" className="landing-btn">
-					Go to Landing
+					Logout
 				</Link>
 			</div>
 		</div>

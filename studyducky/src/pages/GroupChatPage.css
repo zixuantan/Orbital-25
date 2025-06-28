@@ -22,11 +22,12 @@
 .group-stuff {
     display: flex;
     align-items: center;
-    gap: 925px;
+    gap: 610px;
 }
 
 .group-name {
     font-size: 30px;
+    width: 400px;
 }
 
 .files-btn {

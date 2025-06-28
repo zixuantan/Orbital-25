@@ -42,8 +42,7 @@ function FilesPage() {
                                     {file.webViewLink}
                                 </a>
                             </p>
-                            <p className="file-details">Uploaded by {file.uploaderName}</p>
-                            <p className="file-details">Uploaded at {file.date}</p>
+                            
                         </li>
                     ))}
                     </ul>
@@ -52,5 +51,8 @@ function FilesPage() {
         </div>
     )
 }
+
+/* <p className="file-details">Uploaded by {file.uploaderName}</p>
+                            <p className="file-details">Uploaded at {file.date}</p> */
 
 export default FilesPage;
