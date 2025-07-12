@@ -22,7 +22,7 @@
 .group-stuff {
     display: flex;
     align-items: center;
-    gap: 610px;
+    gap: 415px;
 }
 
 .group-name {
@@ -30,11 +30,16 @@
     width: 400px;
 }
 
-.files-btn {
+.group-btn {
+    display: flex;
+    gap: 30px;
+}
+
+.chat-btns {
     background-color: #2c2c2c;
     color: #f5f5f5;
     padding-top: 5px;
-    width: 120px;
+    width: 130px;
     height: 40px;
     border: #2C2C2C;
     border-radius: 8px;
@@ -42,4 +47,5 @@
     cursor: pointer;
     text-decoration: none;
     text-align: center;
+    margin-right: 20px;
 }

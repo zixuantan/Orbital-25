@@ -29,6 +29,10 @@ const userSchema = new Schema(
 		studyStatistics: {
 			totalHours: { type: Number, default: 0 },
 			streak: { type: Number, default: 0 },
+			today: {
+    			date: { type: String },           
+    			seconds: { type: Number, default: 0 } 
+			}
 		},
 
 		commitmentByModule: {
@@ -36,6 +40,12 @@ const userSchema = new Schema(
 			of: Number, // 1–5 for each module
 			default: {},
 		},
+
+		avatar_color: {
+    		type: String,
+    		default: "yellow", 
+    		enum: ["yellow", "blue", "green", "pink"], 
+  		},
 
 		studyGroups: [{ type: Types.ObjectId, ref: "StudyGroup" }],
 		projectGroups: [{ type: Types.ObjectId, ref: "ProjectGroup" }],
