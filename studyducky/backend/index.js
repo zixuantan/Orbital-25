@@ -15,7 +15,9 @@ import retrieveChat from "./routes/retrieveChat.js";
 import retrieveGroups from "./routes/retrieveGroups.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import googleDrive from "./routes/googleDrive.js";
+import retrieveRoomUsers from "./routes/retrieveRoomUsers.js";
 import files from "./routes/files.js";
+import studyTime from "./routes/studyTime.js";
 import cors from "cors"; // backend and frontend run on different ports
 
 import { createServer } from "http";
@@ -62,7 +64,7 @@ app.use(
 		credentials: true,
 	})
 );
-
+app.use(express.json()); //added in after issue with sending msges in gc
 // Session
 app.use(
 	session({
@@ -95,6 +97,8 @@ app.use("/api", retrieveGroups);
 app.use("/api", messageRoutes);
 app.use("/api/drive", googleDrive);
 app.use("/api/drive", files);
+app.use("/api/group", retrieveRoomUsers);
+app.use("/api", studyTime);
 
 app.get("/me", (req, res) => {
 	console.log("User in session:", req.user); // req.user populated by Passport.js after successful auth
@@ -122,6 +126,8 @@ app.get("/debug-session", (req, res) => {
 
 const httpServer = createServer(app);
 
+const studyRoomUsers = {}; 
+
 const io = new Server(httpServer, {
 	cors: {
 		origin: function (origin, callback) {
@@ -148,8 +154,52 @@ io.on("connection", (socket) => {
 		io.to(messageData.groupId).emit("receiveMessage", messageData);
 	});
 
+	socket.on("joinStudyRoom", ({ groupId, user }) => {
+		console.log("joinStudyRoom triggered with:", { groupId, user });
+
+  	if (!user || !user.name) {
+    	console.error("User is missing or incomplete:", user);
+    	return; 
+  	}
+
+		console.log(`${user.name} joined studyroom ${groupId}`);
+		socket.join(groupId);
+		socket.groupId = groupId;
+		socket.user = user;
+
+		if (!studyRoomUsers[groupId]) {
+			studyRoomUsers[groupId] = [];
+		}
+
+		if (!studyRoomUsers[groupId].some((u) => u.id === user._id)) {
+		studyRoomUsers[groupId].push(user);
+		}
+
+		io.to(groupId).emit("update-users", studyRoomUsers[groupId]);
+	});
+
+	socket.on("leaveStudyRoom", ({ groupId, userId }) => {
+		console.log(`User ${userId} left studyroom ${groupId}`);
+		socket.leave(groupId);
+
+		if (studyRoomUsers[groupId]) {
+			studyRoomUsers[groupId] = studyRoomUsers[groupId].filter(
+				(u) => u.id !== userId
+			);
+			io.to(groupId).emit("update-users", studyRoomUsers[groupId]);
+		}
+	});
+
 	socket.on("disconnect", () => {
 		console.log("User disconnected:", socket.id);
+		const { groupId, user } = socket;
+
+		if (groupId && user && studyRoomUsers[groupId]) {
+			studyRoomUsers[groupId] = studyRoomUsers[groupId].filter(
+				(u) => u.id !== user.id
+			);
+			io.to(groupId).emit("update-users", studyRoomUsers[groupId]);
+		}
 	});
 });
 

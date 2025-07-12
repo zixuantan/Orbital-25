@@ -30,7 +30,7 @@ function App() {
 					<Route path="/groups" element={<GroupFinder />} />
 					<Route path="/chat/:groupId" element={<GroupChatPage />} />
 					<Route path="/files/:folderId" element={<FilesPage />} />
-					<Route path="/study-room" element={<VirtualStudyRoom />} />
+					<Route path="/studyroom/:groupId" element={<VirtualStudyRoom />} />
 					<Route path="/stats" element={<Stats />} />
 					<Route path="/settings" element={<Settings />} />
 					<Route path="/create-group" element={<CreateGroup />} />
