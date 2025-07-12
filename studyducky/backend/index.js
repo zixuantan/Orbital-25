@@ -171,7 +171,7 @@ io.on("connection", (socket) => {
 			studyRoomUsers[groupId] = [];
 		}
 
-		if (!studyRoomUsers[groupId].some((u) => u.id === user._id)) {
+		if (!studyRoomUsers[groupId].some((u) => u.id === user.id)) {
 		studyRoomUsers[groupId].push(user);
 		}
 
