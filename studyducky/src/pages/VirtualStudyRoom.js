@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Badge } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import "./VirtualStudyRoom.css";
 import socket from "../socket";
@@ -13,14 +12,14 @@ function VirtualStudyRoom() {
 	const [timeStudied, setTimeStudied] = useState(0);
 	const [eyesOpen, setEyesOpen] = useState(true);
 	const deskPositions = [
-		{ top: 10, left: -132 },
-  		{ top: 10, left: 135 },
-  		{ top: 10, left: 417 },
-  		{ top: 10, left: 693 },
-  		{ top: 208, left: -150 },
-  		{ top: 208, left: 120 },
-  		{ top: 208, left: 418 },
-  		{ top: 208, left: 716 }
+		{ top: "3%", left: "-10%" },
+  		{ top: "3%", left: "11.2%" },
+  		{ top: "3%", left: "33.6%" },
+  		{ top: "3%", left: "55.5%" },
+  		{ top: "36.4%", left: "-12%" },
+  		{ top: "36.4%", left: "9.6%" },
+  		{ top: "36.4%", left: "33.6%" },
+  		{ top: "36.4%", left: "57.3%" }
 	];
 	const formatTime = (seconds) => {
 		const hour = String(Math.floor(seconds / 3600)).padStart(2, '0');

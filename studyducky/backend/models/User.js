@@ -32,6 +32,11 @@ const userSchema = new Schema(
 			today: {
     			date: { type: String },           
     			seconds: { type: Number, default: 0 } 
+			},
+			history: {
+				type: Map,
+				of: Number, 
+				default: {}
 			}
 		},
 

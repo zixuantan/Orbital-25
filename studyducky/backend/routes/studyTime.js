@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/studytime", async (req, res) => {
     const { userId, timeSpent } = req.body; //seconds
-    const today = new Date().toISOString().slice(0, 10); 
+    const dateKey = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Singapore" });
 
     try {
         const user = await User.findById(userId);
@@ -14,14 +14,37 @@ router.post("/studytime", async (req, res) => {
 
         user.studyStatistics.totalHours = (user.studyStatistics.totalHours || 0) + timeSpent / 3600;
 
-        //update today seconds
-        if (user.studyStatistics?.today?.date === today) {
-            user.studyStatistics.today.seconds += timeSpent;
-        } else {
+        if (!user.studyStatistics.today || user.studyStatistics.today.date !== dateKey) {
             user.studyStatistics.today = {
-                date: today,
-                seconds: timeSpent,
+                date: dateKey,
+                seconds: 0
             };
+        }
+        user.studyStatistics.today.seconds += timeSpent;
+
+        if (!user.studyStatistics.history) {
+            user.studyStatistics.history = new Map();
+        }
+        const previous = user.studyStatistics.history.get(dateKey) || 0;
+        user.studyStatistics.history.set(dateKey, previous + timeSpent);
+
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yesterdayKey = yesterday.toLocaleDateString("en-CA", { timeZone: "Asia/Singapore" });
+
+        if (!user.studyStatistics.history.has(yesterdayKey)) {
+            user.studyStatistics.history.set(yesterdayKey, 0);
+        }
+
+        const studiedToday = user.studyStatistics.history.get(dateKey) > 0;
+        const studiedYesterday = user.studyStatistics.history.get(yesterdayKey) > 0;
+
+        if (studiedToday) {
+            if (studiedYesterday) {
+                user.studyStatistics.streak = (user.studyStatistics.streak || 0) + 1;
+            } else {
+                user.studyStatistics.streak = 1;
+            }
         }
 
         await user.save();

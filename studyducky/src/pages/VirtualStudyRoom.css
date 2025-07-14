@@ -1,12 +1,13 @@
 .studyroom-page {
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 .studyroom-top {
     display: flex;
     background-color: #E6FFFB;
-    height: 70px;
+    height: 10.5%;
     align-items: center;
     gap: 20px;
 }
@@ -34,7 +35,7 @@
     background-size: cover; 
     background-attachment: scroll;
     position: relative;
-    height: 89.5vh;
+    height: 89.5%;
 }
 
 .timer {

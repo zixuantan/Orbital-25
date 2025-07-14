@@ -171,7 +171,7 @@ io.on("connection", (socket) => {
 			studyRoomUsers[groupId] = [];
 		}
 
-		if (!studyRoomUsers[groupId].some((u) => u.id === user.id)) {
+		if (!studyRoomUsers[groupId].some((u) => u._id === user._id)) {
 		studyRoomUsers[groupId].push(user);
 		}
 
@@ -184,7 +184,7 @@ io.on("connection", (socket) => {
 
 		if (studyRoomUsers[groupId]) {
 			studyRoomUsers[groupId] = studyRoomUsers[groupId].filter(
-				(u) => u.id !== userId
+				(u) => u._id !== userId
 			);
 			io.to(groupId).emit("update-users", studyRoomUsers[groupId]);
 		}
@@ -196,7 +196,7 @@ io.on("connection", (socket) => {
 
 		if (groupId && user && studyRoomUsers[groupId]) {
 			studyRoomUsers[groupId] = studyRoomUsers[groupId].filter(
-				(u) => u.id !== user.id
+				(u) => u._id !== user._id
 			);
 			io.to(groupId).emit("update-users", studyRoomUsers[groupId]);
 		}
