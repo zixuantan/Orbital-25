@@ -1,4 +1,12 @@
+.chat-component {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .msg-box {
+    flex: 1;
+    overflow-y: scroll;
     padding-left: 22px;
     padding-top: 20px;
 }
