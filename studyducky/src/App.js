@@ -14,6 +14,7 @@ import Settings from "./pages/Settings";
 import GroupFilter from "./pages/GroupFilter";
 import CreateGroup from "./pages/CreateGroup";
 import FilesPage from "./pages/FilesPage";
+import AvatarCustom from "./pages/AvatarCustom.js";
 
 function App() {
 	return (
@@ -34,6 +35,7 @@ function App() {
 					<Route path="/stats" element={<Stats />} />
 					<Route path="/settings" element={<Settings />} />
 					<Route path="/create-group" element={<CreateGroup />} />
+					<Route path="/avatar/:groupId" element={<AvatarCustom />} />
 				</Routes>
 			</div>
 		</Router>

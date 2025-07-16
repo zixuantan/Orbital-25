@@ -1,0 +1,142 @@
+.avatar-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar-top {
+    display: flex;
+    background-color: #E6FFFB;
+    height: 10.5%;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatar-bottom {
+    display: flex;
+    height: 89.5%;
+}
+
+.backstudy-btn {
+    font-size: 25px;
+    width: 60px;
+    color: #2c2c2c;
+    text-decoration: none;
+    padding-left: 40px;
+}
+
+.avatar-header {
+    font-size: 30px;
+}
+
+.preview-side {
+    background: url('avatar-bg.png') no-repeat center fixed;
+    background-position: center top;
+    background-size: cover; 
+    background-attachment: scroll;
+    position: relative;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+
+.avatar {
+    position: absolute;
+    pointer-events: none;
+    overflow: visible;
+    top: -25%;
+    left: -28%;
+    width: 1200px;
+    height: auto;
+    margin-top: 0;
+}
+
+.avatar-preview {
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.eyes-preview {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.wings-preview {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.custom-side {
+    background-color: #fff1c2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    gap: 30px;
+    width: 40%;
+}
+
+.color-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 15px;
+    width: 100%;
+    justify-items: center; 
+    margin-top: 20px;
+}
+
+.each-color {
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    height: 130px;
+    width: 120px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.colour-selection {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #2c2c2c;
+    margin-bottom: 10px;  
+}
+
+.color-name {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2c2c2c;
+    margin-left: 3px;
+}
+
+.save-btn {
+    background-color: #2c2c2c;
+    color: #f5f5f5;
+    width: 120px;
+    height: 40px;
+    border: #2C2C2C;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    margin-left: 303px;
+}

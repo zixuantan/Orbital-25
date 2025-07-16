@@ -28,24 +28,22 @@ router.post("/studytime", async (req, res) => {
         const previous = user.studyStatistics.history.get(dateKey) || 0;
         user.studyStatistics.history.set(dateKey, previous + timeSpent);
 
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        const yesterdayKey = yesterday.toLocaleDateString("en-CA", { timeZone: "Asia/Singapore" });
+        let streak = 0;
+        const todayDate = new Date(dateKey);
 
-        if (!user.studyStatistics.history.has(yesterdayKey)) {
-            user.studyStatistics.history.set(yesterdayKey, 0);
-        }
+        for (let i = 0; ; i++) {
+            const date = new Date(todayDate);
+            date.setDate(todayDate.getDate() - i);
+            const key = date.toLocaleDateString("en-CA", { timeZone: "Asia/Singapore" });
 
-        const studiedToday = user.studyStatistics.history.get(dateKey) > 0;
-        const studiedYesterday = user.studyStatistics.history.get(yesterdayKey) > 0;
-
-        if (studiedToday) {
-            if (studiedYesterday) {
-                user.studyStatistics.streak = (user.studyStatistics.streak || 0) + 1;
+            if (user.studyStatistics.history.has(key) && user.studyStatistics.history.get(key) > 0) {
+                streak++;
             } else {
-                user.studyStatistics.streak = 1;
+                break; 
             }
         }
+
+        user.studyStatistics.streak = streak;
 
         await user.save();
         res.json({ success: true });
@@ -54,5 +52,29 @@ router.post("/studytime", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+router.post("/avatarcolor", async (req, res) => {
+    const { userId, color } = req.body;
+    const avatarColors = ["yellow", "blue", "red", "green", "pink", "purple", "grey", "white", "brown"];
+
+    if (!avatarColors.includes(color)) {
+        return res.status(400).json({ error: "Invalid color" });
+    }
+
+    try {
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { avatar_color: color },
+            { new: true }
+        );
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        res.json({ success: true, avatar_color: user.avatar_color });
+    } catch (err) {
+        console.error("Failed to update avatar color:", err);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 
 export default router;
