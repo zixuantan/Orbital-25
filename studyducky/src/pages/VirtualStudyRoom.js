@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Badge } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import "./VirtualStudyRoom.css";
 import socket from "../socket";
@@ -13,14 +12,14 @@ function VirtualStudyRoom() {
 	const [timeStudied, setTimeStudied] = useState(0);
 	const [eyesOpen, setEyesOpen] = useState(true);
 	const deskPositions = [
-		{ top: 10, left: -132 },
-  		{ top: 10, left: 135 },
-  		{ top: 10, left: 417 },
-  		{ top: 10, left: 693 },
-  		{ top: 208, left: -150 },
-  		{ top: 208, left: 120 },
-  		{ top: 208, left: 418 },
-  		{ top: 208, left: 716 }
+		{ top: "3%", left: "-10%" },
+  		{ top: "3%", left: "11.2%" },
+  		{ top: "3%", left: "33.6%" },
+  		{ top: "3%", left: "55.5%" },
+  		{ top: "36.4%", left: "-12%" },
+  		{ top: "36.4%", left: "9.6%" },
+  		{ top: "36.4%", left: "33.6%" },
+  		{ top: "36.4%", left: "57.3%" }
 	];
 	const formatTime = (seconds) => {
 		const hour = String(Math.floor(seconds / 3600)).padStart(2, '0');
@@ -138,7 +137,9 @@ function VirtualStudyRoom() {
 			<div className="studyroom-top">
 				<Link to={`/chat/${groupId}`} className="backchat-btn">⮜</Link>
 				<h1 className="studyroom-header">Virtual Study Room</h1>
-				<p className="studyroom-intro">Study with your peers without the need for a video call.</p>
+				<Link to={`/avatar/${groupId}`}>
+					<button className="custom-btn">Customize Avatar</button>
+				</Link>
 			</div>
 			<div className="room">
 				<h2 className="timer">{formatTime(timeStudied)}</h2>
@@ -156,7 +157,7 @@ function VirtualStudyRoom() {
 								alt={`${user.name}'s duck`}
 								className="duck-image"/>
 								<img src={eyesOpen ? "/eyes-open.svg" : "/eyes-closed.svg"} className="eyes" alt="eyes" />							
-								<img src="/arms.svg" alt="arms" className="arms"/>
+								<img src={`/arms-${user.avatar_color || "yellow"}.svg`} alt="arms" className="arms"/>
 								<img src="/laptop.png" alt="laptop" className="laptop"/>
 							</div>
 						

@@ -32,6 +32,11 @@ const userSchema = new Schema(
 			today: {
     			date: { type: String },           
     			seconds: { type: Number, default: 0 } 
+			},
+			history: {
+				type: Map,
+				of: Number, 
+				default: {}
 			}
 		},
 
@@ -44,7 +49,7 @@ const userSchema = new Schema(
 		avatar_color: {
     		type: String,
     		default: "yellow", 
-    		enum: ["yellow", "blue", "green", "pink"], 
+    		enum: ["yellow", "blue", "red", "green", "pink", "purple", "grey", "white", "brown"], 
   		},
 
 		studyGroups: [{ type: Types.ObjectId, ref: "StudyGroup" }],

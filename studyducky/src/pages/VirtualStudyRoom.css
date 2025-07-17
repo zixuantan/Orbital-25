@@ -1,12 +1,13 @@
 .studyroom-page {
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 .studyroom-top {
     display: flex;
     background-color: #E6FFFB;
-    height: 70px;
+    height: 10.5%;
     align-items: center;
     gap: 20px;
 }
@@ -23,9 +24,18 @@
     font-size: 30px;
 }
 
-.studyroom-intro {
-    font-size: 25px;
-    margin-top: 13px;
+.custom-btn {
+    background-color: #2c2c2c;
+    color: #f5f5f5;
+    width: 200px;
+    height: 40px;
+    border: #2C2C2C;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    margin-left: 640px;
 }
 
 .room {
@@ -34,7 +44,7 @@
     background-size: cover; 
     background-attachment: scroll;
     position: relative;
-    height: 89.5vh;
+    height: 89.5%;
 }
 
 .timer {

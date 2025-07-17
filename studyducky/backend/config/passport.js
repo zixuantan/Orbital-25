@@ -61,7 +61,7 @@ console.log("GoogleStrategy registered");
 
 passport.serializeUser((user, done) => {
 	console.log("serializeUser called for:", user.email);
-	done(null, { id: user.id, isNew: user.isNew });
+	done(null, { id: user._id, isNew: user.isNew });
 });
 
 passport.deserializeUser(async (obj, done) => {

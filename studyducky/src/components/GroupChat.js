@@ -112,8 +112,8 @@ const GroupChat = ({ groupId, groupType }) => {
 	};
 
 	return (
-		<div>
-			<div className="msg-box" style={{ height: "501.5px", overflowY: "scroll" }}>
+		<div className="chat-component">
+			<div className="msg-box">
 				{messages.map((m, i) => (
 					<p className="message" key={i}>
 						<b className="user">

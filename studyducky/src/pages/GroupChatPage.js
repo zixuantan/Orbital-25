@@ -48,10 +48,11 @@ function GroupChatPage() {
 				
 
 			</div>
-			{group && (
-			<GroupChat groupId={groupId} groupType={group.type} />
-			)}
-	
+			<div className="group-chat">
+				{group && (
+				<GroupChat groupId={groupId} groupType={group.type} />
+				)}
+			</div>	
 		</div>
 	);
 }

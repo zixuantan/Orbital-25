@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/studytime", async (req, res) => {
     const { userId, timeSpent } = req.body; //seconds
-    const today = new Date().toISOString().slice(0, 10); 
+    const dateKey = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Singapore" });
 
     try {
         const user = await User.findById(userId);
@@ -14,15 +14,36 @@ router.post("/studytime", async (req, res) => {
 
         user.studyStatistics.totalHours = (user.studyStatistics.totalHours || 0) + timeSpent / 3600;
 
-        //update today seconds
-        if (user.studyStatistics?.today?.date === today) {
-            user.studyStatistics.today.seconds += timeSpent;
-        } else {
+        if (!user.studyStatistics.today || user.studyStatistics.today.date !== dateKey) {
             user.studyStatistics.today = {
-                date: today,
-                seconds: timeSpent,
+                date: dateKey,
+                seconds: 0
             };
         }
+        user.studyStatistics.today.seconds += timeSpent;
+
+        if (!user.studyStatistics.history) {
+            user.studyStatistics.history = new Map();
+        }
+        const previous = user.studyStatistics.history.get(dateKey) || 0;
+        user.studyStatistics.history.set(dateKey, previous + timeSpent);
+
+        let streak = 0;
+        const todayDate = new Date(dateKey);
+
+        for (let i = 0; ; i++) {
+            const date = new Date(todayDate);
+            date.setDate(todayDate.getDate() - i);
+            const key = date.toLocaleDateString("en-CA", { timeZone: "Asia/Singapore" });
+
+            if (user.studyStatistics.history.has(key) && user.studyStatistics.history.get(key) > 0) {
+                streak++;
+            } else {
+                break; 
+            }
+        }
+
+        user.studyStatistics.streak = streak;
 
         await user.save();
         res.json({ success: true });
@@ -31,5 +52,29 @@ router.post("/studytime", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+router.post("/avatarcolor", async (req, res) => {
+    const { userId, color } = req.body;
+    const avatarColors = ["yellow", "blue", "red", "green", "pink", "purple", "grey", "white", "brown"];
+
+    if (!avatarColors.includes(color)) {
+        return res.status(400).json({ error: "Invalid color" });
+    }
+
+    try {
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { avatar_color: color },
+            { new: true }
+        );
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        res.json({ success: true, avatar_color: user.avatar_color });
+    } catch (err) {
+        console.error("Failed to update avatar color:", err);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 
 export default router;
