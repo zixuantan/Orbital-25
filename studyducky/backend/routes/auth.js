@@ -30,7 +30,7 @@ router.get(
 			res.redirect(`${FRONTEND_URL}/register`);
 		} else {
 			console.log("Redirecting existing user to homepage");
-			res.redirect(`${FRONTEND_URL}/dashboard`);
+			res.redirect(`${FRONTEND_URL}/main`);
 		}
 	}
 );

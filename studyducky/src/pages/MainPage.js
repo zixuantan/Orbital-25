@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./MainPage.css";
 import { Bar } from "react-chartjs-2";
 import { Doughnut } from "react-chartjs-2";
@@ -25,6 +26,7 @@ ChartJS.register(
 );
 
 function MainPage() {
+	const [user, setUser] = useState(null);
 	const [study, setStudyGroups] = useState([]);
 	const [project, setProjectGroups] = useState([]);
 	const [googleId, setGoogleId] = useState(null);
@@ -64,6 +66,7 @@ function MainPage() {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.googleId) {
+					setUser(data);
 					setGoogleId(data.googleId);
 					setStudyGoal(data.studyGoal || 60);
 				}
@@ -138,6 +141,19 @@ function MainPage() {
 		<div className="overall-page">
 			<Navbar />
 
+			{user && (
+				<p
+					style={{
+						fontSize: "20px",
+						fontWeight: "bold",
+						marginTop: "1rem",
+						marginLeft: "1rem",
+					}}
+				>
+					Welcome to your StudyDucky Dashboard, {user.name}!
+				</p>
+			)}
+
 			<div className="stats">
 				<h1>Study Statistics</h1>
 
@@ -162,11 +178,11 @@ function MainPage() {
 				<div
 					className="streak"
 					style={{
-						marginTop: "10rem",
-						fontSize: "30px",
+						marginTop: "12rem",
+						fontSize: "20px",
 						fontWeight: "normal",
 						textAlign: "right",
-						marginLeft: "10%",
+						paddingLeft: "4rem",
 						wdith: "fit-content",
 					}}
 				>
