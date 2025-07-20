@@ -24,19 +24,21 @@ ChartJS.register(
 	ArcElement
 );
 
-const week = [2.0, 3.0, 1.5, 4.0, 2.5, 4.5, 3.0];
-const day = 3;
-
 function MainPage() {
 	const [study, setStudyGroups] = useState([]);
 	const [project, setProjectGroups] = useState([]);
 	const [googleId, setGoogleId] = useState(null);
+	const [dailyMinutes, setDailyMinutes] = useState(0);
+	const [weeklyMinutes, setWeeklyMinutes] = useState([]);
+	const [studyGoal, setStudyGoal] = useState(60);
+	const [streak, setStreak] = useState(1);
+
 	const weeklyData = {
 		labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
 		datasets: [
 			{
-				label: "Hours",
-				data: week,
+				label: "Minutes",
+				data: weeklyMinutes,
 				backgroundColor: "#4abdac",
 				borderRadius: 8,
 			},
@@ -45,7 +47,10 @@ function MainPage() {
 	const dailyData = {
 		datasets: [
 			{
-				data: [day, 24 - day],
+				data: [
+					Math.min(parseFloat(dailyMinutes), studyGoal),
+					Math.max(studyGoal - parseFloat(dailyMinutes), 0),
+				],
 				backgroundColor: ["#4abdac", "#fff"],
 				borderWidth: 0,
 			},
@@ -60,6 +65,7 @@ function MainPage() {
 			.then((data) => {
 				if (data.googleId) {
 					setGoogleId(data.googleId);
+					setStudyGoal(data.studyGoal || 60);
 				}
 			})
 			.catch((err) => {
@@ -69,9 +75,12 @@ function MainPage() {
 
 	useEffect(() => {
 		if (!googleId) return;
-		fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/${googleId}/groups`, {
-			credentials: "include",
-		})
+		fetch(
+			`${process.env.REACT_APP_BACKEND_URL}/api/user/${googleId}/groups`,
+			{
+				credentials: "include",
+			}
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log("Fetched user groups:", data);
@@ -79,6 +88,52 @@ function MainPage() {
 				setProjectGroups(data.projectGroups);
 			});
 	}, [googleId]);
+
+	useEffect(() => {
+		if (!googleId) return;
+
+		fetch(
+			`${process.env.REACT_APP_BACKEND_URL}/api/user/${googleId}/studystats`,
+			{
+				credentials: "include",
+			}
+		)
+			.then((res) => res.json())
+			.then((data) => {
+				console.log("studystats response: ", data);
+
+				const todaySec = data.today?.seconds || 0;
+				setDailyMinutes((todaySec / 60).toFixed(1));
+
+				setStreak(data.streak || 1);
+
+				const history = data.history || {};
+				console.log("History object from backend:", history);
+
+				const now = new Date();
+				const weekData = [];
+
+				for (let i = 6; i >= 0; i--) {
+					const d = new Date(now);
+					d.setDate(now.getDate() - i);
+					const key = d.toLocaleDateString("en-CA", {
+						timeZone: "Asia/Singapore",
+					});
+
+					console.log(`Checking key ${key}: ${history[key]}`);
+
+					const sec = history[key] || 0;
+					weekData.push(Number((sec / 60).toFixed(1)));
+				}
+
+				console.log("Final weekly data (mins):", weekData);
+				setWeeklyMinutes(weekData);
+			})
+			.catch((err) => {
+				console.error("Failed to fetch study stats:", err);
+			});
+	}, [googleId]);
+
 	return (
 		<div className="overall-page">
 			<Navbar />
@@ -89,10 +144,33 @@ function MainPage() {
 				<div className="daily">
 					<p id="today">Today's Progress</p>
 					<Doughnut data={dailyData} />
+					<p
+						style={{
+							marginTop: "1rem",
+							fontSize: "16px",
+							fontWeight: "500",
+						}}
+					>
+						Today's Goal: {studyGoal} minutes
+					</p>
 				</div>
 				<div className="weekly">
 					<p id="week">Weekly Study Hours</p>
 					<Bar data={weeklyData} />
+				</div>
+
+				<div
+					className="streak"
+					style={{
+						marginTop: "10rem",
+						fontSize: "30px",
+						fontWeight: "normal",
+						textAlign: "right",
+						marginLeft: "10%",
+						wdith: "fit-content",
+					}}
+				>
+					Current Streak 🔥 : {streak} day{streak !== 1 ? "s" : ""}
 				</div>
 			</div>
 

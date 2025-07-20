@@ -126,7 +126,7 @@ app.get("/debug-session", (req, res) => {
 
 const httpServer = createServer(app);
 
-const studyRoomUsers = {}; 
+const studyRoomUsers = {};
 
 const io = new Server(httpServer, {
 	cors: {
@@ -157,10 +157,10 @@ io.on("connection", (socket) => {
 	socket.on("joinStudyRoom", ({ groupId, user }) => {
 		console.log("joinStudyRoom triggered with:", { groupId, user });
 
-  	if (!user || !user.name) {
-    	console.error("User is missing or incomplete:", user);
-    	return; 
-  	}
+		if (!user || !user.name) {
+			console.error("User is missing or incomplete:", user);
+			return;
+		}
 
 		console.log(`${user.name} joined studyroom ${groupId}`);
 		socket.join(groupId);
@@ -172,7 +172,7 @@ io.on("connection", (socket) => {
 		}
 
 		if (!studyRoomUsers[groupId].some((u) => u._id === user._id)) {
-		studyRoomUsers[groupId].push(user);
+			studyRoomUsers[groupId].push(user);
 		}
 
 		io.to(groupId).emit("update-users", studyRoomUsers[groupId]);

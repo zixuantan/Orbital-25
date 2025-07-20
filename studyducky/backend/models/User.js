@@ -30,14 +30,19 @@ const userSchema = new Schema(
 			totalHours: { type: Number, default: 0 },
 			streak: { type: Number, default: 0 },
 			today: {
-    			date: { type: String },           
-    			seconds: { type: Number, default: 0 } 
+				date: { type: String },
+				seconds: { type: Number, default: 0 },
 			},
 			history: {
 				type: Map,
-				of: Number, 
-				default: {}
-			}
+				of: Number,
+				default: {},
+			},
+		},
+
+		studyGoal: {
+			type: Number,
+			default: 60,
 		},
 
 		commitmentByModule: {
@@ -47,16 +52,26 @@ const userSchema = new Schema(
 		},
 
 		avatar_color: {
-    		type: String,
-    		default: "yellow", 
-    		enum: ["yellow", "blue", "red", "green", "pink", "purple", "grey", "white", "brown"], 
-  		},
+			type: String,
+			default: "yellow",
+			enum: [
+				"yellow",
+				"blue",
+				"red",
+				"green",
+				"pink",
+				"purple",
+				"grey",
+				"white",
+				"brown",
+			],
+		},
 
 		studyGroups: [{ type: Types.ObjectId, ref: "StudyGroup" }],
 		projectGroups: [{ type: Types.ObjectId, ref: "ProjectGroup" }],
 	},
 	{ timestamps: true }
-); 
+);
 
 const User = model("User", userSchema);
 export default User;

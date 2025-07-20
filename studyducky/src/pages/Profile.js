@@ -18,8 +18,8 @@ function Profile() {
 	const [major, setMajor] = useState("");
 	const [selectedMods, setSelectedMods] = useState([]);
 	const [isEditing, setIsEditing] = useState(false);
+	const [studyGoal, setStudyGoal] = useState("60");
 
-	// Fetch user data
 	useEffect(() => {
 		axios
 			.get(`${process.env.REACT_APP_BACKEND_URL}/me`, {
@@ -30,6 +30,7 @@ function Profile() {
 				setName(user.name);
 				setYear(user.year || "");
 				setMajor(user.major || "");
+				setStudyGoal(user.studyGoal || 60);
 				setSelectedMods(
 					(user.modulesTaken || []).map((mod) => ({
 						value: mod,
@@ -44,6 +45,12 @@ function Profile() {
 
 	const handleSave = async (e) => {
 		e.preventDefault();
+
+		if (!studyGoal || isNaN(studyGoal) || Number(studyGoal) < 1) {
+			alert("Please enter a valid study goal (minimum 1 minute)");
+			return;
+		}
+
 		console.log("Save button clicked");
 		console.log("Payload:", {
 			year,
@@ -58,6 +65,7 @@ function Profile() {
 					year,
 					major,
 					modulesTaken: selectedMods.map((mod) => mod.value),
+					studyGoal: Number(studyGoal),
 				},
 				{ withCredentials: true }
 			);
@@ -114,7 +122,7 @@ function Profile() {
 								width="100"
 								height="100"
 							/>
-							<p id="second-title">Lock It In</p>
+							<p id="second-title">Lock In</p>
 							<p id="second-desc">
 								Study more than an hour consecutively
 							</p>
@@ -166,6 +174,18 @@ function Profile() {
 							onChange={setSelectedMods}
 							isDisabled={!isEditing}
 							className="module-select"
+						/>
+
+						<label>Daily Study Goal (minutes)</label>
+						<input
+							type="number"
+							min={1}
+							value={studyGoal}
+							onChange={(e) => {
+								const val = e.target.value;
+								setStudyGoal(val);
+							}}
+							disabled={!isEditing}
 						/>
 
 						{isEditing ? (

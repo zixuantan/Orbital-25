@@ -9,11 +9,11 @@ router.put("/update-profile", async (req, res) => {
 			return res.status(401).json({ message: "Not authenticated" });
 		}
 
-		const { year, major, modulesTaken } = req.body;
+		const { year, major, modulesTaken, studyGoal } = req.body;
 
 		const updatedUser = await User.findByIdAndUpdate(
 			req.user._id,
-			{ year, major, modulesTaken },
+			{ year, major, modulesTaken, studyGoal },
 			{ new: true }
 		);
 
