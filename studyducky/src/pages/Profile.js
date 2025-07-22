@@ -5,11 +5,28 @@ import "./Profile.css";
 import Navbar from "../components/Navbar";
 
 const modsOption = [
+	{ value: "BT1101", label: "BT1101" },
+	{ value: "BT2101", label: "BT2101" },
 	{ value: "BT2102", label: "BT2102" },
 	{ value: "IS1108", label: "IS1108" },
+	{ value: "IS1128", label: "IS1128" },
 	{ value: "IS2101", label: "IS2101" },
+	{ value: "IS2218", label: "IS2218" },
+	{ value: "IS3103", label: "IS3103" },
+	{ value: "CS1010", label: "CS1010" },
+	{ value: "CS1010A", label: "CS1010A" },
+	{ value: "CS1010J", label: "CS1010J" },
+	{ value: "CS1010S", label: "CS1010S" },
 	{ value: "CS2030", label: "CS2030" },
+	{ value: "CS2030S", label: "CS2030S" },
+	{ value: "CS2040", label: "CS2040" },
+	{ value: "CS2040S", label: "CS2040S" },
+	{ value: "CS2101", label: "CS2101" },
+	{ value: "CS2103T", label: "CS2103T" },
 	{ value: "MA1521", label: "MA1521" },
+	{ value: "MA1522", label: "MA1522" },
+	{ value: "MA2104", label: "MA2104" },
+	{ value: "ST2334", label: "ST2334" },
 ];
 
 function Profile() {
@@ -95,39 +112,8 @@ function Profile() {
 							/>
 							<p>{name}</p>
 						</div>
-						<p id="about">About</p>
-
-						<p id="desc">
-							Just a motivated duck trying to stay afloat in the
-							sea of deadlines. 🐣 Lover of matcha, late-night
-							cramming, and productive silence.
-						</p>
 					</div>
-					<p id="badge">Badges</p>
-					<div className="badge-section">
-						<div className="first">
-							<img
-								src="firstbadge.png"
-								alt="Just Getting Started"
-								width="100"
-								height="100"
-							/>
-							<p id="first-title">Just Getting Started</p>
-							<p id="first-desc">Join the Flock</p>
-						</div>
-						<div className="second">
-							<img
-								src="lockbadge.png"
-								alt="Lock In"
-								width="100"
-								height="100"
-							/>
-							<p id="second-title">Lock In</p>
-							<p id="second-desc">
-								Study more than an hour consecutively
-							</p>
-						</div>
-					</div>
+					
 				</div>
 
 				<div className="account-side">
@@ -157,13 +143,36 @@ function Profile() {
 							disabled={!isEditing}
 						>
 							<option value="">Select</option>
+							<option>Accountancy</option>
+							<option>Anthropology</option>
 							<option>Architecture</option>
 							<option>Business Administration</option>
 							<option>Business Analytics</option>
 							<option>
 								Business Artificial Intelligence Systems
 							</option>
+							<option>Business Economics</option>
+							<option>Chemistry</option>
 							<option>Computer Science</option>
+							<option>Data Science and Analytics</option>
+							<option>Economics</option>
+							<option>Finance</option>
+							<option>Information Security</option>
+							<option>Innovation & Entrepreneurship</option>
+							<option>Leadership & Human Capital Management</option>
+							<option>Life Sciences</option>
+							<option>Marketing</option>
+							<option>Mathematics</option>
+							<option>Operations & Supply Chain Management</option>
+							<option>Philosophy</option>
+							<option>Physics</option>
+							<option>Political Science</option>
+							<option>Real Estate</option>
+							<option>Psychology</option>
+							<option>Social Work</option>
+							<option>Sociology</option>
+							<option>Statistics</option>
+							<option>Quantitative Finance</option>
 						</select>
 
 						<label>Modules taken this semester</label>

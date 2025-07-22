@@ -32,7 +32,8 @@ router.post("/groupfilter", async (req, res) => {
                 return { group, score };
             });
         } else if (type === "project") {
-            matched = await ProjectGroup.find({module, tutorial});
+            const normalizedTutorial = req.body.tutorial.replace(/\s+/g, "").toUpperCase();
+            matched = await ProjectGroup.find({module, tutorial: normalizedTutorial});
             matched = matched.filter(group => !group.members.some(member => member.user.equals(user._id)));
             matched = matched.map((group) => {
                 let score = 0;
