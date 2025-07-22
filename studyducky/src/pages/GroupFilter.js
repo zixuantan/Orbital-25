@@ -256,21 +256,18 @@ function GroupFilter() {
 
 							<div className="indiv">
 								<span className="questions">
-									Which tutorial slot do you have?
+									Which tutorial slot do you have? (Follow NUSMods code eg 2A)
 								</span>
-								<select
+								<input
+									type="text"
 									className="filter-select"
 									required
 									value={tutorialSelected}
-									onChange={(e) =>
-										setTutorial(e.target.value)
-									}
-								>
-									<option value="" hidden></option>
-									<option value="T1">T1</option>
-									<option value="T2">T2</option>
-									<option value="T3">T3</option>
-								</select>
+									onChange={(e) => {									
+										const formattedValue = e.target.value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+										setTutorial(formattedValue);
+									}}
+								/>
 							</div>
 
 							<div className="indiv">
