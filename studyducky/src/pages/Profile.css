@@ -7,7 +7,7 @@
     background-color: #fff;
     display: flex;
     flex-direction: row;
-    height: 130vh;
+    height: 140vh;
 }
 
 .profile-side {
@@ -120,7 +120,7 @@ p {
     border: #2C2C2C;
     border-radius: 8px;
     font-size: 15px;
-    margin-top: 140px;
+    margin-top: 60px;
     margin-left: auto;
     cursor: pointer;
 }

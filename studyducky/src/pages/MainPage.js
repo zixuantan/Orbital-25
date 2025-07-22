@@ -155,38 +155,32 @@ function MainPage() {
 			)}
 
 			<div className="stats">
-				<h1>Study Statistics</h1>
+				<h1 className="stats-header">Study Statistics</h1>
 
-				<div className="daily">
-					<p id="today">Today's Progress</p>
-					<Doughnut data={dailyData} />
-					<p
-						style={{
-							marginTop: "1rem",
-							fontSize: "16px",
-							fontWeight: "500",
-						}}
-					>
-						Today's Goal: {studyGoal} minutes
-					</p>
-				</div>
-				<div className="weekly">
-					<p id="week">Weekly Study Hours</p>
-					<Bar data={weeklyData} />
-				</div>
+				<div className="records">
+					<div className="graphs">
+						<div className="daily">
+							<p id="today">Today's Progress</p>
+							<Doughnut data={dailyData} />
+							<p
+								style={{
+									marginTop: "1rem",
+									fontSize: "16px",
+									fontWeight: "500",
+								}}
+							>
+								Today's Goal: {studyGoal} minutes
+							</p>
+						</div>
+						<div className="weekly">
+							<p id="week">Weekly Study Hours</p>
+							<Bar data={weeklyData} />
+						</div>
+					</div>
 
-				<div
-					className="streak"
-					style={{
-						marginTop: "12rem",
-						fontSize: "20px",
-						fontWeight: "normal",
-						textAlign: "right",
-						paddingLeft: "4rem",
-						wdith: "fit-content",
-					}}
-				>
-					Current Streak 🔥 : {streak} day{streak !== 1 ? "s" : ""}
+					<div className="streak">
+						Current Streak: {streak} day{streak !== 1 ? "s" : ""}
+					</div>
 				</div>
 			</div>
 
