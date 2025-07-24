@@ -42,7 +42,7 @@
     gap: 10px;
     position: relative;
     z-index: 1;
-    height: 570px;
+    height: 650px;
 }
 
 .intro::before {

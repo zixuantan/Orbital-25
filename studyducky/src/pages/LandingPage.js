@@ -22,12 +22,6 @@ function LandingPage() {
 				<button className="start-btn">Get Started</button>
 				</Link>
 			</div>
-			<div className="room-images">
-
-				<img className="rooms" src="room1.png" alt="room1"/>
-				<img className="rooms" src="room2.png" alt="room2"/>
-
-			</div>
 		</div>
 	);
 };
