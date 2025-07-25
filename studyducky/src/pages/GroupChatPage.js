@@ -38,8 +38,7 @@ function GroupChatPage() {
 					<div className="group-stuff">
 						<h1 className="group-name">{group.name}</h1>
 						<div className="group-btn">
-							<Link to={`/studyroom/${groupId}`} className="chat-btns">StudyRoom</Link>
-							<Link to={`/files/${group.folderId}`} className="chat-btns">Files</Link>			
+							<Link to={`/studyroom/${groupId}`} className="chat-btns">StudyRoom</Link>			
 						</div>
 					</div>
 				) : (
