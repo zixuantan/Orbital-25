@@ -15,7 +15,7 @@ function LandingPage() {
 			</div>
 			<div className="intro">
 
-				<h1 id="name">StudyDucky</h1>
+				<h1 id="web-name">StudyDucky</h1>
 				<p id="slogan">Quack your way to better grades — find course mates, 
 					stay accountable, and study together in your virtual study room!</p>
 				<Link to="/login" className="link">
