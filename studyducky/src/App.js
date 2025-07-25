@@ -9,11 +9,8 @@ import Profile from "./pages/Profile";
 import GroupFinder from "./pages/GroupFinder";
 import GroupChatPage from "./pages/GroupChatPage";
 import VirtualStudyRoom from "./pages/VirtualStudyRoom";
-import Stats from "./pages/Stats";
-import Settings from "./pages/Settings";
 import GroupFilter from "./pages/GroupFilter";
 import CreateGroup from "./pages/CreateGroup";
-import FilesPage from "./pages/FilesPage";
 import AvatarCustom from "./pages/AvatarCustom.js";
 
 function App() {
@@ -30,10 +27,7 @@ function App() {
 					<Route path="/filter" element={<GroupFilter />} />
 					<Route path="/groups" element={<GroupFinder />} />
 					<Route path="/chat/:groupId" element={<GroupChatPage />} />
-					<Route path="/files/:folderId" element={<FilesPage />} />
 					<Route path="/studyroom/:groupId" element={<VirtualStudyRoom />} />
-					<Route path="/stats" element={<Stats />} />
-					<Route path="/settings" element={<Settings />} />
 					<Route path="/create-group" element={<CreateGroup />} />
 					<Route path="/avatar/:groupId" element={<AvatarCustom />} />
 				</Routes>

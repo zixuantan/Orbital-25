@@ -85,32 +85,6 @@ const GroupChat = ({ groupId, groupType }) => {
 		setInput("");
 	};
 
-	const handleUpload = async (event) => {
-
-		if (!group || !group.folderId) {
-			alert("No Google Drive folder found.");
-			return;
-		}
-		const file = event.target.files[0];
-		if (!file) return;
-		const fileData = new FormData();
-		fileData.append("file", file);
-	
-		try {
-			const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/drive/upload/${group.folderId}`, {
-				method: "POST",
-				body: fileData,
-				credentials: "include",
-			});
-			const data = await res.json();
-			console.log("File uploaded:", data.fileLink);
-			alert("File uploaded successfully!");
-		} catch (err) {
-			console.error("Upload error:", err);
-			alert("Failed to upload file.");
-		}
-	};
-
 	return (
 		<div className="chat-component">
 			<div className="msg-box">
@@ -134,8 +108,7 @@ const GroupChat = ({ groupId, groupType }) => {
 					className="msg-input"
 				/>
 				<button onClick={sendMessage} className="send-msg-btn">➣</button>
-				<label htmlFor="files" className="upload-btn">Upload Files</label>
-				<input type="file" id="files" onChange={handleUpload} hidden/>
+
 			</div>
 		</div>
 	);

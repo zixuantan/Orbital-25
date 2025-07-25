@@ -23,7 +23,7 @@
 .group-stuff {
     display: flex;
     align-items: center;
-    gap: 415px;
+    gap: 150%;
 }
 
 .group-name {
@@ -40,7 +40,7 @@
     background-color: #2c2c2c;
     color: #f5f5f5;
     padding-top: 5px;
-    width: 130px;
+    width: 150px;
     height: 40px;
     border: #2C2C2C;
     border-radius: 8px;
