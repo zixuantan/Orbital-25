@@ -2,6 +2,7 @@
     background-color: #fff;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 #logo-img {
@@ -12,7 +13,7 @@
 
 .top-bar {
     background-color: #fff1c2;
-    height: 80px;
+    height: 12%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -42,7 +43,7 @@
     gap: 10px;
     position: relative;
     z-index: 1;
-    height: 650px;
+    height: 88%;
 }
 
 .intro::before {
