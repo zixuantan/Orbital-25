@@ -23,7 +23,7 @@ function CreateGroup() {
 	}, []);
 
 	const handleCreate = async (e) => {
-		console.log("🚀 handleCreate triggered");
+		console.log("handleCreate triggered");
 		e.preventDefault();
 		if (!groupName || !module) {
 			alert("Please fill all fields");
@@ -44,7 +44,7 @@ function CreateGroup() {
 
 			const folderId = folderRes.data.folderId;
 			console.log("Folder ID:", folderId);
-			console.log("📁 folderId being sent to /api/groups:", folderId);
+			console.log("folderId being sent to /api/groups:", folderId);
 
 			await axios.post(
 				`${process.env.REACT_APP_BACKEND_URL}/api/groups`,
